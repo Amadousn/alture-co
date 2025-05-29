@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Logo AC</title>
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #F4F1EC;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        
+        .logo-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .logo {
+            position: relative;
+            cursor: pointer;
+            perspective: 1000px;
+            width: 150px;
+            height: 60px;
+        }
+        
+        .logo-front {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #F4F1EC;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform-style: preserve-3d;
+            backface-visibility: hidden;
+        }
+        
+        .logo-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #3E002F;
+            color: #F4F1EC;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            transform: rotateX(180deg);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform-style: preserve-3d;
+            backface-visibility: hidden;
+            letter-spacing: 1px;
+        }
+        
+        .logo:hover .logo-front {
+            transform: rotateX(180deg);
+        }
+        
+        .logo:hover .logo-back {
+            transform: rotateX(0deg);
+        }
+    </style>
+</head>
+<body>
+    <div class="logo-container">
+        <h2>Test du logo avec effet de retournement</h2>
+        
+        <div class="logo">
+            <div class="logo-front">
+                <img src="images/logo/ac-logo.png" alt="AC Logo" width="120" height="40">
+            </div>
+            <div class="logo-back">
+                Alture & Co.
+            </div>
+        </div>
+    </div>
+</body>
+</html>
