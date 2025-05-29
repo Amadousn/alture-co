@@ -1,0 +1,112 @@
+/* Correction de la visibilité du texte pour Alture & Co - Version claire uniquement */
+
+/* Amélioration du contraste des textes dans les cartes de service */
+.service-card p,
+.team-member p,
+.property-info p,
+.value-item p {
+    color: #333333 !important; /* Texte plus foncé pour une meilleure lisibilité */
+    font-weight: 400;
+    font-size: 1.05rem;
+}
+
+/* Amélioration de la visibilité des icônes */
+.service-icon i,
+.value-icon i {
+    color: var(--deep-plum) !important;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+}
+
+/* Amélioration des titres dans les cartes */
+.service-card h3,
+.team-member h3,
+.property-info h3,
+.value-item h3 {
+    color: var(--deep-plum) !important;
+    font-weight: 600;
+}
+
+/* Amélioration du contraste pour les liens */
+.service-link {
+    color: var(--velvet-rose) !important;
+    font-weight: 500;
+}
+
+/* Amélioration de la visibilité des textes sur fond blanc */
+.service-card,
+.team-member,
+.value-item {
+    background-color: rgba(255, 255, 255, 0.9) !important;
+}
+
+/* Amélioration des contrastes pour les autres sections */
+.who-we-are-text p,
+.strategic-vision p,
+.women-wealth p {
+    color: #333333 !important;
+    font-weight: 400;
+}
+
+/* Amélioration de la visibilité des prix des propriétés */
+.property-price {
+    color: var(--deep-plum) !important;
+    font-weight: 700 !important;
+    font-size: 1.2rem !important;
+}
+
+/* Ajout d'ombres pour améliorer la lisibilité */
+.service-card,
+.team-member,
+.property-card,
+.value-item {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Amélioration de la visibilité des textes dans les sections sombres */
+.strategic-vision p,
+.women-wealth p {
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+/* Amélioration de la visibilité des textes dans le formulaire de contact */
+input, textarea {
+    color: #333333 !important;
+    font-weight: 400;
+}
+
+/* Styles spécifiques pour les propriétés */
+.property-overlay h3 {
+    color: white !important;
+    font-weight: 600;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.property-overlay p {
+    color: rgba(255, 255, 255, 0.9) !important;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+/* Amélioration des effets de survol */
+.service-card:hover,
+.team-member:hover,
+.property-card:hover,
+.value-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Amélioration des boutons */
+.btn {
+    background: linear-gradient(45deg, var(--deep-plum), var(--velvet-rose));
+    color: white !important;
+    font-weight: 500;
+    box-shadow: 0 5px 15px rgba(176, 93, 130, 0.3);
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(176, 93, 130, 0.4);
+}

@@ -1,0 +1,58 @@
+/* Styles for logo links */
+
+/* Header logo links */
+.logo a,
+a .logo-full,
+a .logo-text {
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.3s ease;
+}
+
+/* Restore logo hover effect */
+.logo {
+    position: relative;
+    cursor: pointer;
+}
+
+.logo-text {
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+.logo-full {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.logo:hover .logo-text {
+    opacity: 0;
+}
+
+.logo:hover .logo-full,
+.logo:hover a .logo-full {
+    opacity: 1;
+}
+
+/* Footer logo links */
+footer a {
+    text-decoration: none;
+}
+
+footer a .footer-logo {
+    transition: all 0.3s ease;
+}
+
+footer a:hover .footer-logo {
+    opacity: 0.9;
+    transform: scale(1.02);
+}
+
+/* Remove default link styling */
+a .logo-full,
+a .footer-logo {
+    cursor: pointer;
+}

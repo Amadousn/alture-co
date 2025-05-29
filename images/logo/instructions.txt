@@ -1,0 +1,5 @@
+Pour utiliser correctement le logo AC :
+
+1. Enregistrez l'image du logo AC que vous avez partagée
+2. Renommez-la en "ac-logo.png"
+3. Placez-la dans ce dossier (C:\Users\33752\CascadeProjects\alture-co\images\logo\)
