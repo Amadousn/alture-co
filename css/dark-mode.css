@@ -1,0 +1,207 @@
+/* Dark Mode and Enhanced Animations for Alture & Co. */
+
+:root {
+    /* Light mode (default) variables */
+    --bg-color: var(--soft-ivory);
+    --text-color: var(--ivory-black);
+    --heading-color: var(--deep-plum);
+    --accent-color: var(--velvet-rose);
+    --card-bg: #ffffff;
+    --text-color-light: var(--muted-lilac);
+    --section-divider-color: var(--deep-plum);
+    --section-divider-light-color: var(--soft-ivory);
+    --nav-bg: rgba(244, 241, 236, 0.95);
+    --footer-bg: var(--deep-plum);
+    --form-bg: rgba(255, 255, 255, 0.1);
+    --form-border: 1px solid rgba(255, 255, 255, 0.2);
+    --shadow-color: rgba(0, 0, 0, 0.1);
+}
+
+/* Dark mode variables */
+body.dark-mode {
+    --bg-color: #121212;
+    --text-color: #e0e0e0;
+    --heading-color: var(--dusty-lilac);
+    --accent-color: var(--velvet-rose);
+    --card-bg: #1e1e1e;
+    --text-color-light: #a0a0a0;
+    --section-divider-color: var(--dusty-lilac);
+    --section-divider-light-color: var(--dusty-lilac);
+    --nav-bg: rgba(18, 18, 18, 0.95);
+    --footer-bg: #0a0a0a;
+    --form-bg: rgba(30, 30, 30, 0.5);
+    --form-border: 1px solid rgba(255, 255, 255, 0.1);
+    --shadow-color: rgba(0, 0, 0, 0.3);
+}
+
+/* Apply theme variables */
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: var(--heading-color);
+    transition: color 0.5s ease;
+}
+
+header {
+    background-color: var(--nav-bg);
+    transition: background-color 0.5s ease;
+}
+
+.section-divider {
+    background-color: var(--section-divider-color);
+    transition: background-color 0.5s ease;
+}
+
+.section-divider.light {
+    background-color: var(--section-divider-light-color);
+}
+
+footer {
+    background-color: var(--footer-bg);
+    transition: background-color 0.5s ease;
+}
+
+.service-card, .team-member, .value-item {
+    background-color: var(--card-bg);
+    box-shadow: 0 5px 15px var(--shadow-color);
+    transition: background-color 0.5s ease, box-shadow 0.5s ease, transform 0.3s ease;
+}
+
+.contact-form form {
+    background-color: var(--form-bg);
+    border: var(--form-border);
+    transition: background-color 0.5s ease, border 0.5s ease;
+}
+
+input, textarea {
+    background-color: var(--card-bg);
+    color: var(--text-color);
+    border: 1px solid var(--text-color-light);
+    transition: background-color 0.5s ease, color 0.5s ease, border 0.5s ease;
+}
+
+/* Dark Mode Toggle */
+.theme-toggle {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: var(--deep-plum);
+    color: var(--soft-ivory);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 999;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.theme-toggle:hover {
+    transform: scale(1.1);
+}
+
+.theme-toggle i {
+    font-size: 24px;
+    transition: transform 0.5s ease;
+}
+
+body.dark-mode .theme-toggle {
+    background-color: var(--dusty-lilac);
+}
+
+/* Enhanced Animations */
+
+/* Fade in animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInLeft {
+    from { opacity: 0; transform: translateX(-50px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fadeInRight {
+    from { opacity: 0; transform: translateX(50px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(50px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scaleIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* Apply animations to elements */
+.animate {
+    opacity: 0;
+}
+
+.animate.fade-in {
+    animation: fadeIn 1s ease forwards;
+}
+
+.animate.fade-in-left {
+    animation: fadeInLeft 1s ease forwards;
+}
+
+.animate.fade-in-right {
+    animation: fadeInRight 1s ease forwards;
+}
+
+.animate.fade-in-up {
+    animation: fadeInUp 1s ease forwards;
+}
+
+.animate.scale-in {
+    animation: scaleIn 1s ease forwards;
+}
+
+/* Staggered animations for multiple elements */
+.stagger-animation > * {
+    opacity: 0;
+}
+
+/* Hover effects */
+.service-card:hover, .team-member:hover, .value-item:hover {
+    transform: translateY(-10px);
+}
+
+/* Parallax effect */
+.parallax {
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/* Smooth section transitions */
+section {
+    transition: background-color 0.5s ease;
+}
+
+/* Animated underline for links */
+nav ul li a::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 2px;
+    background: var(--accent-color);
+    transition: width 0.3s;
+}
+
+nav ul li a:hover::after {
+    width: 100%;
+}

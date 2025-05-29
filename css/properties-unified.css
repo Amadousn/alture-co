@@ -1,0 +1,267 @@
+/* Unified CSS file for the properties page */
+
+/* Base variables for the gallery */
+:root {
+    /* Main colors */
+    --bg-color: var(--soft-ivory, #F4F1EC);
+    --text-color: var(--ivory-black, #1C1C1C);
+    --accent-color: var(--deep-plum, #3E002F);
+    --secondary-accent: var(--velvet-rose, #B05D82);
+    
+    /* Specific colors for cards and elements */
+    --card-bg: #FFFFFF;
+    --heading-color: var(--deep-plum, #3E002F);
+    --text-color-light: var(--muted-lilac, #92768B);
+    --border-color: rgba(62, 0, 47, 0.1);
+}
+
+/* Base styles for the properties section */
+.properties-gallery {
+    padding: 120px 0 80px;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: all 0.3s ease;
+    min-height: 100vh;
+}
+
+.gallery-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.gallery-container h2 {
+    font-family: var(--primary-font, 'Cormorant Garamond'), serif;
+    font-size: 2.5rem;
+    font-weight: 400;
+    text-align: center;
+    margin-bottom: 1rem;
+    color: var(--heading-color);
+}
+
+.section-divider {
+    width: 60px;
+    height: 2px;
+    background-color: var(--accent-color);
+    margin: 0 auto 2rem;
+}
+
+.intro-text {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 3rem;
+    font-family: var(--secondary-font, 'Montserrat'), sans-serif;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--text-color);
+}
+
+/* Gallery filters */
+.gallery-filters {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    background: none;
+    border: 1px solid var(--accent-color);
+    color: var(--text-color);
+    padding: 8px 20px;
+    margin: 0 10px 10px;
+    cursor: pointer;
+    font-family: var(--secondary-font, 'Montserrat'), sans-serif;
+    font-size: 14px;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+}
+
+.filter-btn:hover, .filter-btn.active {
+    background-color: var(--accent-color);
+    color: #fff;
+}
+
+/* Properties grid */
+.properties-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.property-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 4px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background-color: var(--card-bg);
+    display: block;
+}
+
+.property-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+.property-image {
+    height: 250px;
+    overflow: hidden;
+}
+
+.property-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.property-item:hover .property-image img {
+    transform: scale(1.1);
+}
+
+.property-info {
+    padding: 20px;
+}
+
+.property-info h4 {
+    font-family: var(--primary-font, 'Cormorant Garamond'), serif;
+    font-size: 22px;
+    margin: 0 0 10px;
+    color: var(--heading-color);
+}
+
+.property-meta {
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--secondary-font, 'Montserrat'), sans-serif;
+    font-size: 14px;
+    color: var(--text-color-light);
+    margin-bottom: 10px;
+}
+
+.property-description {
+    display: none; /* Hidden but available for modal */
+}
+
+.property-price {
+    font-family: var(--primary-font, 'Cormorant Garamond'), serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--accent-color);
+}
+
+/* Modal styles */
+.property-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.property-modal.modal-active {
+    opacity: 1;
+}
+
+.modal-content {
+    position: relative;
+    max-width: 80%;
+    max-height: 80%;
+    background-color: var(--card-bg);
+    border-radius: 8px;
+    overflow: hidden;
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+}
+
+.modal-active .modal-content {
+    transform: scale(1);
+}
+
+.modal-image {
+    width: 100%;
+    max-height: 70vh;
+    object-fit: cover;
+}
+
+.modal-details {
+    padding: 20px;
+}
+
+.modal-title {
+    font-family: var(--primary-font, 'Cormorant Garamond'), serif;
+    font-size: 28px;
+    margin: 0 0 15px;
+    color: var(--heading-color);
+}
+
+.modal-description {
+    font-family: var(--secondary-font, 'Montserrat'), sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--text-color);
+    margin-bottom: 20px;
+}
+
+.close-modal {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 30px;
+    color: white;
+    cursor: pointer;
+    z-index: 1001;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+}
+
+.close-modal:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Animations */
+.animate {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.animate.fade-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .properties-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
+    
+    .modal-content {
+        max-width: 95%;
+    }
+    
+    .gallery-container h2 {
+        font-size: 2rem;
+    }
+    
+    .intro-text {
+        font-size: 1rem;
+    }
+}
