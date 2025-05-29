@@ -6,12 +6,16 @@
     <title>Alture & Co. | Strategic Portfolio Management</title>
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/simple-gallery.css">
+    <link rel="stylesheet" href="css/enhanced-animations.css">
+    <link rel="stylesheet" href="css/enhanced-cards.css">
+    <link rel="stylesheet" href="css/loading-animation.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div class="scroll-progress"></div>
     <div class="preloader">
         <div class="preloader-logo">A&Co.</div>
     </div>
@@ -41,10 +45,10 @@
         </div>
     </header>
 
-    <section class="hero">
+    <section class="hero parallax-bg" style="background-image: url('https://images.unsplash.com/photo-1582407947304-fd86f028f716?ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80');">
         <div class="hero-content">
             <h1>Strategic Portfolio Management</h1>
-            <h2 class="hero-subtitle">Real Estate & Digital Assets</h2>
+            <p class="hero-subtitle">Exclusive real estate and digital asset opportunities</p>
             <div class="hero-services">
                 <div class="hero-service">
                     <div class="hero-service-icon">
@@ -106,12 +110,12 @@
         </div>
     </section>
 
-    <section id="what-we-offer" class="what-we-offer">
+    <section id="what-we-offer" class="what-we-offer parallax-bg" style="background-image: linear-gradient(rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.95)), url('https://images.unsplash.com/photo-1560520031-3a4dc4e9de0c?ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80');">
         <div class="container">
-            <h2>What We Offer</h2>
-            <div class="section-divider light"></div>
+            <h2 class="scroll-reveal">What We Offer</h2>
+            <div class="section-divider light scroll-reveal"></div>
             <div class="services-grid">
-                <div class="service-card">
+                <div class="service-card scroll-reveal">
                     <div class="service-icon">
                         <i class="fas fa-building"></i>
                     </div>
@@ -120,7 +124,7 @@
                     <p>Off-market acquisitions, resale structuring, and long-term portfolio planning in Dubai's premium markets.</p>
                     <a href="#contact" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
                 </div>
-                <div class="service-card">
+                <div class="service-card scroll-reveal">
                     <div class="service-icon">
                         <i class="fas fa-chart-line"></i>
                     </div>
@@ -129,7 +133,7 @@
                     <p>Personalized crypto portfolio support, with a focus on clarity, protection, and long-term growth strategies.</p>
                     <a href="#contact" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
                 </div>
-                <div class="service-card">
+                <div class="service-card scroll-reveal">
                     <div class="service-icon">
                         <i class="fas fa-shield-alt"></i>
                     </div>
@@ -138,7 +142,7 @@
                     <p>Secure digital storage solutions, personal cold wallets, and discreet crypto custody with maximum security.</p>
                     <a href="#contact" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
                 </div>
-                <div class="service-card">
+                <div class="service-card scroll-reveal">
                     <div class="service-icon">
                         <i class="fas fa-globe-europe"></i>
                     </div>
@@ -147,7 +151,7 @@
                     <p>Alignment of real estate and crypto capital between Europe and the UAE — with legal precision and discretion.</p>
                     <a href="#contact" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
                 </div>
-                <div class="service-card">
+                <div class="service-card scroll-reveal">
                     <div class="service-icon">
                         <i class="fas fa-handshake"></i>
                     </div>
@@ -185,23 +189,23 @@
         </div>
     </section>
 
-    <section id="team" class="team">
+    <section id="team" class="team-section">
         <div class="container">
-            <h2>The Team</h2>
-            <div class="section-divider"></div>
+            <h2 class="scroll-reveal">Our Team</h2>
+            <div class="section-divider scroll-reveal"></div>
             <div class="team-grid">
-                <div class="team-member">
+                <div class="team-member scroll-reveal">
                     <h3>Céline Sine — Founding Partner</h3>
                     <p>Founder of Alture & Co., Céline leads with precision, discretion, and structured vision. Her background blends strategic thinking, emotional intelligence, and a sharp sense for both real estate and emerging capital markets.</p>
                     <p>She is actively involved in digital finance, with hands-on experience in crypto trading, portfolio growth, and macroeconomic market analysis. Céline's approach reflects a new generation of leadership: quietly powerful, financially conscious, and always aligned with long-term value.</p>
                     <p class="email">celine@altureandco.com</p>
                 </div>
-                <div class="team-member">
+                <div class="team-member scroll-reveal">
                     <h3>Executive Assistant</h3>
                     <p>Manages day-to-day coordination and confidential operations at Alture & Co., including invoicing, client welcome letters, NDAs, and logistics. With a legal background, she adds clarity and oversight to formal communications and supports the partners with precision and calm structure.</p>
                     <p>She also oversees hospitality and bespoke gifting ensuring that every VIP client gesture, private dinner, or thoughtful detail reflects Alture & Co.'s values of elegance, attention, and quiet generosity.</p>
                 </div>
-                <div class="team-member">
+                <div class="team-member scroll-reveal">
                     <h3>Portfolio Accountant</h3>
                     <p>With a meticulous eye and deep sense of financial organization, Rama Sine oversees the internal portfolio logic, financial planning, and reporting.</p>
                     <p>She ensures structure, consistency, and calm efficiency in all operations offering reliability and trust in every transaction.</p>
@@ -216,15 +220,68 @@
         </div>
     </section>
 
-    <!-- Section Galerie de Propriétés -->
+    <!-- Properties Gallery Section -->
+    <section class="testimonials">
+        <div class="testimonials-container">
+            <h2>Client Testimonials</h2>
+            <div class="section-divider"></div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-quote">
+                        Alture & Co. provided exceptional guidance for my Dubai real estate investments. Their strategic approach and market knowledge helped me secure properties with outstanding appreciation potential.
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="testimonial-author-image">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&q=80" alt="Client">
+                        </div>
+                        <div class="testimonial-author-info">
+                            <h4>Michael R.</h4>
+                            <p>European Investor</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-quote">
+                        Their crypto asset structuring service transformed my digital portfolio. The team's attention to detail and security protocols gave me complete confidence in my investments.
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="testimonial-author-image">
+                            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&q=80" alt="Client">
+                        </div>
+                        <div class="testimonial-author-info">
+                            <h4>Sophia L.</h4>
+                            <p>Tech Entrepreneur</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-quote">
+                        As a business owner with assets in multiple countries, Alture & Co.'s cross-border wealth strategy has been invaluable. Their discreet approach and precision in execution are unmatched.
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="testimonial-author-image">
+                            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&q=80" alt="Client">
+                        </div>
+                        <div class="testimonial-author-info">
+                            <h4>Alexander T.</h4>
+                            <p>International Business Owner</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
     <section id="properties" class="properties-section">
         <div class="container">
-            <h2>Premium Properties</h2>
-            <div class="section-divider"></div>
+            <h2 class="scroll-reveal">Premium Properties</h2>
+            <div class="section-divider scroll-reveal"></div>
             <p class="intro-text">Discover our exclusive selection of premium properties in Dubai's most prestigious locations.</p>
             
             <div class="properties-showcase">
-                <div class="property-card">
+                <div class="property-card scroll-reveal">
                     <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Luxury Villa">
                     <div class="property-overlay">
                         <h3>Palm Jumeirah Villa</h3>
@@ -233,7 +290,7 @@
                     </div>
                 </div>
                 
-                <div class="property-card">
+                <div class="property-card scroll-reveal">
                     <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Penthouse">
                     <div class="property-overlay">
                         <h3>Downtown Penthouse</h3>
@@ -242,7 +299,7 @@
                     </div>
                 </div>
                 
-                <div class="property-card">
+                <div class="property-card scroll-reveal">
                     <img src="https://images.unsplash.com/photo-1613977257363-707ba9348227?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Waterfront Apartment">
                     <div class="property-overlay">
                         <h3>Dubai Marina Residence</h3>
@@ -254,11 +311,11 @@
         </div>
     </section>
 
-    <section id="contact" class="contact">
+    <section id="contact" class="contact parallax-bg" style="background-image: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80');">
         <div class="container">
-            <h2>Contact</h2>
-            <div class="section-divider light"></div>
-            <div class="contact-form">
+            <h2 class="scroll-reveal">Contact</h2>
+            <div class="section-divider light scroll-reveal"></div>
+            <div class="contact-form scroll-reveal">
                 <form>
                     <div class="form-group">
                         <input type="text" id="name" name="name" placeholder="Full Name" required>
@@ -269,15 +326,15 @@
                     <div class="form-group">
                         <textarea id="message" name="message" placeholder="Your Message" required></textarea>
                     </div>
-                    <button type="submit" class="btn">Send Message</button>
+                    <button type="submit" class="btn btn-primary">Send Message</button>
                 </form>
             </div>
         </div>
     </section>
 
-    <footer>
+    <footer class="parallax-bg" style="background-image: linear-gradient(rgba(62, 0, 47, 0.95), rgba(62, 0, 47, 0.95)), url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80');">
         <div class="container">
-            <div class="footer-content">
+            <div class="footer-content scroll-reveal">
                 <div class="footer-logo">ALTURE & CO.</div>
                 <div class="footer-links">
                     <ul>
@@ -301,5 +358,9 @@
     </footer>
 
     <script src="js/script.js"></script>
+    <script src="js/enhanced-interactions.js"></script>
+    <script src="js/property-map.js"></script>
+    <script src="js/back-to-top.js"></script>
+    <script src="js/loading-animation.js"></script>
 </body>
 </html>
