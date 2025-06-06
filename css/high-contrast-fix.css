@@ -1,0 +1,166 @@
+/* High contrast fixes for dark backgrounds */
+
+/* Fix for dark background sections */
+.properties-section {
+    background-color: #ffffff !important;
+}
+
+.properties-section h2 {
+    color: #3e002f !important;
+    font-size: 2.5rem !important;
+    font-weight: 600 !important;
+}
+
+.properties-section .section-divider {
+    background-color: #3e002f !important;
+    height: 3px !important;
+    width: 60px !important;
+}
+
+.properties-section .intro-text {
+    color: #333333 !important;
+    font-size: 1.2rem !important;
+    font-weight: 500 !important;
+    margin-bottom: 40px !important;
+}
+
+/* Fix for property cards */
+.property-overlay {
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.5), transparent) !important;
+    padding-bottom: 30px !important;
+}
+
+.property-overlay h3 {
+    color: #ffffff !important;
+    font-size: 1.5rem !important;
+    font-weight: 600 !important;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5) !important;
+}
+
+.property-overlay p {
+    color: #ffffff !important;
+    font-size: 1rem !important;
+    font-weight: 500 !important;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5) !important;
+}
+
+.property-price {
+    color: #ffffff !important;
+    font-weight: 600 !important;
+    font-size: 1.1rem !important;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Contact form improvements */
+.contact {
+    background-color: #ffffff !important;
+}
+
+.contact h2 {
+    color: #3e002f !important;
+}
+
+.contact-form {
+    background-color: #ffffff !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1) !important;
+}
+
+.contact-form input,
+.contact-form textarea {
+    color: #333333 !important;
+    background-color: #ffffff !important;
+    border: 1px solid #999999 !important;
+}
+
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+    color: #666666 !important;
+    font-weight: 500 !important;
+}
+
+.btn-primary {
+    background: linear-gradient(to right, #3e002f, #8e4162) !important;
+    color: #ffffff !important;
+    font-weight: 500 !important;
+}
+
+/* Logo fixes */
+.logo {
+    color: #3e002f !important;
+}
+
+/* Footer fixes */
+footer {
+    background-color: #3e002f !important;
+}
+
+footer .footer-logo {
+    color: #ffffff !important;
+    font-size: 1.8rem !important;
+    font-weight: 600 !important;
+    letter-spacing: 2px !important;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3) !important;
+}
+
+footer a {
+    color: #ffffff !important;
+    font-weight: 500 !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
+    transition: all 0.3s ease !important;
+}
+
+footer a:hover {
+    color: #f0f0f0 !important;
+    text-decoration: underline !important;
+}
+
+footer p {
+    color: #ffffff !important;
+    font-weight: 500 !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
+    font-size: 1.1rem !important;
+}
+
+footer .footer-links ul li {
+    margin-bottom: 10px !important;
+}
+
+footer .footer-contact {
+    margin-top: 20px !important;
+}
+
+/* Testimonials section */
+.testimonial-quote {
+    color: #333333 !important;
+    font-weight: 400 !important;
+}
+
+.testimonial-author-info h4 {
+    color: #3e002f !important;
+}
+
+.testimonial-author-info p {
+    color: #666666 !important;
+    font-weight: 500 !important;
+}
+
+/* Hero section */
+.hero-content h1 {
+    color: #ffffff !important;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5) !important;
+}
+
+.hero-subtitle {
+    color: #ffffff !important;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5) !important;
+}
+
+.hero-service h3 {
+    color: #ffffff !important;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5) !important;
+}
+
+.hero-service p {
+    color: #ffffff !important;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5) !important;
+}

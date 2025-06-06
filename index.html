@@ -9,6 +9,11 @@
     <link rel="stylesheet" href="css/enhanced-animations.css">
     <link rel="stylesheet" href="css/enhanced-cards.css">
     <link rel="stylesheet" href="css/loading-animation.css">
+    <link rel="stylesheet" href="css/text-contrast-fix.css">
+    <link rel="stylesheet" href="css/high-contrast-fix.css">
+    <link rel="stylesheet" href="css/logo-fix.css">
+    <link rel="stylesheet" href="css/hero-title-fix.css">
+    <link rel="stylesheet" href="css/testimonials-coming-soon.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,10 +28,12 @@
     <header>
         <div class="container">
             <div class="logo-container">
-                <div class="logo">
-                    <div class="logo-text">A <span class="ampersand">&</span> C</div>
-                    <div class="logo-full">Alture & Co.</div>
-                </div>
+                <a href="index.html" class="logo-link">
+                    <div class="logo">
+                        <div class="logo-text">A <span class="ampersand">&</span> C</div>
+                        <div class="logo-full">Alture & Co.</div>
+                    </div>
+                </a>
             </div>
             <nav>
                 <ul>
@@ -225,59 +232,25 @@
         <div class="testimonials-container">
             <h2>Client Testimonials</h2>
             <div class="section-divider"></div>
-            <div class="testimonials-grid">
-                <div class="testimonial-card">
-                    <div class="testimonial-quote">
-                        Alture & Co. provided exceptional guidance for my Dubai real estate investments. Their strategic approach and market knowledge helped me secure properties with outstanding appreciation potential.
-                    </div>
-                    <div class="testimonial-author">
-                        <div class="testimonial-author-image">
-                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&q=80" alt="Client">
-                        </div>
-                        <div class="testimonial-author-info">
-                            <h4>Michael R.</h4>
-                            <p>European Investor</p>
-                        </div>
-                    </div>
+            <div class="coming-soon-container">
+                <div class="coming-soon-icon">
+                    <i class="fas fa-stars"></i>
                 </div>
-                
-                <div class="testimonial-card">
-                    <div class="testimonial-quote">
-                        Their crypto asset structuring service transformed my digital portfolio. The team's attention to detail and security protocols gave me complete confidence in my investments.
-                    </div>
-                    <div class="testimonial-author">
-                        <div class="testimonial-author-image">
-                            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&q=80" alt="Client">
-                        </div>
-                        <div class="testimonial-author-info">
-                            <h4>Sophia L.</h4>
-                            <p>Tech Entrepreneur</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="testimonial-card">
-                    <div class="testimonial-quote">
-                        As a business owner with assets in multiple countries, Alture & Co.'s cross-border wealth strategy has been invaluable. Their discreet approach and precision in execution are unmatched.
-                    </div>
-                    <div class="testimonial-author">
-                        <div class="testimonial-author-image">
-                            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&q=80" alt="Client">
-                        </div>
-                        <div class="testimonial-author-info">
-                            <h4>Alexander T.</h4>
-                            <p>International Business Owner</p>
-                        </div>
-                    </div>
+                <h3>Coming Soon</h3>
+                <p>We are currently collecting testimonials from our valued clients.</p>
+                <p>Client experiences and success stories will be featured here soon.</p>
+                <div class="construction-note">
+                    <i class="fas fa-info-circle"></i>
+                    <span>This section is under construction</span>
                 </div>
             </div>
         </div>
     </section>
     
-    <section id="properties" class="properties-section">
+    <section id="properties" class="properties-section" style="background-color: #ffffff;">
         <div class="container">
-            <h2 class="scroll-reveal">Premium Properties</h2>
-            <div class="section-divider scroll-reveal"></div>
+            <h2 class="scroll-reveal" style="color: #3e002f;">Premium Properties</h2>
+            <div class="section-divider scroll-reveal" style="background-color: #3e002f;"></div>
             <p class="intro-text">Discover our exclusive selection of premium properties in Dubai's most prestigious locations.</p>
             
             <div class="properties-showcase">
@@ -335,7 +308,7 @@
     <footer class="parallax-bg" style="background-image: linear-gradient(rgba(62, 0, 47, 0.95), rgba(62, 0, 47, 0.95)), url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80');">
         <div class="container">
             <div class="footer-content scroll-reveal">
-                <div class="footer-logo">ALTURE & CO.</div>
+                <a href="index.html" class="logo-link"><div class="footer-logo" style="color: #ffffff; font-size: 1.8rem; font-weight: 600; letter-spacing: 2px; text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">ALTURE & CO.</div></a>
                 <div class="footer-links">
                     <ul>
                         <li><a href="#who-we-are">Who We Are</a></li>

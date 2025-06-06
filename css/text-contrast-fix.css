@@ -1,0 +1,133 @@
+/* Improved text contrast for better readability */
+
+/* General text improvements */
+body {
+    color: #333333; /* Darker base text color */
+}
+
+p, li, span, div {
+    color: #333333; /* Darker text color for better readability */
+}
+
+/* Fix for dark backgrounds */
+.properties-section {
+    background-color: #fff !important;
+    color: #333333 !important;
+}
+
+.properties-section h2,
+.properties-section .section-divider,
+.properties-section p {
+    color: #333333 !important;
+}
+
+.properties-section .intro-text {
+    color: #333333 !important;
+    font-weight: 500 !important;
+    font-size: 1.2rem !important;
+}
+
+/* Service cards text */
+.service-card p {
+    color: #333333;
+    font-weight: 400;
+}
+
+/* Property descriptions */
+.property-overlay p {
+    color: #ffffff;
+    font-weight: 500;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+/* Team member descriptions */
+.team-member p {
+    color: #333333;
+    font-weight: 400;
+}
+
+/* Testimonial quotes */
+.testimonial-quote {
+    color: #333333;
+    font-weight: 400;
+}
+
+.testimonial-author-info p {
+    color: #333333;
+    font-weight: 500;
+}
+
+/* Form labels and placeholders */
+::placeholder {
+    color: #666666;
+    opacity: 1;
+}
+
+/* Contact form improvements */
+.contact-form input,
+.contact-form textarea {
+    color: #333333 !important;
+    background-color: #ffffff !important;
+    border: 1px solid #999999 !important;
+}
+
+.contact-form ::placeholder {
+    color: #666666 !important;
+    font-weight: 500 !important;
+}
+
+.contact {
+    background-color: #ffffff !important;
+}
+
+.contact h2,
+.contact .section-divider {
+    color: #3e002f !important;
+}
+
+/* Footer text */
+footer p, footer a {
+    color: #ffffff;
+    font-weight: 400;
+}
+
+/* Hero services */
+.hero-service p {
+    color: #ffffff;
+    font-weight: 500;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+/* Section intro text */
+.intro-text {
+    color: #333333;
+    font-weight: 400;
+    font-size: 1.1rem;
+}
+
+/* Improved headings */
+h1, h2, h3, h4, h5, h6 {
+    color: #3e002f; /* Deep plum color for headings */
+}
+
+/* Service card links */
+.service-link {
+    color: #3e002f;
+    font-weight: 500;
+}
+
+/* Improved section dividers */
+.section-divider {
+    background-color: #3e002f;
+    height: 3px;
+    width: 60px;
+    margin: 0 auto 40px;
+}
+
+/* Improved buttons */
+.btn-primary {
+    background: linear-gradient(to right, #3e002f, #8e4162);
+    color: #ffffff;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
