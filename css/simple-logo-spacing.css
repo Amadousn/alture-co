@@ -1,0 +1,9 @@
+/* Simple Logo Spacing - Just a little bit of letter spacing */
+
+#simple-logo-short {
+    letter-spacing: 0.1em; /* Subtle letter spacing */
+}
+
+#simple-logo-full {
+    letter-spacing: 0.05em; /* Subtle letter spacing */
+}

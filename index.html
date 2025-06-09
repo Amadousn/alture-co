@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alture & Co. | Strategic Portfolio Management</title>
+    <title>Alture & Co. | <strong>Strategic Portfolio Management</strong></title>
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/simple-gallery.css">
     <link rel="stylesheet" href="css/enhanced-animations.css">
@@ -11,9 +11,13 @@
     <link rel="stylesheet" href="css/loading-animation.css">
     <link rel="stylesheet" href="css/text-contrast-fix.css">
     <link rel="stylesheet" href="css/high-contrast-fix.css">
-    <link rel="stylesheet" href="css/logo-fix.css">
     <link rel="stylesheet" href="css/hero-title-fix.css">
+    <link rel="stylesheet" href="css/white-subtitle-fix.css">
+    <link rel="stylesheet" href="css/force-white-text.css">
+    <link rel="stylesheet" href="css/simple-logo-spacing.css">
+    <link rel="stylesheet" href="css/contact-info-fix.css">
     <link rel="stylesheet" href="css/testimonials-coming-soon.css">
+    <link rel="stylesheet" href="css/strategic-vision-fix.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,40 +26,85 @@
 <body>
     <div class="scroll-progress"></div>
     <div class="preloader">
-        <div class="preloader-logo">A&Co.</div>
+        <div class="preloader-logo">A<span style="color: var(--velvet-rose);">&</span>Co.</div>
     </div>
-
-    <header>
-        <div class="container">
-            <div class="logo-container">
-                <a href="index.html" class="logo-link">
-                    <div class="logo">
-                        <div class="logo-text">A <span class="ampersand">&</span> C</div>
-                        <div class="logo-full">Alture & Co.</div>
-                    </div>
+    <header style="position: fixed; top: 0; left: 0; width: 100%; padding-top: 1.25rem; padding-bottom: 1.25rem; background-color: white; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); z-index: 50; transition: all 0.3s ease;">
+        <div style="max-width: 1200px; margin-left: auto; margin-right: auto; padding-left: 1.5rem; padding-right: 1.5rem; display: flex; justify-content: space-between; align-items: center;">
+            <div style="margin-right: 3.5rem;">
+                <style>
+                    /* Style spécifique au logo, isolé du reste du CSS */
+                    #simple-logo {
+                        position: relative;
+                        display: inline-block;
+                        text-decoration: none;
+                        width: 120px;
+                        height: 40px;
+                    }
+                    #simple-logo-short {
+                        font-family: 'Cormorant Garamond', serif;
+                        font-size: 1.5rem;
+                        font-weight: 500;
+                        color: black;
+                        display: block;
+                        position: absolute;
+                        opacity: 1;
+                        transition: opacity 0.5s ease;
+                        text-align: center;
+                        width: 100%;
+                    }
+                    #simple-logo-full {
+                        font-family: 'Cormorant Garamond', serif;
+                        font-size: 1.5rem;
+                        font-weight: 500;
+                        color: black;
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        opacity: 0;
+                        transition: opacity 0.5s ease;
+                        white-space: nowrap;
+                    }
+                    #simple-logo:hover #simple-logo-short {
+                        opacity: 0;
+                    }
+                    #simple-logo:hover #simple-logo-full {
+                        opacity: 1;
+                    }
+                    .pink-amp {
+                        color: #D14D72; /* Couleur velvet-rose explicite pour éviter les conflits */
+                        font-weight: 400;
+                    }
+                </style>
+                <a href="index.html" id="simple-logo">
+                    <span id="simple-logo-short">A<span class="pink-amp">&</span>C</span>
+                    <span id="simple-logo-full">Alture <span class="pink-amp">&</span> Co.</span>
                 </a>
             </div>
             <nav>
-                <ul>
-                    <li><a href="#who-we-are">WHO WE ARE</a></li>
-                    <li><a href="#what-we-offer">WHAT WE OFFER</a></li>
-                    <li><a href="properties.html">PROPERTIES</a></li>
-                    <li><a href="#strategic-vision">STRATEGIC VISION</a></li>
-                    <li><a href="#women-wealth">WOMEN & WEALTH</a></li>
-                    <li><a href="#team">THE TEAM</a></li>
-                    <li><a href="#contact">CONTACT</a></li>
+                <ul style="display: flex; gap: 1.5rem;">
+                    <li><a href="#who-we-are" style="color: black; transition: color 0.3s ease; font-size: 0.875rem; font-family: 'Montserrat', sans-serif; font-weight: 500; letter-spacing: 0.05em;" onmouseover="this.style.color='#D14D72'" onmouseout="this.style.color='black'">WHO WE ARE</a></li>
+                    <li><a href="#what-we-offer" style="color: black; transition: color 0.3s ease; font-size: 0.875rem; font-family: 'Montserrat', sans-serif; font-weight: 500; letter-spacing: 0.05em;" onmouseover="this.style.color='#D14D72'" onmouseout="this.style.color='black'">WHAT WE OFFER</a></li>
+                    <li><a href="properties.html" style="color: black; transition: color 0.3s ease; font-size: 0.875rem; font-family: 'Montserrat', sans-serif; font-weight: 500; letter-spacing: 0.05em;" onmouseover="this.style.color='#D14D72'" onmouseout="this.style.color='black'">PROPERTIES</a></li>
+                    <li><a href="#strategic-vision" style="color: black; transition: color 0.3s ease; font-size: 0.875rem; font-family: 'Montserrat', sans-serif; font-weight: 500; letter-spacing: 0.05em;" onmouseover="this.style.color='#D14D72'" onmouseout="this.style.color='black'">STRATEGIC VISION</a></li>
+                    <li><a href="#women-wealth" style="color: black; transition: color 0.3s ease; font-size: 0.875rem; font-family: 'Montserrat', sans-serif; font-weight: 500; letter-spacing: 0.05em;" onmouseover="this.style.color='#D14D72'" onmouseout="this.style.color='black'">WOMEN <span style="color: #D14D72;">&</span> WEALTH</a></li>
+                    <li><a href="#team" style="color: black; transition: color 0.3s ease; font-size: 0.875rem; font-family: 'Montserrat', sans-serif; font-weight: 500; letter-spacing: 0.05em;" onmouseover="this.style.color='#D14D72'" onmouseout="this.style.color='black'">THE TEAM</a></li>
+                    <li><a href="#contact" style="color: black; transition: color 0.3s ease; font-size: 0.875rem; font-family: 'Montserrat', sans-serif; font-weight: 500; letter-spacing: 0.05em;" onmouseover="this.style.color='#D14D72'" onmouseout="this.style.color='black'">CONTACT</a></li>
                 </ul>
             </nav>
             <div class="menu-toggle">
-                <i class="fas fa-bars"></i>
+                <i class="fas fa-bars" style="color: black; font-size: 1.5rem; transition: color 0.3s ease; cursor: pointer;" onmouseover="this.style.color='#D14D72'" onmouseout="this.style.color='black'"></i>
             </div>
         </div>
     </header>
 
     <section class="hero parallax-bg" style="background-image: url('https://images.unsplash.com/photo-1582407947304-fd86f028f716?ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80');">
         <div class="hero-content">
-            <h1>Strategic Portfolio Management</h1>
-            <p class="hero-subtitle">Exclusive real estate and digital asset opportunities</p>
+            <h1 style="font-size: 4.5rem; text-shadow: 0 2px 10px rgba(0,0,0,0.5); letter-spacing: 1px; color: #ffffff; font-weight: 600;"><strong>Strategic Portfolio Management</strong></h1>
+            <div style="margin-top: 1.5rem; margin-bottom: 3rem;">
+                <p class="pure-white-text" style="display: inline-block; font-family: 'Montserrat', sans-serif; font-size: 1.5rem; color: #FFFFFF; letter-spacing: 0.05em; text-transform: uppercase; font-weight: 600; text-shadow: 0 2px 4px rgba(0,0,0,0.7);">
+                    REAL ESTATE AND DIGITAL ASSET STRUCTURING
+                </p>
+            </div>
             <div class="hero-services">
                 <div class="hero-service">
                     <div class="hero-service-icon">
@@ -93,25 +142,9 @@
             <div class="section-divider"></div>
             <div class="who-we-are-content">
                 <div class="who-we-are-text">
-                    <p class="intro-text">Alture & Co. is a discreet boutique firm offering tailored portfolio advisory across real estate and digital markets.</p>
-                    <div class="values-grid">
-                        <div class="value-item">
-                            <div class="value-icon"><i class="fas fa-handshake"></i></div>
-                            <h3>Discretion</h3>
-                            <p>We operate with complete privacy and confidentiality for our selective clientele.</p>
-                        </div>
-                        <div class="value-item">
-                            <div class="value-icon"><i class="fas fa-gem"></i></div>
-                            <h3>Precision</h3>
-                            <p>Every strategy is crafted with meticulous attention to detail and execution.</p>
-                        </div>
-                        <div class="value-item">
-                            <div class="value-icon"><i class="fas fa-shield-alt"></i></div>
-                            <h3>Trust</h3>
-                            <p>We build lasting relationships founded on reliability and quiet strength.</p>
-                        </div>
-                    </div>
-                    <p class="closing-text">We serve a selective international clientele primarily from Europe seeking long-term value, strategic insight, and total confidentiality.</p>
+                    <p class="intro-text">Alture & Co. is a discreet advisory firm based in Dubai.</p>
+                    <p>Structured around real estate and digital capital, the firm serves an international clientele between Europe and the UAE.</p>
+                    <p>Every engagement is approached with long-term vision, clarity, and full confidentiality.</p>
                 </div>
             </div>
         </div>
@@ -119,66 +152,78 @@
 
     <section id="what-we-offer" class="what-we-offer parallax-bg" style="background-image: linear-gradient(rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.95)), url('https://images.unsplash.com/photo-1560520031-3a4dc4e9de0c?ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80');">
         <div class="container">
-            <h2 class="scroll-reveal">What We Offer</h2>
-            <div class="section-divider light scroll-reveal"></div>
+            <h2 class="scroll-reveal" style="color: #333333; font-weight: 600;">What We Manage</h2>
+            <div class="section-divider light scroll-reveal" style="background-color: var(--velvet-rose);"></div>
             <div class="services-grid">
                 <div class="service-card scroll-reveal">
                     <div class="service-icon">
                         <i class="fas fa-building"></i>
                     </div>
-                    <h3>Real Estate Investment Advisory</h3>
+                    <h3 style="color: #333333; font-weight: 600;">Real Estate</h3>
                     <div class="service-divider"></div>
-                    <p>Off-market acquisitions, resale structuring, and long-term portfolio planning in Dubai's premium markets.</p>
-                    <a href="#contact" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                    <p style="color: #444444; font-weight: 400;">Property portfolios composed of 20 to 40+ assets.</p>
+                    <p style="color: #444444; font-weight: 400;">Each property is reviewed individually based on location, view, exposure, current value, and market cycles.</p>
+                    <p style="color: #444444; font-weight: 400;">Coordination with selected agents and clear strategy defined for each asset.</p>
                 </div>
                 <div class="service-card scroll-reveal">
                     <div class="service-icon">
                         <i class="fas fa-chart-line"></i>
                     </div>
-                    <h3>Crypto Asset Structuring</h3>
+                    <h3 style="color: #333333; font-weight: 600;">Digital Assets</h3>
                     <div class="service-divider"></div>
-                    <p>Personalized crypto portfolio support, with a focus on clarity, protection, and long-term growth strategies.</p>
-                    <a href="#contact" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                    <p style="color: #444444; font-weight: 400;">Structuring of crypto portfolios: cold wallet configuration, asset organisation, and positioning aligned with UAE residency.</p>
                 </div>
                 <div class="service-card scroll-reveal">
                     <div class="service-icon">
-                        <i class="fas fa-shield-alt"></i>
+                        <i class="fas fa-globe"></i>
                     </div>
-                    <h3>Cold Wallet Configuration</h3>
+                    <h3 style="color: #333333; font-weight: 600;">Cross-Border Coordination</h3>
                     <div class="service-divider"></div>
-                    <p>Secure digital storage solutions, personal cold wallets, and discreet crypto custody with maximum security.</p>
-                    <a href="#contact" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                    <p style="color: #444444; font-weight: 400;">Real estate and digital capital aligned between Europe and the UAE.</p>
+                    <p style="color: #444444; font-weight: 400;">All work is handled discreetly, with legal and financial partners when required.</p>
                 </div>
                 <div class="service-card scroll-reveal">
                     <div class="service-icon">
                         <i class="fas fa-globe-europe"></i>
                     </div>
-                    <h3>Cross-Border Wealth Strategy</h3>
+                    <h3 style="color: #333333; font-weight: 600;">Cross-Border Wealth Strategy</h3>
                     <div class="service-divider"></div>
-                    <p>Alignment of real estate and crypto capital between Europe and the UAE — with legal precision and discretion.</p>
-                    <a href="#contact" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                    <p style="color: #444444; font-weight: 400;">Alignment of real estate and crypto capital between Europe and the UAE — with legal precision and discretion.</p>
+                    <a href="#contact" class="service-link" style="color: var(--velvet-rose); font-weight: 500;">Learn More <i class="fas fa-arrow-right"></i></a>
                 </div>
                 <div class="service-card scroll-reveal">
                     <div class="service-icon">
                         <i class="fas fa-handshake"></i>
                     </div>
-                    <h3>Confidential Capital Deployment</h3>
+                    <h3 style="color: #333333; font-weight: 600;">Confidential Capital Deployment</h3>
                     <div class="service-divider"></div>
-                    <p>Access to discreet opportunities, strategic placements, and quiet execution for high-net-worth individuals.</p>
-                    <a href="#contact" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                    <p style="color: #444444; font-weight: 400;">Access to discreet opportunities, strategic placements, and quiet execution for high-net-worth individuals.</p>
+                    <a href="#contact" class="service-link" style="color: var(--velvet-rose); font-weight: 500;">Learn More <i class="fas fa-arrow-right"></i></a>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="strategic-vision" class="strategic-vision">
+    <section id="who-its-for" class="who-its-for parallax-bg" style="background-image: linear-gradient(rgba(62, 0, 47, 0.9), rgba(62, 0, 47, 0.9)), url('https://images.unsplash.com/photo-1560520031-3a4dc4e9de0c?ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80');">
         <div class="container">
-            <h2>Strategic Vision</h2>
-            <div class="section-divider"></div>
-            <div class="vision-content">
-                <p>At Alture & Co., we believe in the power of strategic planning and discreet execution. Our vision is to provide our clients with unparalleled access to exclusive opportunities in both traditional real estate and emerging digital markets.</p>
-                <p>We combine deep market expertise with innovative approaches to create bespoke portfolio strategies that align with our clients' long-term wealth objectives and lifestyle aspirations.</p>
-                <p>Our commitment to discretion, precision, and excellence guides every aspect of our service, ensuring that each client receives the attention and expertise they deserve.</p>
+            <h2 class="scroll-reveal" style="color: #ffffff; font-weight: 600;">Who It's For</h2>
+            <div class="section-divider light scroll-reveal" style="background-color: var(--velvet-rose);"></div>
+            <div class="vision-content" style="padding: 2rem; max-width: 800px; margin: 0 auto; text-align: center;">
+                <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 1.5rem; color: #ffffff;">Alture & Co. works with private investors, founders, and independent who already manage significant capital.</p>
+                <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 1.5rem; color: #ffffff;">Our work is designed for those seeking long-term structure, market clarity, and discreet execution across real estate and digital assets.</p>
+                <p style="font-size: 1.1rem; line-height: 1.8; color: #ffffff;">We focus on confidentiality, precision, and thoughtful execution.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="strategic-vision" class="strategic-vision strategic-vision-white">
+        <div class="container">
+            <h2 style="color: #000000; font-weight: 600; text-align: center;">Strategic Vision</h2>
+            <div class="section-divider" style="background-color: #D14D72; width: 80px; height: 3px; margin: 1.5rem auto;"></div>
+            <div class="vision-content" style="padding: 2rem; max-width: 800px; margin: 0 auto; text-align: center;">
+                <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 1.5rem; color: #000000;">At Alture & Co., we believe in the power of strategic planning and discreet execution. Our vision is to provide our clients with unparalleled access to exclusive opportunities in both traditional real estate and emerging digital markets.</p>
+                <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 1.5rem; color: #000000;">We combine deep market expertise with innovative approaches to create bespoke portfolio strategies that align with our clients' long-term wealth objectives and lifestyle aspirations.</p>
+                <p style="font-size: 1.1rem; line-height: 1.8; color: #000000;">Our commitment to discretion, precision, and excellence guides every aspect of our service, ensuring that each client receives the attention and expertise they deserve.</p>
             </div>
         </div>
     </section>
@@ -214,8 +259,8 @@
                 </div>
                 <div class="team-member scroll-reveal">
                     <h3>Portfolio Accountant</h3>
-                    <p>With a meticulous eye and deep sense of financial organization, Rama Sine oversees the internal portfolio logic, financial planning, and reporting.</p>
-                    <p>She ensures structure, consistency, and calm efficiency in all operations offering reliability and trust in every transaction.</p>
+                    <p>With a meticulous eye and deep sense of financial organization, our accountant oversees the internal portfolio logic, financial planning, and reporting.</p>
+                    <p>Ensuring structure, consistency, and calm efficiency in all operations offering reliability and trust in every transaction.</p>
                     <p class="email">accounting@altureandco.com</p>
                 </div>
                 <div class="team-member">
@@ -308,9 +353,9 @@
     <footer class="parallax-bg" style="background-image: linear-gradient(rgba(62, 0, 47, 0.95), rgba(62, 0, 47, 0.95)), url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80');">
         <div class="container">
             <div class="footer-content scroll-reveal">
-                <a href="index.html" class="logo-link"><div class="footer-logo" style="color: #ffffff; font-size: 1.8rem; font-weight: 600; letter-spacing: 2px; text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">ALTURE & CO.</div></a>
+                <a href="index.html" class="logo-link"><div class="footer-logo" style="color: #ffffff; font-size: 1.8rem; font-weight: 600; letter-spacing: 2px; text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); font-family: 'Cormorant Garamond', serif;">ALTURE <span style="color: var(--velvet-rose);">&</span> CO.</div></a>
                 <div class="footer-links">
-                    <ul>
+                    <ul style="font-family: 'Montserrat', sans-serif; font-weight: 300;">
                         <li><a href="#who-we-are">Who We Are</a></li>
                         <li><a href="#what-we-offer">What We Offer</a></li>
                         <li><a href="#strategic-vision">Strategic Vision</a></li>
@@ -319,13 +364,13 @@
                         <li><a href="#contact">Contact</a></li>
                     </ul>
                 </div>
-                <div class="footer-contact">
-                    <p>Dubai, UAE</p>
-                    <p>Email: info@altureandco.com</p>
+                <div class="footer-contact" style="font-family: 'Montserrat', sans-serif; font-weight: 200;">
+                    <p style="color: rgba(255, 255, 255, 0.8); margin-bottom: 0.5rem; font-size: 0.85rem; letter-spacing: 0.03em;">Dubai, UAE</p>
+                    <p style="color: rgba(255, 255, 255, 0.8); font-size: 0.85rem; letter-spacing: 0.03em;">Email: info@altureandco.com</p>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2025 Alture & Co. All rights reserved.</p>
+                <p style="font-family: 'Montserrat', sans-serif; font-weight: 300;">&copy; 2025 Alture & Co. All rights reserved.</p>
             </div>
         </div>
     </footer>
