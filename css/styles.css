@@ -1195,20 +1195,25 @@ footer::before {
 }
 
 @media (max-width: 768px) {
+    /* Menu mobile */
     .menu-toggle {
         display: block;
+        z-index: 1001;
     }
     
+    /* Navigation */
     nav {
         position: fixed;
         top: 0;
         right: -100%;
-        width: 250px;
+        width: 80%;
+        max-width: 300px;
         height: 100vh;
         background-color: var(--soft-ivory);
-        padding: 80px 20px;
-        transition: right 0.3s ease;
+        padding: 100px 20px 40px;
+        transition: right 0.4s ease;
         box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
     }
     
     nav.active {
@@ -1217,40 +1222,160 @@ footer::before {
     
     nav ul {
         flex-direction: column;
+        align-items: flex-start;
     }
     
     nav ul li {
         margin: 15px 0;
+        width: 100%;
+    }
+    
+    nav ul li a {
+        display: block;
+        padding: 10px 0;
+        font-size: 1rem;
+    }
+    
+    /* En-tête */
+    header {
+        padding: 15px 0 !important;
+    }
+    
+    /* Section Hero */
+    .hero {
+        padding-top: 100px !important;
+        min-height: 100vh !important;
+        height: auto !important;
     }
     
     .hero h1 {
-        font-size: 2.2rem;
+        font-size: 2.2rem !important;
+        line-height: 1.2 !important;
+        margin-bottom: 20px !important;
     }
     
+    .hero-content {
+        padding: 0 20px !important;
+    }
+    
+    /* Sections générales */
     section {
-        padding: 80px 0;
+        padding: 60px 0 !important;
     }
     
     section h2 {
-        font-size: 2rem;
+        font-size: 1.8rem !important;
+        text-align: center;
+        margin-bottom: 20px !important;
     }
     
+    .section-divider {
+        margin: 0 auto 30px !important;
+    }
+    
+    /* Grilles */
     .services-grid,
     .team-grid {
         grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    
+    /* Cartes de service */
+    .service-card {
+        padding: 25px !important;
+    }
+    
+    /* Formulaire de contact */
+    .contact-form {
+        padding: 20px !important;
+    }
+    
+    .form-group {
+        margin-bottom: 20px;
+    }
+    
+    /* Pied de page */
+    footer {
+        text-align: center;
+    }
+    
+    .footer-links {
+        flex-direction: column;
+        gap: 20px;
     }
 }
 
 @media (max-width: 480px) {
+    /* Ajustements pour très petits écrans */
+    .container {
+        padding: 0 15px !important;
+    }
+    
+    /* En-tête */
+    header {
+        padding: 10px 0 !important;
+    }
+    
+    .logo-link {
+        font-size: 1.2rem !important;
+    }
+    
+    /* Section Hero */
     .hero h1 {
-        font-size: 1.8rem;
+        font-size: 1.8rem !important;
+        line-height: 1.2 !important;
+        margin-bottom: 15px !important;
+    }
+    
+    .hero-subtitle {
+        font-size: 0.9rem !important;
+        margin-bottom: 30px !important;
+    }
+    
+    /* Boutons */
+    .btn {
+        padding: 10px 20px;
+        font-size: 0.8rem;
+    }
+    
+    /* Sections */
+    section {
+        padding: 50px 0 !important;
     }
     
     section h2 {
-        font-size: 1.8rem;
+        font-size: 1.6rem !important;
+        margin-bottom: 15px !important;
     }
     
-    section p {
-        font-size: 1rem;
+    /* Cartes */
+    .service-card {
+        padding: 20px 15px !important;
+    }
+    
+    .service-icon {
+        width: 50px;
+        height: 50px;
+        margin-bottom: 15px;
+    }
+    
+    .service-icon i {
+        font-size: 1.5rem;
+    }
+    
+    /* Formulaire */
+    .form-group input,
+    .form-group textarea {
+        padding: 10px;
+        font-size: 0.9rem;
+    }
+    
+    /* Pied de page */
+    footer {
+        padding: 30px 0 !important;
+    }
+    
+    .footer-links {
+        gap: 15px;
     }
 }

@@ -1,0 +1,71 @@
+/* 
+ * Alture & Co. - Properties Mobile Styles
+ * Optimisation de l'affichage des propriétés sur mobile
+ */
+
+@media (max-width: 768px) {
+    /* Ajustement de la grille de propriétés pour mobile */
+    .properties-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    /* Style des éléments de propriété sur mobile */
+    .property-item {
+        margin-bottom: 2rem;
+    }
+    
+    /* Amélioration de l'affichage des filtres sur mobile */
+    .gallery-filters {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .filter-btn {
+        margin: 0.3rem;
+        padding: 0.5rem 1rem;
+        font-size: 0.8rem;
+    }
+    
+    /* Ajustement de la modal pour mobile */
+    .property-modal .modal-content {
+        flex-direction: column;
+        width: 90%;
+    }
+    
+    .modal-image {
+        width: 100%;
+        max-height: 300px;
+        object-fit: cover;
+    }
+    
+    .modal-details {
+        width: 100%;
+        padding: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Ajustements supplémentaires pour très petits écrans */
+    .intro-text {
+        font-size: 0.9rem;
+        padding: 0 1rem;
+    }
+    
+    .property-info h4 {
+        font-size: 1.2rem;
+    }
+    
+    .property-meta {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .property-meta span {
+        margin-bottom: 0.3rem;
+    }
+    
+    .property-price {
+        font-size: 1.1rem;
+    }
+}

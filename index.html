@@ -21,15 +21,17 @@
     <link rel="stylesheet" href="css/pure-white-title.css">
     <link rel="stylesheet" href="css/testimonials-coming-soon.css">
     <link rel="stylesheet" href="css/strategic-vision-fix.css">
+    <link rel="stylesheet" href="css/mobile-override.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/logo-black-fix.css">
 </head>
 <body>
     <div class="scroll-progress"></div>
     <div class="preloader">
-        <div class="preloader-logo">A<span style="color: var(--velvet-rose);">&</span>Co.</div>
+        <div class="preloader-logo">A<span style="color: #000000 !important; text-shadow: none !important;">&</span>Co.</div>
     </div>
     <header style="position: fixed; top: 0; left: 0; width: 100%; padding-top: 1.25rem; padding-bottom: 1.25rem; background-color: white; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); z-index: 50; transition: all 0.3s ease;">
         <div style="max-width: 1200px; margin-left: auto; margin-right: auto; padding-left: 1.5rem; padding-right: 1.5rem; display: flex; justify-content: space-between; align-items: center;">
@@ -42,12 +44,16 @@
                         text-decoration: none;
                         width: 120px;
                         height: 40px;
+                        color: #000000 !important;
+                    }
+                    #simple-logo span {
+                        color: #000000 !important;
                     }
                     #simple-logo-short {
                         font-family: 'Cormorant Garamond', serif;
                         font-size: 1.5rem;
                         font-weight: 500;
-                        color: black;
+                        color: #000000; /* Noir pur */
                         display: block;
                         position: absolute;
                         opacity: 1;
@@ -58,8 +64,8 @@
                     #simple-logo-full {
                         font-family: 'Cormorant Garamond', serif;
                         font-size: 1.5rem;
+                        color: #000000; /* Noir pur */
                         font-weight: 500;
-                        color: black;
                         position: absolute;
                         top: 0;
                         left: 0;
@@ -74,7 +80,7 @@
                         opacity: 1;
                     }
                     .pink-amp {
-                        color: #D14D72; /* Couleur velvet-rose explicite pour éviter les conflits */
+                        color: #D14D72;
                         font-weight: 400;
                     }
                 </style>
@@ -83,20 +89,22 @@
                     <span id="simple-logo-full">Alture <span class="pink-amp">&</span> Co.</span>
                 </a>
             </div>
+            <button class="menu-toggle" aria-label="Menu">
+                <span class="menu-line"></span>
+                <span class="menu-line"></span>
+                <span class="menu-line"></span>
+            </button>
             <nav>
                 <ul style="display: flex; gap: 1.5rem;">
                     <li><a href="#who-we-are" style="color: black; transition: color 0.3s ease; font-size: 0.875rem; font-family: 'Montserrat', sans-serif; font-weight: 500; letter-spacing: 0.05em;" onmouseover="this.style.color='#D14D72'" onmouseout="this.style.color='black'">WHO WE ARE</a></li>
                     <li><a href="#what-we-offer" style="color: black; transition: color 0.3s ease; font-size: 0.875rem; font-family: 'Montserrat', sans-serif; font-weight: 500; letter-spacing: 0.05em;" onmouseover="this.style.color='#D14D72'" onmouseout="this.style.color='black'">WHAT WE OFFER</a></li>
                     <li><a href="properties.html" style="color: black; transition: color 0.3s ease; font-size: 0.875rem; font-family: 'Montserrat', sans-serif; font-weight: 500; letter-spacing: 0.05em;" onmouseover="this.style.color='#D14D72'" onmouseout="this.style.color='black'">PROPERTIES</a></li>
                     <li><a href="#strategic-vision" style="color: black; transition: color 0.3s ease; font-size: 0.875rem; font-family: 'Montserrat', sans-serif; font-weight: 500; letter-spacing: 0.05em;" onmouseover="this.style.color='#D14D72'" onmouseout="this.style.color='black'">STRATEGIC VISION</a></li>
-                    <li><a href="#women-wealth" style="color: black; transition: color 0.3s ease; font-size: 0.875rem; font-family: 'Montserrat', sans-serif; font-weight: 500; letter-spacing: 0.05em;" onmouseover="this.style.color='#D14D72'" onmouseout="this.style.color='black'">WOMEN <span style="color: #D14D72;">&</span> WEALTH</a></li>
+
                     <li><a href="#team" style="color: black; transition: color 0.3s ease; font-size: 0.875rem; font-family: 'Montserrat', sans-serif; font-weight: 500; letter-spacing: 0.05em;" onmouseover="this.style.color='#D14D72'" onmouseout="this.style.color='black'">THE TEAM</a></li>
                     <li><a href="#contact" style="color: black; transition: color 0.3s ease; font-size: 0.875rem; font-family: 'Montserrat', sans-serif; font-weight: 500; letter-spacing: 0.05em;" onmouseover="this.style.color='#D14D72'" onmouseout="this.style.color='black'">CONTACT</a></li>
                 </ul>
             </nav>
-            <div class="menu-toggle">
-                <i class="fas fa-bars" style="color: black; font-size: 1.5rem; transition: color 0.3s ease; cursor: pointer;" onmouseover="this.style.color='#D14D72'" onmouseout="this.style.color='black'"></i>
-            </div>
         </div>
     </header>
 
@@ -259,70 +267,6 @@
         </div>
     </section>
 
-    <section id="women-wealth" class="women-wealth">
-        <div class="container">
-            <h2>Women & Wealth</h2>
-            <div class="section-divider light"></div>
-            <p>We believe women should own their capital — not just earn it.</p>
-            <p>At Alture & Co., we work with women who have already built something: Entrepreneurs, real estate professionals, independent business owners, and strategic creatives.</p>
-            <p>They make money, they make decisions — and they're ready to structure it with precision.</p>
-            <p>Our role is to offer clear, strategic deployment options through real estate and digital assets.</p>
-            <p>We don't teach. We don't coach.</p>
-            <p>We work alongside.</p>
-        </div>
-    </section>
-
-    <section id="team" class="team-section">
-        <div class="container">
-            <h2 class="scroll-reveal">Our Team</h2>
-            <div class="section-divider scroll-reveal"></div>
-            <div class="team-grid">
-                <div class="team-member scroll-reveal">
-                    <h3>Céline Sine — Founding Partner</h3>
-                    <p>Founder of Alture & Co., Céline leads with precision, discretion, and structured vision. Her background blends strategic thinking, emotional intelligence, and a sharp sense for both real estate and emerging capital markets.</p>
-                    <p>She is actively involved in digital finance, with hands-on experience in crypto trading, portfolio growth, and macroeconomic market analysis. Céline's approach reflects a new generation of leadership: quietly powerful, financially conscious, and always aligned with long-term value.</p>
-                    <p class="email">celine@altureandco.com</p>
-                </div>
-                <div class="team-member scroll-reveal">
-                    <h3>Executive Assistant</h3>
-                    <p>Manages day-to-day coordination and confidential operations at Alture & Co., including invoicing, client welcome letters, NDAs, and logistics. With a legal background, she adds clarity and oversight to formal communications and supports the partners with precision and calm structure.</p>
-                    <p>She also oversees hospitality and bespoke gifting ensuring that every VIP client gesture, private dinner, or thoughtful detail reflects Alture & Co.'s values of elegance, attention, and quiet generosity.</p>
-                </div>
-                <div class="team-member scroll-reveal">
-                    <h3>Portfolio Accountant</h3>
-                    <p>With a meticulous eye and deep sense of financial organization, our accountant oversees the internal portfolio logic, financial planning, and reporting.</p>
-                    <p>Ensuring structure, consistency, and calm efficiency in all operations offering reliability and trust in every transaction.</p>
-                    <p class="email">accounting@altureandco.com</p>
-                </div>
-                <div class="team-member">
-                    <h3>Digital & Brand Architect</h3>
-                    <p>Oversees the full visual identity of Alture & Co., including the website, design direction, brand materials, and pitch formatting.</p>
-                    <p>This role ensures everything client-facing reflects the firm's refined image with precision, calm, and aesthetic clarity.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Properties Gallery Section -->
-    <section class="testimonials">
-        <div class="testimonials-container">
-            <h2>Client Testimonials</h2>
-            <div class="section-divider"></div>
-            <div class="coming-soon-container">
-                <div class="coming-soon-icon">
-                    <i class="fas fa-stars"></i>
-                </div>
-                <h3>Coming Soon</h3>
-                <p>We are currently collecting testimonials from our valued clients.</p>
-                <p>Client experiences and success stories will be featured here soon.</p>
-                <div class="construction-note">
-                    <i class="fas fa-info-circle"></i>
-                    <span>This section is under construction</span>
-                </div>
-            </div>
-        </div>
-    </section>
-    
     <section id="properties" class="properties-section" style="background-color: #ffffff;">
         <div class="container">
             <h2 class="scroll-reveal" style="color: #3e002f;">Premium Properties</h2>
@@ -384,13 +328,13 @@
     <footer class="parallax-bg" style="background-image: linear-gradient(rgba(62, 0, 47, 0.95), rgba(62, 0, 47, 0.95)), url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80');">
         <div class="container">
             <div class="footer-content scroll-reveal">
-                <a href="index.html" class="logo-link"><div class="footer-logo" style="color: #ffffff; font-size: 1.8rem; font-weight: 600; letter-spacing: 2px; text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); font-family: 'Cormorant Garamond', serif;">ALTURE <span style="color: var(--velvet-rose);">&</span> CO.</div></a>
+                <a href="index.html" class="logo-link"><div class="footer-logo" style="color: #000000; font-size: 1.8rem; font-weight: 600; letter-spacing: 2px; text-shadow: none; font-family: 'Cormorant Garamond', serif;">ALTURE <span style="color: #000000 !important; text-shadow: none !important; display: inline !important;">&</span> CO.</div></a>
                 <div class="footer-links">
                     <ul style="font-family: 'Montserrat', sans-serif; font-weight: 300;">
                         <li><a href="#who-we-are">Who We Are</a></li>
                         <li><a href="#what-we-offer">What We Offer</a></li>
                         <li><a href="#strategic-vision">Strategic Vision</a></li>
-                        <li><a href="#women-wealth">Women & Wealth</a></li>
+
                         <li><a href="#team">The Team</a></li>
                         <li><a href="#contact">Contact</a></li>
                     </ul>
@@ -412,6 +356,7 @@
     <script src="js/back-to-top.js"></script>
     <script src="js/loading-animation.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/mobile-menu.js"></script>
     <script src="js/service-cards.js"></script>
 </body>
 </html>

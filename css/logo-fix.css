@@ -103,3 +103,17 @@
     font-weight: 600 !important;
     color: #000000 !important; /* Noir pur comme demandé */
 }
+
+/* Forcer la couleur noire sur le symbole & dans le logo */
+.preloader-logo span,
+.preloader-logo span *,
+.footer-logo span,
+.footer-logo span * {
+    color: #000000 !important;
+}
+
+/* S'assurer que le & reste noir même avec des styles en ligne */
+.preloader-logo [style*="color:"],
+.footer-logo [style*="color:"] {
+    color: #000000 !important;
+}

@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>Alture & Co. | Strategic Portfolio Management</title>
+    
+    <!-- Polices Google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        /* STYLES DE BASE */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body, html {
+            width: 100%;
+            height: 100%;
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+            color: #333;
+        }
+        
+        /* HEADER ET NAVIGATION */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 24px;
+            color: #fff;
+            text-decoration: none;
+        }
+        
+        .nav-toggle {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        /* SECTION HERO */
+        .hero {
+            height: 100vh;
+            width: 100%;
+            background-image: url('images/hero-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            padding-top: 80px;
+        }
+        
+        .hero:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 0;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .hero-title {
+            font-family: 'Cormorant Garamond', serif;
+            color: #fff;
+            font-size: 2.5rem;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            font-weight: 500;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.7);
+        }
+        
+        .hero-title span {
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .hero-subtitle {
+            color: #fff;
+            font-size: 1rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            margin-bottom: 40px;
+            font-weight: 300;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        /* SERVICES */
+        .hero-services {
+            width: 100%;
+            max-width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .hero-service {
+            background-color: rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+            padding: 20px;
+            text-align: center;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .hero-service i {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+        
+        .hero-service h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        
+        .hero-service p {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            line-height: 1.4;
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <a href="#" class="logo">A&C</a>
+        <button class="nav-toggle"><i class="fas fa-bars"></i></button>
+    </header>
+    
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">
+                <span>Strategic</span>
+                <span>Portfolio</span>
+                <span>Management</span>
+            </h1>
+            <p class="hero-subtitle">REAL ESTATE AND DIGITAL ASSET STRUCTURING</p>
+            
+            <div class="hero-services">
+                <div class="hero-service">
+                    <i class="fas fa-building"></i>
+                    <h3>Real Estate</h3>
+                    <p>Premium Dubai properties & strategic investments</p>
+                </div>
+                
+                <div class="hero-service">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Digital Assets</h3>
+                    <p>Crypto portfolio structuring & secure custody</p>
+                </div>
+                
+                <div class="hero-service">
+                    <i class="fas fa-globe"></i>
+                    <h3>Cross-Border</h3>
+                    <p>Strategic wealth alignment between Europe & UAE</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comportement du menu mobile -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const navToggle = document.querySelector('.nav-toggle');
+            
+            if (navToggle) {
+                navToggle.addEventListener('click', function() {
+                    alert('Pour accéder à la version complète, veuillez visiter sur un appareil à écran plus large.');
+                });
+            }
+        });
+    </script>
+</body>
+</html>

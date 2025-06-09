@@ -1,0 +1,188 @@
+/*
+ * Alture & Co. - CORRECTION ULTIME MOBILE
+ * Styles prioritaires pour résoudre les problèmes d'affichage sur mobile
+ */
+
+/* 1. RÉINITIALISATION DES STYLES POUR MOBILE */
+@media only screen and (max-width: 768px) {
+    /* Réinitialisation des styles problématiques */
+    html, body {
+        overflow-x: hidden !important;
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    
+    /* Désactivation des effets de défilement qui pourraient causer des problèmes */
+    .parallax-bg {
+        background-attachment: scroll !important;
+        background-position: center center !important;
+    }
+}
+
+/* 2. CORRECTION DE LA SECTION HERO */
+@media only screen and (max-width: 768px) {
+    /* Style de base pour .hero */
+    .hero {
+        position: relative !important;
+        height: auto !important;
+        min-height: 100vh !important;
+        padding: 80px 20px 40px 20px !important; /* Ajout de padding en haut pour l'en-tête */
+        margin: 0 !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        align-items: center !important;
+        background-image: url('https://images.unsplash.com/photo-1582407947304-fd86f028f716?ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80') !important;
+        background-size: cover !important;
+        background-position: center center !important;
+        background-repeat: no-repeat !important;
+        background-attachment: scroll !important;
+        overflow: hidden !important;
+        z-index: 1 !important;
+    }
+    
+    /* Overlay sombre pour améliorer la lisibilité */
+    .hero::before {
+        content: '' !important;
+        position: absolute !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        bottom: 0 !important;
+        background: rgba(0, 0, 0, 0.5) !important;
+        z-index: -1 !important;
+    }
+    
+    /* Conteneur du contenu hero */
+    .hero-content {
+        position: relative !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 20px 15px !important;
+        margin: 0 auto !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        z-index: 2 !important;
+    }
+    
+    /* Style du titre principal */
+    .hero-title {
+        font-family: 'Cormorant Garamond', serif !important;
+        font-size: 2.2rem !important;
+        font-weight: 500 !important;
+        line-height: 1.2 !important;
+        color: #ffffff !important;
+        text-align: center !important;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.7) !important;
+        margin: 0 0 15px 0 !important;
+        padding: 0 10px !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        display: block !important;
+    }
+    
+    /* Style pour chaque partie du titre */
+    .hero-title span {
+        display: block !important;
+        margin-bottom: 5px !important;
+        width: 100% !important;
+        text-align: center !important;
+    }
+    
+    /* Style du sous-titre */
+    .hero-subtitle {
+        font-family: 'Montserrat', sans-serif !important;
+        font-size: 1rem !important;
+        font-weight: 300 !important;
+        line-height: 1.4 !important;
+        color: #ffffff !important;
+        text-align: center !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.1em !important;
+        margin: 0 0 30px 0 !important;
+        padding: 0 15px !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        opacity: 0.9 !important;
+    }
+    
+    /* Masquer le séparateur mobile inutile */
+    .mobile-break {
+        display: none !important;
+    }
+}
+
+/* 3. CORRECTION DE LA SECTION WHAT WE OFFER */
+@media only screen and (max-width: 768px) {
+    /* Masquer la section WHAT WE OFFER qui apparaît en haut */
+    #what-we-offer {
+        display: none !important;
+        visibility: hidden !important;
+        height: 0 !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        overflow: hidden !important;
+    }
+    
+    /* S'assurer que la section WHAT WE OFFER ne prend pas d'espace */
+    .what-we-offer {
+        display: none !important;
+        visibility: hidden !important;
+        height: 0 !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        overflow: hidden !important;
+    }
+}
+
+/* 4. CORRECTION DE LA SECTION WHO WE ARE */
+@media only screen and (max-width: 768px) {
+    /* Masquer complètement la section WHO WE ARE */
+    #who-we-are,
+    .who-we-are,
+    section#who-we-are,
+    section.who-we-are {
+        display: none !important;
+        visibility: hidden !important;
+        height: 0 !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        overflow: hidden !important;
+        position: absolute !important;
+        left: -9999px !important;
+        top: -9999px !important;
+    }
+    
+    /* Masquer les liens vers WHO WE ARE */
+    a[href*="who-we-are"],
+    [href*="who-we-are"] {
+        display: none !important;
+        visibility: hidden !important;
+    }
+}
+
+/* 5. CORRECTIONS SUPPLÉMENTAIRES */
+@media only screen and (max-width: 768px) {
+    /* Désactiver les animations problématiques */
+    .parallax-bg,
+    .scroll-reveal,
+    .fade-in {
+        animation: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+    }
+    
+    /* Corriger les problèmes de défilement */
+    html {
+        overflow-x: hidden !important;
+    }
+    
+    body {
+        overflow-x: hidden !important;
+        width: 100% !important;
+        position: relative !important;
+    }
+}

@@ -1,0 +1,208 @@
+/* 
+ * Alture & Co. - Cross-Browser & Mobile Compatibility Fixes
+ * Correctifs pour Safari et appareils mobiles
+ */
+
+/* Correctifs généraux pour Safari */
+@supports (-webkit-touch-callout: none) {
+    /* Correction du rendu des polices sur Safari */
+    body {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+    
+    /* Correction des animations pour Safari */
+    .animate {
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+    }
+    
+    /* Correction des transitions pour Safari */
+    .property-item, .modal, .nav-toggle, nav, .filter-btn {
+        -webkit-transition: all 0.3s ease;
+        transition: all 0.3s ease;
+    }
+    
+    /* Correction des flexbox pour Safari */
+    .header-content, nav ul, .footer-content, .property-meta {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+    }
+    
+    /* Correction du sticky header pour Safari */
+    header.scrolled {
+        position: -webkit-sticky;
+        position: sticky;
+    }
+}
+
+/* Correctifs pour iOS */
+@supports (-webkit-touch-callout: none) and (not (translate: none)) {
+    /* Correction du 100vh sur iOS (problème de barre d'adresse) */
+    .fullscreen-section {
+        height: -webkit-fill-available;
+    }
+    
+    /* Correction des inputs sur iOS */
+    input, textarea, select {
+        -webkit-appearance: none;
+        appearance: none;
+        border-radius: 0;
+    }
+    
+    /* Désactiver le zoom sur les inputs sur iOS */
+    @media screen and (max-width: 768px) {
+        input, textarea, select {
+            font-size: 16px; /* Empêche le zoom automatique sur iOS */
+        }
+    }
+}
+
+/* Correctifs généraux pour mobile */
+@media screen and (max-width: 768px) {
+    /* Amélioration de la lisibilité des textes */
+    body {
+        font-size: 16px;
+        line-height: 1.6;
+    }
+    
+    h1 {
+        font-size: 2rem;
+    }
+    
+    h2 {
+        font-size: 1.8rem;
+    }
+    
+    h3 {
+        font-size: 1.5rem;
+    }
+    
+    /* Correction des marges et paddings */
+    .container {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    
+    section {
+        padding: 3rem 0;
+    }
+    
+    /* Amélioration du tap target size pour mobile */
+    button, .btn, a.btn, nav a {
+        min-height: 44px;
+        min-width: 44px;
+        padding: 10px 15px;
+    }
+    
+    /* Correction du scroll horizontal */
+    html, body {
+        overflow-x: hidden;
+        width: 100%;
+    }
+    
+    /* Correction des images pour éviter le débordement */
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+}
+
+/* Correctifs pour très petits écrans */
+@media screen and (max-width: 480px) {
+    /* Réduction des marges et paddings */
+    section {
+        padding: 2rem 0;
+    }
+    
+    .container {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    
+    /* Ajustement des tailles de texte */
+    h1 {
+        font-size: 1.8rem;
+    }
+    
+    h2 {
+        font-size: 1.6rem;
+    }
+    
+    h3 {
+        font-size: 1.3rem;
+    }
+    
+    /* Correction du logo pour petits écrans */
+    #simple-logo {
+        width: 100px !important;
+    }
+}
+
+/* Correction spécifique pour la modal sur Safari */
+@supports (-webkit-touch-callout: none) {
+    .modal {
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .modal-content {
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+    }
+}
+
+/* Correction des animations pour Safari */
+@supports (-webkit-touch-callout: none) {
+    .fade-in, .slide-up, .slide-in {
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+    }
+}
+
+/* Correction du z-index pour Safari */
+@supports (-webkit-touch-callout: none) {
+    header {
+        z-index: 1000;
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+    }
+    
+    .nav-toggle {
+        z-index: 1100;
+        position: relative;
+    }
+}
+
+/* Correction des grilles pour Safari et mobile */
+@supports (-webkit-touch-callout: none) or (max-width: 768px) {
+    .properties-grid {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    }
+    
+    .property-item {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 100%;
+        flex: 0 0 100%;
+        margin-bottom: 2rem;
+    }
+    
+    @media screen and (min-width: 768px) {
+        .property-item {
+            -ms-flex: 0 0 calc(50% - 1rem);
+            flex: 0 0 calc(50% - 1rem);
+            margin-right: 1rem;
+        }
+    }
+    
+    @media screen and (min-width: 992px) {
+        .property-item {
+            -ms-flex: 0 0 calc(33.333% - 1rem);
+            flex: 0 0 calc(33.333% - 1rem);
+        }
+    }
+}
