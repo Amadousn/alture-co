@@ -1,0 +1,87 @@
+/* Styling for the Women & Wealth section */
+
+.women-wealth {
+    padding: 6rem 0;
+    background-color: var(--dark-purple);
+    color: #ffffff;
+}
+
+.women-wealth .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.women-wealth h2 {
+    font-family: var(--primary-font);
+    font-size: 2.5rem;
+    font-weight: 400;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #ffffff;
+}
+
+.women-wealth .section-divider {
+    background-color: var(--velvet-rose);
+    width: 80px;
+    height: 3px;
+    margin: 0 auto 3rem;
+}
+
+.women-wealth-content {
+    display: flex;
+    justify-content: center;
+}
+
+.women-wealth-text {
+    max-width: 700px;
+    text-align: center;
+}
+
+.women-wealth-text p {
+    font-family: var(--primary-font);
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.women-wealth-text .intro-text {
+    font-size: 1.4rem;
+    font-weight: 500;
+    margin-bottom: 2rem;
+    color: #ffffff;
+}
+
+.women-wealth-text .paragraph-separator {
+    width: 40px;
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.3);
+    margin: 2rem auto;
+}
+
+.women-wealth-text .emphasis-text {
+    font-style: italic;
+    color: var(--velvet-rose);
+    font-size: 1.2rem;
+    margin: 2rem 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .women-wealth {
+        padding: 4rem 0;
+    }
+    
+    .women-wealth h2 {
+        font-size: 2rem;
+    }
+    
+    .women-wealth-text .intro-text {
+        font-size: 1.2rem;
+    }
+    
+    .women-wealth-text p {
+        font-size: 1rem;
+    }
+}
