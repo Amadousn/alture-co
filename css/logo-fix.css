@@ -1,0 +1,119 @@
+/* Logo styling - Version noire simple et élégante */
+
+/* Ces styles vont remplacer ceux définis dans styles.css pour les mêmes classes */
+/* Utilisation de !important uniquement lorsque nécessaire pour éviter les conflits */
+
+/* Structure du conteneur de logo */
+.logo-container {
+    display: flex !important;
+    align-items: center !important;
+    position: relative !important;
+    z-index: 100 !important;
+    margin-right: 40px !important;
+}
+
+/* Lien du logo */
+.logo-link {
+    text-decoration: none !important;
+    display: block !important;
+    width: 120px !important;
+    height: 40px !important;
+    position: relative !important;
+    overflow: hidden !important;
+    /* Suppression de perspective pour éviter l'effet 3D */
+}
+
+/* Conteneur du logo */
+.logo {
+    position: relative !important;
+    cursor: pointer !important;
+    width: 100% !important;
+    height: 100% !important;
+    /* Suppression de perspective pour éviter l'effet 3D */
+}
+
+/* Texte du logo (A&C) */
+.logo-text {
+    position: absolute !important;
+    width: 100% !important;
+    height: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background-color: transparent !important;
+    font-family: var(--primary-font) !important;
+    font-size: 2rem !important;
+    font-weight: 500 !important;
+    color: #000000 !important; /* Noir pur comme demandé */
+    letter-spacing: 1px !important;
+    transition: opacity 0.3s ease !important;
+    /* Suppression des propriétés 3D et ombres */
+    text-shadow: none !important;
+}
+
+/* Esperluette (&) */
+.ampersand {
+    color: var(--velvet-rose) !important; /* Rose comme demandé */
+    font-size: 2rem !important;
+    font-weight: 300 !important;
+    margin: 0 2px !important;
+}
+
+/* Texte complet (Alture & Co.) */
+.logo-full {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background-color: transparent !important; /* Fond transparent */
+    color: #000000 !important; /* Noir pur comme demandé */
+    font-family: var(--primary-font) !important;
+    font-size: 1.5rem !important;
+    font-weight: 500 !important;
+    opacity: 0 !important;
+    transition: opacity 0.3s ease !important;
+    /* Suppression des transformations 3D et ombres */
+    transform: none !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+}
+
+/* Animation simple au survol - fade in/out */
+.logo-link:hover .logo-text {
+    opacity: 0 !important;
+}
+
+.logo-link:hover .logo-full {
+    opacity: 1 !important;
+}
+
+/* Suppression de l'effet de lueur */
+.logo::after {
+    display: none !important;
+}
+
+/* Style du préchargeur pour correspondre au logo */
+.preloader-logo {
+    font-family: var(--primary-font) !important;
+    font-size: 2.4rem !important;
+    font-weight: 600 !important;
+    color: #000000 !important; /* Noir pur comme demandé */
+}
+
+/* Forcer la couleur noire sur le symbole & dans le logo */
+.preloader-logo span,
+.preloader-logo span *,
+.footer-logo span,
+.footer-logo span * {
+    color: #000000 !important;
+}
+
+/* S'assurer que le & reste noir même avec des styles en ligne */
+.preloader-logo [style*="color:"],
+.footer-logo [style*="color:"] {
+    color: #000000 !important;
+}

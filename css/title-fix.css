@@ -1,0 +1,66 @@
+/*
+ * Alture & Co. - Fix pour afficher le titre principal sur mobile
+ * Ajuste l'espacement et le positionnement pour garantir la visibilité du titre
+ */
+
+@media only screen and (max-width: 768px) {
+    /* Augmenter l'espace en haut pour afficher le titre */
+    .hero {
+        padding-top: 120px !important; /* Augmenter l'espace en haut */
+    }
+    
+    .hero-content {
+        padding-top: 30px !important;
+        margin-top: 20px !important;
+    }
+    
+    /* Déplacer les éléments vers le bas */
+    .hero-title {
+        display: block !important;
+        position: relative !important;
+        top: 0 !important;
+        margin-bottom: 30px !important;
+        font-size: 2.2rem !important;
+        color: #FFFFFF !important;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.7) !important;
+        z-index: 100 !important;
+    }
+    
+    /* Forcer l'affichage du titre sur des lignes séparées */
+    .hero-title span {
+        display: block !important;
+        line-height: 1.3 !important;
+        margin-bottom: 5px !important;
+    }
+    
+    /* Ajuster le sous-titre */
+    .hero-subtitle {
+        margin-top: 10px !important;
+        margin-bottom: 30px !important;
+    }
+    
+    /* Réduire légèrement la taille des services pour gagner de l'espace */
+    .hero-services {
+        margin-top: 10px !important;
+    }
+    
+    .hero-service {
+        padding: 15px !important;
+        margin-bottom: 10px !important;
+    }
+}
+
+/* Pour les plus petits écrans */
+@media only screen and (max-width: 480px) {
+    .hero {
+        padding-top: 90px !important;
+    }
+    
+    .hero-title {
+        font-size: 1.8rem !important;
+    }
+    
+    .hero-service {
+        padding: 12px !important;
+    }
+}

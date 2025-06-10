@@ -1,0 +1,14 @@
+/* Fix pour la section Strategic Vision */
+.strategic-vision-white {
+    background-color: #ffffff !important;
+    background-image: none !important;
+    color: #000000 !important;
+}
+
+.strategic-vision-white h2 {
+    color: #000000 !important;
+}
+
+.strategic-vision-white p {
+    color: #000000 !important;
+}

@@ -1,0 +1,384 @@
+/* Enhanced card designs for Alture & Co. */
+
+/* Improved service cards */
+.service-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    background-color: #fff;
+    z-index: 1;
+}
+
+.service-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(to right, var(--deep-plum), var(--velvet-rose));
+    transition: height 0.5s ease;
+    z-index: -1;
+}
+
+.service-card:hover {
+    transform: translateY(-15px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.service-card:hover::before {
+    height: 100%;
+    opacity: 0.05;
+}
+
+.service-icon {
+    position: relative;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background-color: rgba(62, 0, 47, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 20px;
+    transition: all 0.5s ease;
+}
+
+.service-icon i {
+    font-size: 30px;
+    color: var(--deep-plum);
+    transition: all 0.5s ease;
+}
+
+.service-card:hover .service-icon {
+    background-color: var(--deep-plum);
+    transform: rotateY(180deg);
+}
+
+.service-card:hover .service-icon i {
+    color: #fff;
+    transform: rotateY(180deg);
+}
+
+/* Enhanced property cards */
+.property-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.property-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 30px 20px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+    color: #fff;
+    transition: all 0.5s ease;
+}
+
+.property-card:hover .property-overlay {
+    padding-bottom: 50px;
+}
+
+.property-overlay h3 {
+    font-family: var(--primary-font);
+    font-size: 24px;
+    margin: 0 0 10px;
+    transform: translateY(0);
+    transition: transform 0.5s ease;
+}
+
+.property-overlay p {
+    opacity: 0.8;
+    margin-bottom: 10px;
+    transform: translateY(0);
+    transition: transform 0.5s ease 0.1s;
+}
+
+.property-overlay .property-price {
+    font-weight: 600;
+    color: var(--velvet-rose);
+    transform: translateY(0);
+    transition: transform 0.5s ease 0.2s;
+}
+
+.property-card:hover .property-overlay h3,
+.property-card:hover .property-overlay p,
+.property-card:hover .property-overlay .property-price {
+    transform: translateY(-5px);
+}
+
+/* Enhanced team member cards */
+.team-member {
+    position: relative;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: all 0.5s ease;
+    overflow: hidden;
+}
+
+.team-member::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(to right, var(--deep-plum), var(--velvet-rose));
+    transition: height 0.5s ease;
+    z-index: 0;
+}
+
+.team-member:hover {
+    transform: translateY(-15px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.team-member:hover::after {
+    height: 10px;
+}
+
+.team-member h3 {
+    position: relative;
+    z-index: 1;
+    font-size: 22px;
+    margin-bottom: 15px;
+    color: var(--deep-plum);
+}
+
+.team-member p {
+    position: relative;
+    z-index: 1;
+    font-size: 16px;
+    line-height: 1.7;
+    margin-bottom: 15px;
+}
+
+.team-member .email {
+    position: relative;
+    z-index: 1;
+    font-weight: 500;
+    color: var(--velvet-rose);
+}
+
+/* Testimonials section */
+.testimonials {
+    padding: 80px 0;
+    background-color: var(--soft-ivory);
+    position: relative;
+    overflow: hidden;
+}
+
+.testimonials::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80') center/cover no-repeat;
+    opacity: 0.05;
+    z-index: 0;
+}
+
+.testimonials-container {
+    position: relative;
+    z-index: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 30px;
+}
+
+.testimonials h2 {
+    text-align: center;
+    font-family: var(--primary-font);
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: var(--deep-plum);
+}
+
+.testimonials .section-divider {
+    width: 60px;
+    height: 2px;
+    background-color: var(--deep-plum);
+    margin: 0 auto 40px;
+}
+
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 30px;
+}
+
+.testimonial-card {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: all 0.5s ease;
+    position: relative;
+}
+
+.testimonial-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.testimonial-quote {
+    font-size: 18px;
+    line-height: 1.7;
+    font-style: italic;
+    margin-bottom: 20px;
+    color: var(--ivory-black);
+    position: relative;
+}
+
+.testimonial-quote::before {
+    content: '"';
+    font-family: Georgia, serif;
+    font-size: 60px;
+    color: var(--velvet-rose);
+    opacity: 0.2;
+    position: absolute;
+    top: -20px;
+    left: -15px;
+}
+
+.testimonial-author {
+    display: flex;
+    align-items: center;
+}
+
+.testimonial-author-image {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 15px;
+}
+
+.testimonial-author-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.testimonial-author-info h4 {
+    font-family: var(--primary-font);
+    font-size: 18px;
+    margin: 0 0 5px;
+    color: var(--deep-plum);
+}
+
+.testimonial-author-info p {
+    font-size: 14px;
+    color: var(--muted-lilac);
+    margin: 0;
+}
+
+/* Enhanced contact form */
+.contact-form {
+    position: relative;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 40px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    transition: all 0.5s ease;
+}
+
+.contact-form:hover {
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+}
+
+.form-group {
+    position: relative;
+    margin-bottom: 25px;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid rgba(62, 0, 47, 0.1);
+    border-radius: 5px;
+    font-family: var(--secondary-font);
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--deep-plum);
+    box-shadow: 0 0 15px rgba(62, 0, 47, 0.1);
+}
+
+.form-group.focused input,
+.form-group.focused textarea {
+    padding-top: 25px;
+    padding-bottom: 5px;
+}
+
+.form-group.focused::before {
+    content: attr(data-placeholder);
+    position: absolute;
+    top: 5px;
+    left: 15px;
+    font-size: 12px;
+    color: var(--deep-plum);
+    transition: all 0.3s ease;
+}
+
+.btn {
+    background: linear-gradient(to right, var(--deep-plum), var(--velvet-rose));
+    color: #fff;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 5px;
+    font-family: var(--secondary-font);
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(62, 0, 47, 0.2);
+}
+
+.btn::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: all 0.5s ease;
+}
+
+.btn:hover::after {
+    left: 100%;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .testimonials-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .contact-form {
+        padding: 30px 20px;
+    }
+}

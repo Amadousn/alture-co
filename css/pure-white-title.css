@@ -1,0 +1,46 @@
+/* Elegant pure white title with refined styling */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant:wght@300;400;500;600&display=swap');
+
+.hero h1 {
+    /* Reset previous effects */
+    background: none !important;
+    -webkit-background-clip: initial !important;
+    background-clip: initial !important;
+    -webkit-text-fill-color: #FFFFFF !important;
+    color: #FFFFFF !important;
+    text-shadow: none !important;
+    
+    /* Enhanced typography */
+    font-family: 'Cormorant', var(--primary-font) !important;
+    font-weight: 300 !important;
+    letter-spacing: 2px !important;
+    font-size: 4.8rem !important;
+    line-height: 1.1 !important;
+    
+    /* Subtle refinements */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 20px 0;
+    max-width: 90%;
+    margin: 0 auto;
+}
+
+.hero h1 strong {
+    color: #FFFFFF !important;
+    -webkit-text-fill-color: #FFFFFF !important;
+    background: none !important;
+    font-weight: 500 !important;
+    letter-spacing: 3px !important;
+}
+
+/* Add subtle animation */
+@keyframes gentle-glow {
+    0% { opacity: 0.95; }
+    50% { opacity: 1; }
+    100% { opacity: 0.95; }
+}
+
+.hero h1 {
+    animation: gentle-glow 4s infinite ease-in-out;
+}

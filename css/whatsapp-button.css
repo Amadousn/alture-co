@@ -1,0 +1,64 @@
+/* Style pour le bouton WhatsApp */
+.whatsapp-contact {
+    display: inline-flex;
+    align-items: center;
+    background-color: #25D366;
+    color: white !important;
+    padding: 12px 24px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+    margin-top: 20px;
+}
+
+.whatsapp-contact i {
+    margin-right: 10px;
+    font-size: 1.4rem;
+}
+
+.whatsapp-contact:hover {
+    background-color: #128C7E;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+}
+
+.whatsapp-contact:active {
+    transform: translateY(0);
+}
+
+/* Style pour le numéro dans le footer */
+.whatsapp-number {
+    display: flex;
+    align-items: center;
+    margin-top: 15px;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.whatsapp-number i {
+    margin-right: 8px;
+    color: #25D366;
+    font-size: 1.2rem;
+}
+
+.whatsapp-number:hover {
+    color: #ffffff;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .whatsapp-contact {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+    
+    .whatsapp-number {
+        font-size: 0.85rem;
+    }
+}

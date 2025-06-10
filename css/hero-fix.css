@@ -1,0 +1,66 @@
+/* Fix pour l'espacement entre le header fixe et la section hero */
+.hero {
+    padding-top: 120px; /* Espacement réduit car le titre est plus petit */
+    position: relative;
+    z-index: 1;
+    padding-bottom: 80px;
+    min-height: 80vh;
+}
+
+/* Réduction de la taille de police du titre principal */
+.hero h1 {
+    font-size: 3.5rem !important; /* Taille réduite par rapport à 4.5rem */
+    line-height: 1.2; /* Meilleur espacement des lignes */
+    margin-bottom: 1.5rem !important;
+}
+
+/* Ajustement pour les écrans mobiles */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 2.5rem !important; /* Taille encore plus petite sur mobile */
+    }
+}
+
+/* S'assurer que le contenu de la section hero est bien positionné */
+.hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+/* Ajustement pour les écrans mobiles */
+@media (max-width: 768px) {
+    .hero {
+        padding-top: 120px; /* Réduire l'espacement sur mobile si nécessaire */
+        padding-bottom: 80px; /* Réduire l'espacement en bas sur mobile */
+    }
+}
+
+/* S'assurer que le premier élément après le header a une marge suffisante */
+.hero:first-of-type {
+    margin-top: 0;
+}
+
+/* Ajustement pour la section what-we-offer */
+#what-we-offer {
+    scroll-margin-top: 120px; /* Ajuste la position de défilement pour l'ancre */
+    padding: 80px 0; /* Ajoute un espacement en haut et en bas */
+}
+
+/* Ajustement supplémentaire pour les écrans mobiles */
+@media (max-width: 768px) {
+    #what-we-offer {
+        scroll-margin-top: 100px;
+        padding: 60px 0;
+    }
+}
+
+/* S'assurer que le contenu n'est pas coupé en bas de page */
+html {
+    scroll-padding-top: 120px; /* Correspond à la hauteur du header fixe */
+}
+
+@media (max-width: 768px) {
+    html {
+        scroll-padding-top: 100px; /* Ajustement pour mobile */
+    }
+}

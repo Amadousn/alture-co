@@ -1,0 +1,19 @@
+/* Force black color for the & symbol in the logo */
+.preloader-logo span,
+.preloader-logo span *,
+.footer-logo span,
+.footer-logo span * {
+    color: #000000 !important;
+}
+
+/* Override any other conflicting styles */
+.preloader-logo,
+.footer-logo {
+    color: #000000 !important;
+}
+
+/* Ensure the ampersand is black in all states */
+.preloader-logo span[style*="color:"],
+.footer-logo span[style*="color:"] {
+    color: #000000 !important;
+}

@@ -1,0 +1,121 @@
+/* Correction de la visibilité du texte pour Alture & Co */
+
+/* Amélioration du contraste des textes dans les cartes de service */
+.service-card p,
+.team-member p,
+.property-info p,
+.value-item p {
+    color: #333333 !important; /* Texte plus foncé pour une meilleure lisibilité */
+    font-weight: 400;
+    font-size: 1.05rem;
+}
+
+/* Amélioration de la visibilité des icônes */
+.service-icon i,
+.value-icon i {
+    color: var(--deep-plum) !important;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+}
+
+/* Amélioration des titres dans les cartes */
+.service-card h3,
+.team-member h3,
+.property-info h3,
+.value-item h3 {
+    color: var(--deep-plum) !important;
+    font-weight: 600;
+}
+
+/* Amélioration du contraste pour les liens */
+.service-link {
+    color: var(--velvet-rose) !important;
+    font-weight: 500;
+}
+
+/* Amélioration de la visibilité des textes sur fond blanc */
+.service-card,
+.team-member,
+.value-item {
+    background-color: rgba(255, 255, 255, 0.9) !important;
+}
+
+/* Amélioration du contraste en mode sombre */
+body.dark-mode .service-card p,
+body.dark-mode .team-member p,
+body.dark-mode .property-info p,
+body.dark-mode .value-item p {
+    color: #e0e0e0 !important;
+}
+
+body.dark-mode .service-card h3,
+body.dark-mode .team-member h3,
+body.dark-mode .property-info h3,
+body.dark-mode .value-item h3 {
+    color: var(--cream) !important;
+}
+
+body.dark-mode .service-icon i,
+body.dark-mode .value-icon i {
+    color: var(--gold-accent) !important;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+body.dark-mode .service-card,
+body.dark-mode .team-member,
+body.dark-mode .value-item {
+    background-color: rgba(30, 30, 30, 0.9) !important;
+}
+
+/* Amélioration des contrastes pour les autres sections */
+.who-we-are-text p,
+.strategic-vision p,
+.women-wealth p {
+    color: #333333 !important;
+    font-weight: 400;
+}
+
+body.dark-mode .who-we-are-text p,
+body.dark-mode .strategic-vision p,
+body.dark-mode .women-wealth p {
+    color: #e0e0e0 !important;
+}
+
+/* Amélioration de la visibilité des prix des propriétés */
+.property-price {
+    color: var(--deep-plum) !important;
+    font-weight: 700 !important;
+    font-size: 1.2rem !important;
+}
+
+/* Ajout d'ombres pour améliorer la lisibilité */
+.service-card,
+.team-member,
+.property-card,
+.value-item {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Amélioration de la visibilité des textes dans les sections sombres */
+.strategic-vision p,
+.women-wealth p {
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+body.dark-mode .strategic-vision p,
+body.dark-mode .women-wealth p {
+    background-color: rgba(30, 30, 30, 0.9);
+}
+
+/* Amélioration de la visibilité des textes dans le formulaire de contact */
+input, textarea {
+    color: #333333 !important;
+    font-weight: 400;
+}
+
+body.dark-mode input,
+body.dark-mode textarea {
+    color: #e0e0e0 !important;
+}

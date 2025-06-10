@@ -1,0 +1,16 @@
+/* Force white subtitle */
+.hero-subtitle {
+    font-family: 'Montserrat', sans-serif !important;
+    font-size: 1.5rem !important;
+    font-weight: 400 !important;
+    letter-spacing: 0.05em !important;
+    margin-top: 1.5rem !important;
+    margin-bottom: 3rem !important;
+    color: #FFFFFF !important;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.7) !important;
+    -webkit-background-clip: initial !important;
+    background-clip: initial !important;
+    -webkit-text-fill-color: #FFFFFF !important;
+    background: none !important;
+    text-transform: uppercase !important;
+}

@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alture & Co. | <strong>Strategic Portfolio Management</strong></title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/simple-gallery.css">
+    <link rel="stylesheet" href="css/enhanced-animations.css">
+    <link rel="stylesheet" href="css/enhanced-cards.css">
+    <link rel="stylesheet" href="css/loading-animation.css">
+    <link rel="stylesheet" href="css/text-contrast-fix.css">
+    <link rel="stylesheet" href="css/high-contrast-fix.css">
+    <link rel="stylesheet" href="css/hero-title-fix.css">
+    <link rel="stylesheet" href="css/white-subtitle-fix.css">
+    <link rel="stylesheet" href="css/force-white-text.css">
+    <link rel="stylesheet" href="css/simple-logo-spacing.css">
+    <link rel="stylesheet" href="css/contact-info-fix.css">
+    <link rel="stylesheet" href="css/service-cards-hover.css">
+    <link rel="stylesheet" href="css/who-we-are-styling.css">
+    <link rel="stylesheet" href="css/pure-white-title.css">
+    <link rel="stylesheet" href="css/testimonials-coming-soon.css">
+    <link rel="stylesheet" href="css/strategic-vision-fix.css">
+    <link rel="stylesheet" href="css/mobile-override.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/logo-black-fix.css">
+    <link rel="stylesheet" href="css/service-cards-fix.css">
+    <link rel="stylesheet" href="css/hero-fix.css">
+    <link rel="stylesheet" href="css/whatsapp-button.css">
+</head>
+<body>
+    <div class="scroll-progress"></div>
+    <div class="preloader">
+        <div class="preloader-logo">A<span style="color: #000000 !important; text-shadow: none !important;">&</span>Co.</div>
+    </div>
+    <header style="position: fixed; top: 0; left: 0; width: 100%; padding-top: 1.25rem; padding-bottom: 1.25rem; background-color: white; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); z-index: 50; transition: all 0.3s ease;">
+        <div style="max-width: 1200px; margin-left: auto; margin-right: auto; padding-left: 1.5rem; padding-right: 1.5rem; display: flex; justify-content: space-between; align-items: center;">
+            <div style="margin-right: 3.5rem;">
+                <style>
+                    /* Style spécifique au logo, isolé du reste du CSS */
+                    #simple-logo {
+                        position: relative;
+                        display: inline-block;
+                        text-decoration: none;
+                        width: 120px;
+                        height: 40px;
+                        color: #000000 !important;
+                    }
+                    #simple-logo span {
+                        color: #000000 !important;
+                    }
+                    #simple-logo-short {
+                        font-family: 'Cormorant Garamond', serif;
+                        font-size: 1.5rem;
+                        font-weight: 500;
+                        color: #000000; /* Noir pur */
+                        display: block;
+                        position: absolute;
+                        opacity: 1;
+                        transition: opacity 0.5s ease;
+                        text-align: center;
+                        width: 100%;
+                    }
+                    #simple-logo-full {
+                        font-family: 'Cormorant Garamond', serif;
+                        font-size: 1.5rem;
+                        color: #000000; /* Noir pur */
+                        font-weight: 500;
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        opacity: 0;
+                        transition: opacity 0.5s ease;
+                        white-space: nowrap;
+                    }
+                    #simple-logo:hover #simple-logo-short {
+                        opacity: 0;
+                    }
+                    #simple-logo:hover #simple-logo-full {
+                        opacity: 1;
+                    }
+                    .pink-amp {
+                        color: #D14D72;
+                        font-weight: 400;
+                    }
+                </style>
+                <a href="index.html" id="simple-logo">
+                    <span id="simple-logo-short">A<span class="pink-amp">&</span>C</span>
+                    <span id="simple-logo-full">Alture <span class="pink-amp">&</span> Co.</span>
+                </a>
+            </div>
+            <button class="menu-toggle" aria-label="Menu">
+                <span class="menu-line"></span>
+                <span class="menu-line"></span>
+                <span class="menu-line"></span>
+            </button>
+            <nav>
+                <ul style="display: flex; gap: 1.5rem;">
+                    <li><a href="#who-we-are" style="color: black; transition: color 0.3s ease; font-size: 0.875rem; font-family: 'Montserrat', sans-serif; font-weight: 500; letter-spacing: 0.05em;" onmouseover="this.style.color='#D14D72'" onmouseout="this.style.color='black'">WHO WE ARE</a></li>
+                    <li><a href="#what-we-offer" style="color: black; transition: color 0.3s ease; font-size: 0.875rem; font-family: 'Montserrat', sans-serif; font-weight: 500; letter-spacing: 0.05em;" onmouseover="this.style.color='#D14D72'" onmouseout="this.style.color='black'">WHAT WE OFFER</a></li>
+                    <li><a href="properties.html" style="color: black; transition: color 0.3s ease; font-size: 0.875rem; font-family: 'Montserrat', sans-serif; font-weight: 500; letter-spacing: 0.05em;" onmouseover="this.style.color='#D14D72'" onmouseout="this.style.color='black'">PROPERTIES</a></li>
+                    <li><a href="#strategic-vision" style="color: black; transition: color 0.3s ease; font-size: 0.875rem; font-family: 'Montserrat', sans-serif; font-weight: 500; letter-spacing: 0.05em;" onmouseover="this.style.color='#D14D72'" onmouseout="this.style.color='black'">STRATEGIC VISION</a></li>
+                    <li><a href="#contact" style="color: black; transition: color 0.3s ease; font-size: 0.875rem; font-family: 'Montserrat', sans-serif; font-weight: 500; letter-spacing: 0.05em;" onmouseover="this.style.color='#D14D72'" onmouseout="this.style.color='black'">CONTACT</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero parallax-bg" style="background-image: url('https://images.unsplash.com/photo-1582407947304-fd86f028f716?ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80');">
+        <div class="hero-content">
+            <h1 style="font-size: 4.5rem; letter-spacing: 1px; color: #ffffff; font-weight: 600;"><strong>Strategic Portfolio Management</strong></h1>
+            <div style="margin-top: 1.5rem; margin-bottom: 3rem;">
+                <p class="pure-white-text" style="display: inline-block; font-family: 'Montserrat', sans-serif; font-size: 1.5rem; color: #FFFFFF; letter-spacing: 0.05em; text-transform: uppercase; font-weight: 600; text-shadow: 0 2px 4px rgba(0,0,0,0.7);">
+                    REAL ESTATE AND DIGITAL ASSET STRUCTURING
+                </p>
+            </div>
+            <div class="hero-services">
+                <div class="hero-service">
+                    <div class="hero-service-icon">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <h3>Real Estate</h3>
+                    <p>Premium Dubai properties & strategic investments</p>
+                </div>
+                <div class="hero-service">
+                    <div class="hero-service-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Digital Assets</h3>
+                    <p>Crypto portfolio structuring & secure custody</p>
+                </div>
+                <div class="hero-service">
+                    <div class="hero-service-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <h3>Cross-Border</h3>
+                    <p>Strategic wealth alignment between Europe & UAE</p>
+                </div>
+            </div>
+            <a href="#what-we-offer" class="btn hero-btn">Discover Our Services</a>
+            <div class="scroll-indicator">
+                <span>Scroll</span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+        </div>
+    </section>
+
+    <section id="who-we-are" class="who-we-are">
+        <div class="container">
+            <h2>Who We Are</h2>
+            <div class="section-divider"></div>
+            <div class="who-we-are-content">
+                <div class="who-we-are-text">
+                    <p class="intro-text">Alture & Co. is a discreet advisory firm based in Dubai.</p>
+                    
+                    <p>Focused on real estate and digital capital, the firm serves an international clientele across Europe and the UAE.</p>
+                    
+                    <p>Every engagement is guided by long-term vision, clarity, and full confidentiality.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="what-we-offer" class="what-we-offer parallax-bg" style="background-image: linear-gradient(rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.95)), url('https://images.unsplash.com/photo-1560520031-3a4dc4e9de0c?ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80');">
+        <div class="container">
+            <h2 class="scroll-reveal" style="color: #333333; font-weight: 600;">What We Manage</h2>
+            <div class="section-divider light scroll-reveal" style="background-color: var(--velvet-rose);"></div>
+            <div class="services-grid">
+                <div class="service-card scroll-reveal">
+                    <div class="service-icon">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <h3 style="color: #333333; font-weight: 600;">Real Estate</h3>
+                    <div class="service-divider"></div>
+                    <p style="color: #444444; font-weight: 400;">Property portfolios composed of 20 to 40+ assets.</p>
+                    <p style="color: #444444; font-weight: 400;">Each property is reviewed individually based on location, view, exposure, current value, and market cycles.</p>
+                    <p style="color: #444444; font-weight: 400;">Coordination with selected agents and clear strategy defined for each asset.</p>
+                    
+                    <div class="service-description">
+                        <p class="problem">Investors managing multiple properties get overwhelmed by cold calls, outdated info, and agents who promise but don't deliver.</p>
+                        <p class="solution">We act as your single trusted contact, coordinating only proven agents with clear strategies for each asset.</p>
+                    </div>
+                </div>
+                <div class="service-card scroll-reveal">
+                    <div class="service-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 style="color: #333333; font-weight: 600;">Digital Assets</h3>
+                    <div class="service-divider"></div>
+                    <p style="color: #444444; font-weight: 400;">Structuring of crypto portfolios: cold wallet configuration, asset organisation, and positioning aligned with UAE residency.</p>
+                    
+                    <div class="service-description">
+                        <p class="problem">Many clients rely on outdated or insecure platforms, facing limited trading hours and unclear exit strategies.</p>
+                        <p class="solution">We secure portfolios with cold wallets and provide strategic asset management aligned with residency needs.</p>
+                    </div>
+                </div>
+                <div class="service-card scroll-reveal">
+                    <div class="service-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <h3 style="color: #333333; font-weight: 600;">Cross-Border Coordination</h3>
+                    <div class="service-divider"></div>
+                    <p style="color: #444444; font-weight: 400;">Real estate and digital capital aligned between Europe and the UAE.</p>
+                    <p style="color: #444444; font-weight: 400;">All work is handled discreetly, with legal and financial partners when required.</p>
+                    
+                    <div class="service-description">
+                        <p class="problem">Navigating complex legal and tax environments across Europe and the UAE can be confusing and risky.</p>
+                        <p class="solution">We ensure seamless, compliant capital flow and strategic asset alignment with trusted partners.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="who-its-for" class="who-its-for parallax-bg" style="background-image: linear-gradient(rgba(62, 0, 47, 0.9), rgba(62, 0, 47, 0.9)), url('https://images.unsplash.com/photo-1560520031-3a4dc4e9de0c?ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80');">
+        <div class="container">
+            <h2 class="scroll-reveal" style="color: #ffffff; font-weight: 600;">Who It's For</h2>
+            <div class="section-divider light scroll-reveal" style="background-color: var(--velvet-rose);"></div>
+            <div class="vision-content" style="padding: 2rem; max-width: 800px; margin: 0 auto; text-align: center;">
+                <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 1.5rem; color: #ffffff;">Alture & Co. works with private investors, founders, and independent who already manage significant capital.</p>
+                <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 1.5rem; color: #ffffff;">Our work is designed for those seeking long-term structure, market clarity, and discreet execution across real estate and digital assets.</p>
+                <p style="font-size: 1.1rem; line-height: 1.8; color: #ffffff;">We focus on confidentiality, precision, and thoughtful execution.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="strategic-vision" class="strategic-vision strategic-vision-white">
+        <div class="container">
+            <h2 style="color: #000000; font-weight: 600; text-align: center;">Strategic Vision</h2>
+            <div class="section-divider" style="background-color: #D14D72; width: 80px; height: 3px; margin: 1.5rem auto;"></div>
+            <div class="vision-content" style="padding: 2rem; max-width: 800px; margin: 0 auto; text-align: center;">
+                <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 1.5rem; color: #000000;">At Alture & Co., we believe in the power of strategic planning and discreet execution. Our vision is to provide our clients with unparalleled access to exclusive opportunities in both traditional real estate and emerging digital markets.</p>
+                <p style="font-size: 1.1rem; line-height: 1.8; color: #000000;">We combine deep market expertise with innovative approaches to create bespoke portfolio strategies that align with our clients' long-term wealth objectives and lifestyle aspirations.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="properties" class="properties-section" style="background-color: #ffffff;">
+        <div class="container">
+            <h2 class="scroll-reveal" style="color: #3e002f;">Premium Properties</h2>
+            <div class="section-divider scroll-reveal" style="background-color: #3e002f;"></div>
+            <p class="intro-text">Discover our exclusive selection of premium properties in Dubai's most prestigious locations.</p>
+            
+            <div class="properties-showcase">
+                <div class="property-card scroll-reveal">
+                    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Luxury Villa">
+                    <div class="property-overlay">
+                        <h3>Palm Jumeirah Villa</h3>
+                        <p>Exclusive beachfront villa with panoramic sea views</p>
+                        <span class="property-price">Price on Request</span>
+                    </div>
+                </div>
+                
+                <div class="property-card scroll-reveal">
+                    <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Penthouse">
+                    <div class="property-overlay">
+                        <h3>Downtown Penthouse</h3>
+                        <p>Spectacular full-floor penthouse with 360-degree views</p>
+                        <span class="property-price">AED 28M</span>
+                    </div>
+                </div>
+                
+                <div class="property-card scroll-reveal">
+                    <img src="https://images.unsplash.com/photo-1613977257363-707ba9348227?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Waterfront Apartment">
+                    <div class="property-overlay">
+                        <h3>Dubai Marina Residence</h3>
+                        <p>Elegant waterfront apartment with marina views</p>
+                        <span class="property-price">AED 8.2M</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact parallax-bg" style="background-image: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80');">
+        <div class="container">
+            <h2 class="scroll-reveal">Contact</h2>
+            <div class="section-divider light scroll-reveal"></div>
+            <div class="contact-form scroll-reveal">
+                <form>
+                    <div class="form-group">
+                        <input type="text" id="name" name="name" placeholder="Full Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" name="email" placeholder="Email Address" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="message" name="message" placeholder="Your Message" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Send Message</button>
+                    
+                    <div style="text-align: center; margin-top: 30px;">
+                        <p style="margin-bottom: 15px; font-family: 'Montserrat', sans-serif; color: #333; font-weight: 500;">Or contact us directly via WhatsApp</p>
+                        <a href="https://wa.me/971509845622" class="whatsapp-contact" target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-whatsapp"></i> +971 50 984 5622
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="parallax-bg" style="background-image: linear-gradient(rgba(62, 0, 47, 0.95), rgba(62, 0, 47, 0.95)), url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80');">
+        <div class="container">
+            <div class="footer-content scroll-reveal">
+                <a href="index.html" class="logo-link"><div class="footer-logo" style="color: #000000; font-size: 1.8rem; font-weight: 600; letter-spacing: 2px; text-shadow: none; font-family: 'Cormorant Garamond', serif;">ALTURE <span style="color: #000000 !important; text-shadow: none !important; display: inline !important;">&</span> CO.</div></a>
+                <div class="footer-links">
+                    <ul style="font-family: 'Montserrat', sans-serif; font-weight: 300;">
+                        <li><a href="#who-we-are">Who We Are</a></li>
+                        <li><a href="#what-we-offer">What We Offer</a></li>
+                        <li><a href="#strategic-vision">Strategic Vision</a></li>
+
+                        <li><a href="#team">The Team</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact" style="font-family: 'Montserrat', sans-serif; font-weight: 200;">
+                    <p style="color: rgba(255, 255, 255, 0.8); margin-bottom: 0.5rem; font-size: 0.85rem; letter-spacing: 0.03em;">Dubai, UAE</p>
+                    <p style="color: rgba(255, 255, 255, 0.8); margin-bottom: 0.5rem; font-size: 0.85rem; letter-spacing: 0.03em;">Email: info@altureandco.com</p>
+                    <a href="https://wa.me/971509845622" class="whatsapp-number" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-whatsapp"></i> +971 50 984 5622
+                    </a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p style="font-family: 'Montserrat', sans-serif; font-weight: 300;">&copy; 2025 Alture & Co. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script src="js/enhanced-interactions.js"></script>
+    <script src="js/property-map.js"></script>
+    <script src="js/back-to-top.js"></script>
+    <script src="js/loading-animation.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/mobile-menu.js"></script>
+    <script src="js/service-cards.js"></script>
+</body>
+</html>
