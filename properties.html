@@ -241,6 +241,46 @@
     </footer>
     
     <script>
+        // Gestion du menu hamburger
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuToggle = document.querySelector('.menu-toggle');
+            const nav = document.querySelector('header nav');
+            const menuLines = document.querySelectorAll('.menu-line');
+            
+            if (menuToggle && nav) {
+                menuToggle.addEventListener('click', function() {
+                    // Basculer la classe 'active' sur la navigation
+                    nav.classList.toggle('active');
+                    
+                    // Animation des lignes du menu hamburger
+                    menuLines.forEach((line, index) => {
+                        if (nav.classList.contains('active')) {
+                            // Animation pour ouvrir le menu (transforme en X)
+                            if (index === 0) line.style.transform = 'rotate(45deg) translate(5px, 5px)';
+                            if (index === 1) line.style.opacity = '0';
+                            if (index === 2) line.style.transform = 'rotate(-45deg) translate(7px, -6px)';
+                        } else {
+                            // Réinitialiser l'animation
+                            line.style.transform = '';
+                            line.style.opacity = '';
+                        }
+                    });
+                });
+                
+                // Fermer le menu lorsqu'on clique sur un lien
+                const navLinks = document.querySelectorAll('nav a');
+                navLinks.forEach(link => {
+                    link.addEventListener('click', () => {
+                        nav.classList.remove('active');
+                        menuLines.forEach((line, index) => {
+                            line.style.transform = '';
+                            line.style.opacity = '';
+                        });
+                    });
+                });
+            }
+        });
+        
         // Données de la propriété Five Palm Jumeirah
         const propertyData = {
             'five-palm-jumeirah': {
