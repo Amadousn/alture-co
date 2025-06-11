@@ -126,20 +126,22 @@
             <i class="fas fa-times"></i>
         </button>
         
-        <!-- Flèches de navigation -->
-        <button class="nav-arrow prev" aria-label="Previous image" onclick="prevImage()">
-            <i class="fas fa-chevron-left"></i>
-        </button>
-        <button class="nav-arrow next" aria-label="Next image" onclick="nextImage()">
-            <i class="fas fa-chevron-right"></i>
-        </button>
-        
         <div class="modal-content">
             <!-- Conteneur principal de la galerie -->
             <div class="gallery-container">
-                <!-- Image principale -->
-                <div class="gallery-main">
-                    <img id="mainImage" src="" alt="Property Image" loading="eager">
+                <!-- Conteneur pour le média (image ou vidéo) -->
+                <div class="media-viewer-container">
+                    <div class="media-viewer-wrapper" id="mainMedia">
+                        <!-- Le contenu sera ajouté dynamiquement par JavaScript -->
+                    </div>
+                    
+                    <!-- Flèches de navigation -->
+                    <button class="nav-arrow prev" aria-label="Image précédente" onclick="prevImage()">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="nav-arrow next" aria-label="Image suivante" onclick="nextImage()">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
                 </div>
                 
                 <!-- Informations de la propriété -->
@@ -173,7 +175,7 @@
             <div class="property-card">
                 <div class="property-image-container">
                     <img src="images/Five palm Jumeirah 3BED/image0.jpeg" alt="Five Palm Jumeirah" class="property-image">
-                    <button class="view-gallery-btn" onclick="openGallery('five-palm-jumeirah')">View Gallery</button>
+                    <button class="view-gallery-btn" data-property="five-palm-jumeirah">View Gallery</button>
                 </div>
                 <div class="property-details">
                     <h3 class="property-title">Five Palm Jumeirah</h3>
@@ -245,17 +247,22 @@
                 title: 'Five Palm Jumeirah',
                 price: 'AED 10,000,000.00',
                 description: '3 Bedroom, 10th Floor | Five Palm Jumeirah\n\n3 Bedrooms + Maid\'s Room, 2,770 Sq Ft\n\nFully Furnished\n\nCorner Unit with Sea & Palm View\n\n2 Parking Spaces\n\n2 Large Balconies, including 1 with Jacuzzi\n\nArea: 2,770 Sq Ft\n\nVacant on Transfer',
-                images: [
-                    'images/Five palm Jumeirah 3BED/image0.jpeg',
-                    'images/Five palm Jumeirah 3BED/image1.jpeg',
-                    'images/Five palm Jumeirah 3BED/image2.jpeg',
-                    'images/Five palm Jumeirah 3BED/image3.jpeg',
-                    'images/Five palm Jumeirah 3BED/image4.jpeg',
-                    'images/Five palm Jumeirah 3BED/image5.jpeg',
-                    'images/Five palm Jumeirah 3BED/image6.jpeg',
-                    'images/Five palm Jumeirah 3BED/image7.jpeg',
-                    'images/Five palm Jumeirah 3BED/image8.jpeg',
-                    'images/Five palm Jumeirah 3BED/image10.jpeg'
+                media: [
+                    { type: 'image', url: 'images/Five palm Jumeirah 3BED/image0.jpeg' },
+                    { type: 'image', url: 'images/Five palm Jumeirah 3BED/image1.jpeg' },
+                    { type: 'image', url: 'images/Five palm Jumeirah 3BED/image2.jpeg' },
+                    { type: 'image', url: 'images/Five palm Jumeirah 3BED/image3.jpeg' },
+                    { type: 'image', url: 'images/Five palm Jumeirah 3BED/image4.jpeg' },
+                    { type: 'image', url: 'images/Five palm Jumeirah 3BED/image5.jpeg' },
+                    { type: 'image', url: 'images/Five palm Jumeirah 3BED/image6.jpeg' },
+                    { type: 'image', url: 'images/Five palm Jumeirah 3BED/image7.jpeg' },
+                    { type: 'image', url: 'images/Five palm Jumeirah 3BED/image8.jpeg' },
+                    { type: 'image', url: 'images/Five palm Jumeirah 3BED/image10.jpeg' },
+                    { 
+                        type: 'video', 
+                        url: 'vidéo/Five palm jumeirah.mp4',
+                        thumbnail: 'images/Five palm Jumeirah 3BED/image0.jpeg' // Utilisation de la première image comme miniature
+                    }
                 ]
             }
         };
@@ -268,53 +275,158 @@
         let modalCloseTimeout = null;
         let touchStartX = 0; // Pour la détection du glissement sur mobile
 
-        // Fonction pour afficher une image spécifique
-        function showImage(index) {
-            const mainImage = document.getElementById('mainImage');
-            const thumbnails = document.querySelectorAll('.thumbnail');
+        // Fonction pour afficher un média (image ou vidéo) spécifique
+        window.showMedia = function(index) {
+            if (!currentProperty || !currentProperty.media || currentProperty.media.length === 0) return;
             
-            if (index >= 0 && index < propertyImages.length) {
-                // Mettre à jour l'index courant
-                currentImageIndex = index;
-                
-                // Ajouter une classe de chargement
-                mainImage.classList.remove('loaded');
-                
-                // Changer l'image après un court délai pour le fondu
-                setTimeout(() => {
-                    // Charger la nouvelle image
-                    const img = new Image();
-                    img.onload = function() {
-                        mainImage.src = this.src;
-                        mainImage.alt = propertyImages[index].alt || `Image ${index + 1}`;
-                        mainImage.classList.add('loaded');
-                        
-                        // Mettre à jour la miniature active
-                        updateActiveThumbnail(index);
-                    };
-                    img.src = propertyImages[index].src || propertyImages[index];
-                    
-                }, 150);
+            // Mettre à jour l'index courant
+            if (index < 0) index = currentProperty.media.length - 1;
+            if (index >= currentProperty.media.length) index = 0;
+            
+            currentImageIndex = index;
+            const media = currentProperty.media[index];
+            const mainMedia = document.getElementById('mainMedia');
+            
+            if (!mainMedia) return;
+            
+            // Mettre en pause la vidéo en cours si elle existe
+            const currentVideo = mainMedia.querySelector('video');
+            if (currentVideo) {
+                currentVideo.pause();
             }
+            
+            // Effacer le contenu précédent
+            mainMedia.innerHTML = '';
+            
+            // Créer un conteneur pour le média
+            const mediaContainer = document.createElement('div');
+            mediaContainer.className = 'media-viewer-container';
+            
+            // Ajouter une classe de chargement
+            mainMedia.classList.add('loading');
+            
+            if (media.type === 'image' || !media.type) {
+                // Gestion des images (rétrocompatibilité avec l'ancien format)
+                const img = document.createElement('img');
+                img.className = 'media-viewer';
+                img.alt = `Image ${index + 1} - ${currentProperty?.title || 'Property'}`;
+                
+                img.onload = function() {
+                    mainMedia.classList.remove('loading');
+                    mainMedia.classList.add('loaded');
+                    updateActiveThumbnail(index);
+                };
+                
+                img.onerror = function() {
+                    mainMedia.innerHTML = '<div class="media-error">Erreur de chargement de l\'image</div>';
+                    mainMedia.classList.remove('loading');
+                };
+                
+                img.src = media.url || media; // Support pour l'ancien format (chaîne simple)
+                mediaContainer.appendChild(img);
+                
+            } else if (media.type === 'video') {
+                // Création du conteneur vidéo
+                const videoContainer = document.createElement('div');
+                videoContainer.className = 'video-container';
+                
+                const video = document.createElement('video');
+                video.className = 'media-viewer video';
+                video.src = media.url;
+                video.controls = true;
+                video.playsInline = true;
+                video.preload = 'metadata';
+                video.setAttribute('aria-label', `Vidéo de la propriété ${currentProperty?.title || ''}`);
+                
+                // Gestion du chargement de la vidéo
+                video.onloadeddata = function() {
+                    mainMedia.classList.remove('loading');
+                    mainMedia.classList.add('loaded');
+                    updateActiveThumbnail(index);
+                };
+                
+                video.onerror = function() {
+                    mainMedia.innerHTML = '<div class="media-error">Erreur de chargement de la vidéo</div>';
+                    mainMedia.classList.remove('loading');
+                };
+                
+                videoContainer.appendChild(video);
+                mediaContainer.appendChild(videoContainer);
+                
+                // Essayer de lire la vidéo automatiquement (peut être bloqué par le navigateur)
+                const playPromise = video.play();
+                if (playPromise !== undefined) {
+                    playPromise.catch(error => {
+                        console.log('La lecture automatique a été bloquée:', error);
+                    });
+                }
+            }
+            
+            // Ajouter le conteneur de média au DOM
+            mainMedia.appendChild(mediaContainer);
+            
+            // Mettre à jour la miniature active
+            updateActiveThumbnail(index);
         }
         
+        // Fonction pour afficher une image spécifique (rétrocompatibilité)
+        window.showImage = function(index) {
+            // Si la propriété utilise l'ancien format (tableau d'URLs)
+            if (currentProperty && Array.isArray(currentProperty.images)) {
+                propertyImages = currentProperty.images;
+                if (index >= 0 && index < propertyImages.length) {
+                    const mainMedia = document.getElementById('mainMedia');
+                    if (mainMedia) {
+                        mainMedia.innerHTML = '';
+                        const img = new Image();
+                        img.onload = function() {
+                            mainMedia.appendChild(img);
+                            updateActiveThumbnail(index);
+                        };
+                        img.src = propertyImages[index];
+                        img.alt = `Image ${index + 1} - ${currentProperty?.title || 'Property'}`;
+                    }
+                }
+            } else {
+                // Utiliser la nouvelle fonction showMedia pour le nouveau format
+                showMedia(index);
+            }
+        }
+
         // Fonction pour mettre à jour la miniature active
-        function updateActiveThumbnail(index) {
+        window.updateActiveThumbnail = function(index) {
             const thumbnails = document.querySelectorAll('.thumbnail');
+            const thumbnailsContainer = document.getElementById('galleryThumbnails');
+            
+            if (!thumbnailsContainer) return;
+            
             thumbnails.forEach((thumb, i) => {
                 if (i === index) {
                     thumb.classList.add('active');
-                    // Faire défiler jusqu'à la miniature active si nécessaire
-                    const container = thumb.parentElement;
-                    const containerRect = container.getBoundingClientRect();
-                    const thumbRect = thumb.getBoundingClientRect();
                     
-                    if (thumbRect.left < containerRect.left || thumbRect.right > containerRect.right) {
-                        thumb.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'nearest',
-                            inline: 'center'
-                        });
+                    // Si c'est une vidéo, gérer la lecture
+                    if (currentProperty && currentProperty.media && currentProperty.media[index]) {
+                        const media = currentProperty.media[index];
+                        if (media.type === 'video') {
+                            // Mettre en pause la vidéo précédente si elle existe
+                            const prevVideo = document.querySelector('#mainMedia video');
+                            if (prevVideo) {
+                                prevVideo.pause();
+                            }
+                            
+                            // Si on clique sur la miniature d'une vidéo, on la lit
+                            setTimeout(() => {
+                                const newVideo = document.querySelector('#mainMedia video');
+                                if (newVideo && newVideo.paused) {
+                                    const playPromise = newVideo.play();
+                                    if (playPromise !== undefined) {
+                                        playPromise.catch(error => {
+                                            console.log('La lecture automatique a été bloquée:', error);
+                                        });
+                                    }
+                                }
+                            }, 100);
+                        }
                     }
                 } else {
                     thumb.classList.remove('active');
@@ -322,18 +434,32 @@
             });
         }
 
-        // Fonction pour afficher l'image suivante
-        function nextImage() {
-            if (!isModalOpen || !propertyImages.length) return;
-            const newIndex = (currentImageIndex + 1) % propertyImages.length;
-            showImage(newIndex);
+        // Fonction pour afficher le média suivant
+        window.nextImage = function() {
+            if (!currentProperty) return;
+            const mediaItems = currentProperty.media || [];
+            if (mediaItems.length === 0 && currentProperty.images) {
+                // Rétrocompatibilité avec l'ancien format
+                const nextIndex = (currentImageIndex + 1) % currentProperty.images.length;
+                showImage(nextIndex);
+            } else if (mediaItems.length > 0) {
+                const nextIndex = (currentImageIndex + 1) % mediaItems.length;
+                showMedia(nextIndex);
+            }
         }
-
-        // Fonction pour afficher l'image précédente
-        function prevImage() {
-            if (!isModalOpen || !propertyImages.length) return;
-            const newIndex = (currentImageIndex - 1 + propertyImages.length) % propertyImages.length;
-            showImage(newIndex);
+        
+        // Fonction pour afficher le média précédent
+        window.prevImage = function() {
+            if (!currentProperty) return;
+            const mediaItems = currentProperty.media || [];
+            if (mediaItems.length === 0 && currentProperty.images) {
+                // Rétrocompatibilité avec l'ancien format
+                const prevIndex = (currentImageIndex - 1 + currentProperty.images.length) % currentProperty.images.length;
+                showImage(prevIndex);
+            } else if (mediaItems.length > 0) {
+                const prevIndex = (currentImageIndex - 1 + mediaItems.length) % mediaItems.length;
+                showMedia(prevIndex);
+            }
         }
 
         // Gestionnaire d'événements pour les touches du clavier
@@ -381,54 +507,69 @@
         }
 
         // Fonction pour fermer la modale
-        function closeModal() {
+        window.closeModal = function() {
             if (!isModalOpen) return;
             
             const modal = document.getElementById('galleryModal');
             if (!modal) return;
             
-            // Annuler tout timeout en attente
-            if (modalCloseTimeout) {
-                clearTimeout(modalCloseTimeout);
-                modalCloseTimeout = null;
+            // Arrêter toutes les vidéos en cours de lecture
+            const videos = document.querySelectorAll('video');
+            videos.forEach(video => {
+                video.pause();
+            });
+            
+            // Appeler la fonction de nettoyage si elle existe
+            if (typeof modal._cleanUpListeners === 'function') {
+                modal._cleanUpListeners();
+                delete modal._cleanUpListeners;
             }
             
-            // Désactiver le défilement fluide pendant la fermeture
-            document.body.style.overflow = 'auto';
-            document.body.style.paddingRight = '';
-            
-            // Ajouter la classe de fermeture pour l'animation
-            modal.classList.add('closing');
+            // Démarrer l'animation de sortie
+            modal.classList.remove('show');
             
             // Attendre la fin de l'animation avant de masquer la modale
-            modalCloseTimeout = setTimeout(() => {
+            setTimeout(() => {
                 modal.style.display = 'none';
-                modal.classList.remove('show', 'closing');
                 isModalOpen = false;
                 
-                // Nettoyer les écouteurs d'événements
-                document.removeEventListener('keydown', handleKeyDown);
-                document.removeEventListener('touchstart', handleTouchStart, { passive: true });
-                document.removeEventListener('touchend', handleTouchEnd, { passive: true });
+                // Réactiver le défilement du body
+                document.body.style.overflow = '';
+                document.body.style.paddingRight = '';
                 
-                // Réinitialiser l'index
+                // Réinitialiser l'index de l'image courante
                 currentImageIndex = 0;
-                propertyImages = [];
-                currentProperty = null;
                 
-                modalCloseTimeout = null;
-            }, 300);
+                // Nettoyer les références
+                currentProperty = null;
+                propertyImages = [];
+            }, 300); // Durée de l'animation CSS (0.3s)
         }
 
-        // Script pour la galerie
-        function openGallery(propertyId) {
-            console.log('Opening gallery for property:', propertyId);
-            const modal = document.getElementById('galleryModal');
-            const property = propertyData[propertyId];
+        // Fonction globale pour ouvrir la galerie
+        window.openGallery = function(propertyId) {
+            console.log('Ouverture de la galerie pour la propriété:', propertyId);
             
-            if (!property) {
-                console.error('Property not found:', propertyId);
+            // Récupérer l'élément modal
+            const modal = document.getElementById('galleryModal');
+            if (!modal) {
+                console.error('Élément modal non trouvé');
                 return;
+            }
+            
+            // Récupérer la propriété correspondante
+            const property = propertyData[propertyId];
+            if (!property) {
+                console.error('Propriété non trouvée:', propertyId);
+                return;
+            }
+            
+            // Si la propriété utilise l'ancien format (tableau d'URLs), le convertir en nouveau format
+            if (Array.isArray(property.images) && !property.media) {
+                property.media = property.images.map(url => ({
+                    type: 'image',
+                    url: url
+                }));
             }
             
             // Nettoyer les écouteurs d'événements précédents
@@ -500,24 +641,46 @@
             if (thumbnailsContainer) {
                 console.log('Conteneur des miniatures trouvé:', thumbnailsContainer);
                 thumbnailsContainer.innerHTML = '';
-                console.log('Images à afficher:', propertyImages);
+                
+                // Utiliser property.media ou property.images selon ce qui est disponible
+                const mediaItems = property.media || [];
+                console.log('Médias à afficher:', mediaItems);
 
-                // Ajouter les miniatures
-                propertyImages.forEach((image, index) => {
-                    console.log('Ajout de la miniature:', image);
+                // Si aucun média n'est défini, utiliser les anciennes images pour la rétrocompatibilité
+                if (mediaItems.length === 0 && property.images) {
+                    mediaItems.push(...property.images.map(url => ({
+                        type: 'image',
+                        url: url
+                    })));
+                }
+
+                // Ajouter les miniatures pour chaque média (image ou vidéo)
+                mediaItems.forEach((media, index) => {
                     const thumbnail = document.createElement('div');
                     thumbnail.className = 'thumbnail' + (index === 0 ? ' active' : '');
-                    thumbnail.innerHTML = `<img src="${image}" alt="Miniature ${index + 1}" loading="lazy">`;
+                    
+                    if (media.type === 'video') {
+                        // Pour les vidéos, utiliser la miniature spécifiée ou une vignette par défaut
+                        const thumbSrc = media.thumbnail || 'images/video-thumbnail.jpg';
+                        thumbnail.innerHTML = `
+                            <div class="video-thumbnail">
+                                <img src="${thumbSrc}" alt="Vidéo ${index + 1}" loading="lazy">
+                                <div class="play-icon"><i class="fas fa-play"></i></div>
+                            </div>`;
+                    } else {
+                        // Pour les images, utiliser directement l'URL
+                        const imgSrc = media.url || media; // Support pour l'ancien format
+                        thumbnail.innerHTML = `<img src="${imgSrc}" alt="Image ${index + 1}" loading="lazy">`;
+                    }
                     
                     thumbnail.addEventListener('click', (e) => {
                         e.preventDefault();
-                        showImage(index);
+                        showMedia(index);
                     });
 
                     thumbnailsContainer.appendChild(thumbnail);
                 });
                 
-                // Vérifier si des miniatures ont été ajoutées
                 console.log('Nombre de miniatures ajoutées:', thumbnailsContainer.children.length);
             }
 
@@ -528,58 +691,76 @@
                 document.body.style.paddingRight = window.innerWidth - document.documentElement.clientWidth + 'px';
                 
                 // Afficher la modale
-                modal.style.display = 'flex';
+                modal.style.display = 'block';
                 
                 // Forcer le reflow pour activer la transition
                 void modal.offsetWidth;
                 
                 // Démarrer l'animation d'entrée
-                setTimeout(() => {
-                    modal.classList.add('show');
-                    isModalOpen = true;
-                    
-                    // Afficher la première image
-                    if (mainImage && propertyImages.length > 0) {
-                        mainImage.classList.remove('loaded');
-                        mainImage.src = propertyImages[0];
-                        mainImage.onload = () => {
-                            mainImage.classList.add('loaded');
-                        };
-                        mainImage.alt = property.title || 'Image de la propriété';
+                modal.classList.add('show');
+                
+                // Mettre à jour l'état
+                isModalOpen = true;
+                
+                // Afficher le premier média
+                if (property.media && property.media.length > 0) {
+                    showMedia(0);
+                } else if (property.images && property.images.length > 0) {
+                    // Rétrocompatibilité avec l'ancien format
+                    showImage(0);
+                }
+                
+                // Ajouter les écouteurs d'événements
+                document.addEventListener('keydown', handleKeyDown);
+                document.addEventListener('touchstart', handleTouchStart, { passive: true });
+                document.addEventListener('touchend', handleTouchEnd, { passive: true });
+                
+                // Mettre le focus sur la modale pour la navigation au clavier
+                modal.setAttribute('tabindex', '-1');
+                modal.focus();
+                
+                // Gestion du clic en dehors de la modale
+                const handleModalClick = function(e) {
+                    if (e.target === modal) {
+                        closeModal();
                     }
-                    
-                    // Ajouter les écouteurs d'événements
-                    document.addEventListener('keydown', handleKeyDown);
-                    document.addEventListener('touchstart', handleTouchStart, { passive: true });
-                    document.addEventListener('touchend', handleTouchEnd, { passive: true });
-                    
-                    // Gestion du clic en dehors de la modale
-                    modal.addEventListener('click', function modalClickHandler(e) {
-                        if (e.target === modal) {
-                            closeModal();
-                        }
+                };
+                
+                modal.addEventListener('click', handleModalClick);
+                
+                // Empêcher la propagation du clic sur le contenu
+                const modalContent = modal.querySelector('.modal-content');
+                if (modalContent) {
+                    modalContent.addEventListener('click', function(e) {
+                        e.stopPropagation();
                     });
-                    
-                    // Empêcher la propagation du clic sur le contenu
-                    const modalContent = modal.querySelector('.modal-content');
-                    if (modalContent) {
-                        modalContent.addEventListener('click', function(e) {
-                            e.stopPropagation();
-                        });
-                    }
-                }, 10);
+                }
+                
+                // Nettoyage des écouteurs lors de la fermeture
+                const cleanUp = function() {
+                    modal.removeEventListener('click', handleModalClick);
+                    document.removeEventListener('keydown', handleKeyDown);
+                    document.removeEventListener('touchstart', handleTouchStart);
+                    document.removeEventListener('touchend', handleTouchEnd);
+                };
+                
+                // Stocker la fonction de nettoyage pour une utilisation ultérieure
+                modal._cleanUpListeners = cleanUp;
             }
         }
 
-        // Initialiser les boutons de galerie
-        document.querySelectorAll('.view-gallery-btn').forEach(button => {
-            button.addEventListener('click', function() {
-                openGallery(this.getAttribute('data-property'));
-            });
-        });
-
-        // Script pour le préchargeur
+        // Script pour le préchargeur et initialisation des composants
         document.addEventListener('DOMContentLoaded', function() {
+            // Initialiser les boutons de galerie
+            document.querySelectorAll('.view-gallery-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const propertyId = this.getAttribute('data-property');
+                    console.log('Bouton cliqué, propriété:', propertyId);
+                    openGallery(propertyId);
+                });
+            });
+            
+            console.log('Boutons de galerie initialisés');
             const preloader = document.querySelector('.preloader');
             if (preloader) {
                 preloader.style.opacity = '0';

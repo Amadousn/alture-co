@@ -552,27 +552,75 @@ header nav a.active {
     position: fixed;
     top: 0;
     left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.8);
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.95);
     z-index: 1000;
-    align-items: center;
-    justify-content: center;
     opacity: 0;
-    transition: opacity 0.3s ease-in-out;
+    transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     overflow-y: auto;
     padding: 20px;
     box-sizing: border-box;
-    backdrop-filter: blur(8px);
+    -webkit-overflow-scrolling: touch; /* Améliore le défilement sur iOS */
+    overscroll-behavior: contain; /* Empêche le défilement du contenu en arrière-plan */
+}
+
+@media (max-width: 768px) {
+    .modal {
+        padding: 10px 0;
+    }
+    
+    .modal-content {
+        border-radius: 0;
+        margin-bottom: 0;
+        min-height: 100vh;
+    }
+    
+    .media-viewer-container {
+        padding: 10px 0;
+    }
+    
+    .media-viewer {
+        max-height: 50vh;
+        border-radius: 0;
+    }
+    
+    .video-container {
+        border-radius: 0;
+    }
+    
+    .video-container video {
+        border-radius: 0;
+    }
+    
+    .close-modal {
+        top: 10px;
+        right: 10px;
+        width: 36px;
+        height: 36px;
+        font-size: 18px;
+    }
+}
+
+/* Amélioration du défilement pour WebKit */
+.modal::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+.modal::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+}
+
+.modal::-webkit-scrollbar-track {
+    background-color: rgba(0, 0, 0, 0.1);
 }
 
 .modal.show {
     opacity: 1;
     display: flex;
-    align-items: flex-start;
-    justify-content: center;
-    padding: 4rem 2rem;
-    animation: fadeIn 0.3s ease-in-out;
+    display: block;
 }
 
 .modal-content {
@@ -581,14 +629,12 @@ header nav a.active {
     border-radius: 16px;
     width: 100%;
     max-width: 1200px;
-    max-height: 90vh;
+    margin: 0 auto;
     overflow: hidden;
-    display: flex;
-    flex-direction: column;
     box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
     transform: translateY(0);
     transition: all 0.3s ease-in-out;
-    margin: 20px 0;
+    margin-bottom: 40px;
 }
 
 .close-modal {
@@ -621,37 +667,122 @@ header nav a.active {
 .gallery-container {
     display: flex;
     flex-direction: column;
-    height: auto;
-    max-height: 100%;
-    overflow-y: auto;
-    scrollbar-width: thin;
-    scrollbar-color: #D14D72 rgba(0, 0, 0, 0.1);
+    width: 100%;
 }
 
-.gallery-container::-webkit-scrollbar {
-    width: 6px;
+/* Conteneur principal des médias */
+.media-viewer-container {
+    position: relative;
+    width: 100%;
+    background: #f8f8f8;
+    padding: 20px;
+    box-sizing: border-box;
 }
 
-.gallery-container::-webkit-scrollbar-track {
-    background: rgba(0, 0, 0, 0.05);
-}
-
-.gallery-container::-webkit-scrollbar-thumb {
-    background-color: #D14D72;
-    border-radius: 3px;
-}
-
-.gallery-main {
-    flex: 0 0 auto;
+/* Conteneur du média (image ou vidéo) */
+.media-viewer-wrapper {
+    position: relative;
+    width: 100%;
+    min-height: 300px;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 30px;
     background: #f8f8f8;
-    position: relative;
     overflow: hidden;
-    min-height: 200px;
+    padding: 24px 0 16px 0;
+}
+
+/* Styles communs pour les médias */
+.media-viewer {
+    display: block;
+    margin: 24px auto 16px auto;
+    max-width: 90%;
     max-height: 70vh;
+    width: auto;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+    object-fit: contain;
+}
+
+/* Styles spécifiques pour les vidéos */
+.media-viewer.video {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16/9;
+    background: #000;
+}
+
+/* Conteneur vidéo */
+.video-container {
+    width: 100%;
+    max-width: 90%;
+    margin: 24px auto 16px auto;
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+}
+
+.video-container video {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 70vh;
+    object-fit: contain;
+    background: #000;
+}
+
+/* Styles pour les miniatures vidéo */
+.video-thumbnail {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.video-thumbnail .play-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40px;
+    height: 40px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #D14D72;
+    font-size: 16px;
+}
+
+/* État de chargement */
+.gallery-main.loading {
+    background-color: #f0f0f0;
+    position: relative;
+}
+
+.gallery-main.loading::after {
+    content: '';
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #D14D72;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Message d'erreur */
+.media-error {
+    padding: 20px;
+    color: #D14D72;
+    text-align: center;
 }
 
 #mainImage {
@@ -698,32 +829,217 @@ header nav a.active {
     position: fixed;
     top: 50%;
     transform: translateY(-50%);
-    width: 50px;
-    height: 50px;
-    background: rgba(255, 255, 255, 0.9);
-    color: #333;
-    border: none;
+    width: 44px;
+    height: 44px;
+    background: rgba(255, 255, 255, 0.95);
+    color: #2d232d;
+    border: 2px solid rgba(0, 0, 0, 0.1);
     border-radius: 50%;
-    font-size: 20px;
+    font-size: 16px;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 10001;
-    transition: all 0.3s ease;
+    z-index: 1002;
+    transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 0;
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .nav-arrow:hover {
-    background: #fff;
-    transform: translateY(-50%) scale(1.1);
-    color: #D14D72;
+    background: #D14D72;
+    color: white;
+    transform: translateY(-50%) scale(1.05);
+    border-color: #D14D72;
+}
+
+.nav-arrow:active {
+    transform: translateY(-50%) scale(0.95);
 }
 
 .nav-arrow.prev {
-    left: 30px;
+    left: 10px;
 }
 
+.nav-arrow.next {
+    right: 10px;
+}
+
+/* Miniatures */
+.gallery-thumbnails {
+    display: flex;
+    padding: 15px 20px;
+    gap: 10px;
+    overflow-x: auto;
+    background: #fff;
+    border-top: 1px solid #f0f0f0;
+    scrollbar-width: thin;
+    scrollbar-color: #D14D72 rgba(0, 0, 0, 0.05);
+}
+
+.gallery-thumbnails::-webkit-scrollbar {
+    height: 6px;
+}
+
+.gallery-thumbnails::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.gallery-thumbnails::-webkit-scrollbar-thumb {
+    background-color: #D14D72;
+    border-radius: 3px;
+}
+
+.thumbnail {
+    flex: 0 0 auto;
+    width: 80px;
+    height: 60px;
+    border-radius: 6px;
+    overflow: hidden;
+    cursor: pointer;
+    position: relative;
+    border: 2px solid transparent;
+    transition: all 0.2s ease;
+    opacity: 0.7;
+}
+
+.thumbnail:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+}
+
+.thumbnail.active {
+    border-color: #D14D72;
+    opacity: 1;
+    transform: none;
+}
+
+.thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Indicateur de vidéo sur les miniatures */
+.thumbnail.video-thumbnail::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 24px;
+    height: 24px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #D14D72;
+    font-size: 10px;
+    pointer-events: none;
+}
+
+.thumbnail.video-thumbnail::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.2);
+    pointer-events: none;
+}
+
+/* Style pour les écrans mobiles */
+@media (max-width: 768px) {
+    .thumbnail {
+        width: 70px;
+        height: 52px;
+        flex: 0 0 70px;
+    }
+    
+    .nav-arrow {
+        width: 36px;
+        height: 36px;
+        font-size: 14px;
+        background: rgba(255, 255, 255, 0.9);
+        border: 1px solid rgba(0, 0, 0, 0.1);
+    }
+    
+    .nav-arrow.prev {
+        left: 5px;
+    }
+    
+    .nav-arrow.next {
+        right: 5px;
+    }
+    
+    .media-viewer-container {
+        padding: 10px 0;
+        margin-bottom: 10px;
+    }
+    
+    .gallery-thumbnails {
+        padding: 10px 5px;
+        gap: 8px;
+    }
+    
+    /* Amélioration du touch target pour les flèches */
+    .nav-arrow::after {
+        content: '';
+        position: absolute;
+        top: -10px;
+        left: -10px;
+        right: -10px;
+        bottom: -10px;
+    }
+    
+    /* Ajustement pour les vidéos en plein écran */
+    .video-container video {
+        max-height: 40vh;
+        -webkit-tap-highlight-color: transparent;
+    }
+    
+    /* Masquer les contrôles natifs des vidéos sur mobile */
+    video::-webkit-media-controls {
+        display: none !important;
+    }
+    
+    /* Amélioration du touch feedback pour les miniatures */
+    .thumbnail:active {
+        transform: scale(0.95);
+        transition: transform 0.1s ease;
+    }
+    
+    /* Désactiver le zoom sur le conteneur vidéo lors du double-tap */
+    .video-container {
+        touch-action: pan-x pan-y;
+    }
+    
+    /* Amélioration de la visibilité des flèches sur fond sombre */
+    .nav-arrow {
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+    
+    /* Ajustement pour les appareils avec encoches ou arrondis d'écran */
+    @supports (padding: max(0px)) {
+        .nav-arrow.prev {
+            left: max(5px, env(safe-area-inset-left));
+        }
+        
+        .nav-arrow.next {
+            right: max(5px, env(safe-area-inset-right));
+        }
+        
+        .gallery-thumbnails {
+            padding-bottom: max(10px, env(safe-area-inset-bottom));
+        }
+    }
+}
+
+/* Positionnement des flèches de navigation */
 .nav-arrow.next {
     right: 30px;
 }
