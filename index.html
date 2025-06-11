@@ -137,18 +137,29 @@
                     <p>Strategic wealth alignment between Europe & UAE</p>
                 </div>
             </div>
-            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2rem;">
-                <a href="#what-we-offer" class="btn hero-btn" style="background-color: transparent; border: 2px solid white; transition: all 0.3s ease;">
+            <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; margin: 3rem 0 2rem;">
+                <a href="#what-we-offer" style="padding: 1rem 2.5rem; font-size: 0.8rem; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; text-decoration: none; border: 1px solid white; color: white; background: transparent; transition: all 0.3s ease;">
                     Discover Our Services
                 </a>
-                <a href="properties.html" class="btn hero-btn" style="background-color: #D14D72; border: 2px solid #D14D72; transition: all 0.3s ease;">
+                <a href="properties.html" style="padding: 1rem 2.5rem; font-size: 0.8rem; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; text-decoration: none; border: 1px solid white; color: white; background: rgba(255, 255, 255, 0.1); transition: all 0.3s ease;">
                     View Our Properties
                 </a>
             </div>
-            <div class="scroll-indicator">
-                <span>Scroll</span>
-                <i class="fas fa-chevron-down"></i>
-            </div>
+            <style>
+                .hero-btn {
+                    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+                }
+                .hero-btn:hover {
+                    transform: translateY(-2px);
+                    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+                }
+                .hero-btn:active {
+                    transform: translateY(0);
+                }
+                .hero-btn:hover span:last-child {
+                    transform: translateX(0);
+                }
+            </style>
         </div>
     </section>
 
