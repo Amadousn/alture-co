@@ -92,18 +92,21 @@
                     <span id="simple-logo-full">Alture <span class="pink-amp">&</span> Co.</span>
                 </a>
             </div>
-            <button class="menu-toggle" aria-label="Menu">
-                <span class="menu-line"></span>
-                <span class="menu-line"></span>
-                <span class="menu-line"></span>
+            <button class="menu-toggle" id="menuToggle" aria-label="Menu" aria-expanded="false" aria-controls="mainNav">
+                <svg viewBox="0 0 100 80" width="30" height="30" class="menu-icon" aria-hidden="true">
+                    <rect width="100" height="10" fill="#3E002F"></rect>
+                    <rect y="30" width="100" height="10" fill="#3E002F"></rect>
+                    <rect y="60" width="100" height="10" fill="#3E002F"></rect>
+                </svg>
+                <span class="sr-only">Menu</span>
             </button>
-            <nav>
-                <ul style="display: flex; gap: 1.5rem;">
-                    <li><a href="#who-we-are" style="color: black; transition: color 0.3s ease; font-size: 0.875rem; font-family: 'Montserrat', sans-serif; font-weight: 500; letter-spacing: 0.05em;" onmouseover="this.style.color='#D14D72'" onmouseout="this.style.color='black'">WHO WE ARE</a></li>
-                    <li><a href="#what-we-offer" style="color: black; transition: color 0.3s ease; font-size: 0.875rem; font-family: 'Montserrat', sans-serif; font-weight: 500; letter-spacing: 0.05em;" onmouseover="this.style.color='#D14D72'" onmouseout="this.style.color='black'">WHAT WE OFFER</a></li>
-                    <li><a href="properties.html" style="color: black; transition: color 0.3s ease; font-size: 0.875rem; font-family: 'Montserrat', sans-serif; font-weight: 500; letter-spacing: 0.05em;" onmouseover="this.style.color='#D14D72'" onmouseout="this.style.color='black'">PROPERTIES</a></li>
-                    <li><a href="#strategic-vision" style="color: black; transition: color 0.3s ease; font-size: 0.875rem; font-family: 'Montserrat', sans-serif; font-weight: 500; letter-spacing: 0.05em;" onmouseover="this.style.color='#D14D72'" onmouseout="this.style.color='black'">STRATEGIC VISION</a></li>
-                    <li><a href="#contact" style="color: black; transition: color 0.3s ease; font-size: 0.875rem; font-family: 'Montserrat', sans-serif; font-weight: 500; letter-spacing: 0.05em;" onmouseover="this.style.color='#D14D72'" onmouseout="this.style.color='black'">CONTACT</a></li>
+            <nav id="mainNav" class="main-navigation">
+                <ul class="nav-list">
+                    <li><a href="#who-we-are" class="nav-link">WHO WE ARE</a></li>
+                    <li><a href="#what-we-offer" class="nav-link">WHAT WE OFFER</a></li>
+                    <li><a href="properties.html" class="nav-link">PROPERTIES</a></li>
+                    <li><a href="#strategic-vision" class="nav-link">STRATEGIC VISION</a></li>
+                    <li><a href="#contact" class="nav-link">CONTACT</a></li>
                 </ul>
             </nav>
         </div>
@@ -301,8 +304,37 @@
     <script src="js/property-map.js"></script>
     <script src="js/back-to-top.js"></script>
     <script src="js/loading-animation.js"></script>
-    <script src="js/main.js"></script>
-    <script src="js/mobile-menu.js"></script>
-    <script src="js/service-cards.js"></script>
+    <!-- ScrollReveal CDN -->
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <!-- SimpleParallax CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/simple-parallax-js@5.5.1/dist/simpleParallax.min.js"></script>
+    <script src="js/mobile-menu.js" defer></script>
+    <script>
+      // Initialisation de ScrollReveal
+      document.addEventListener('DOMContentLoaded', function() {
+        if (typeof ScrollReveal !== 'undefined') {
+          ScrollReveal().reveal('.scroll-reveal', {
+            delay: 200,
+            distance: '20px',
+            origin: 'bottom',
+            duration: 800,
+            easing: 'cubic-bezier(0.5, 0, 0, 1)',
+            interval: 100
+          });
+        }
+
+        // Initialisation de SimpleParallax pour les images avec la classe 'parallax-img'
+        if (typeof simpleParallax !== 'undefined') {
+          const images = document.querySelectorAll('.parallax-img');
+          if (images.length > 0) {
+            new simpleParallax(images, {
+              scale: 1.1,
+              delay: 0.6,
+              transition: 'cubic-bezier(0,0,0,1)'
+            });
+          }
+        }
+      });
+    </script>
 </body>
 </html>
