@@ -121,17 +121,44 @@
     
     <!-- Galerie Modale -->
     <div id="galleryModal" class="modal">
-        <span class="close-modal">&times;</span>
+        <!-- Bouton de fermeture -->
+        <button class="close-modal" aria-label="Close" onclick="closeModal()">
+            <i class="fas fa-times"></i>
+        </button>
+        
+        <!-- Flèches de navigation -->
+        <button class="nav-arrow prev" aria-label="Previous image" onclick="prevImage()">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        <button class="nav-arrow next" aria-label="Next image" onclick="nextImage()">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+        
         <div class="modal-content">
+            <!-- Conteneur principal de la galerie -->
             <div class="gallery-container">
+                <!-- Image principale -->
                 <div class="gallery-main">
-                    <img id="mainImage" src="" alt="Property Image">
-                    <div class="property-details">
-                        <h3 id="propertyTitle"></h3>
-                        <p id="propertyDescription"></p>
-                        <div class="property-features" id="propertyFeatures"></div>
-                    </div>
+                    <img id="mainImage" src="" alt="Property Image" loading="eager">
                 </div>
+                
+                <!-- Informations de la propriété -->
+                <div class="property-info">
+                    <h2 id="propertyTitle"></h2>
+                    <p class="property-price"><span class="currency">AED</span> <span id="propertyPrice"></span></p>
+                    <p class="property-location" id="propertyLocation"></p>
+                    <p class="property-description" id="propertyDescription"></p>
+                    
+                    <div class="property-features" id="propertyFeatures">
+                        <!-- Les caractéristiques seront ajoutées dynamiquement -->
+                    </div>
+                    
+                    <a href="#contact" class="btn btn-primary">
+                        Contact Us <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                
+                <!-- Miniatures -->
                 <div class="gallery-thumbnails" id="galleryThumbnails">
                     <!-- Les miniatures seront ajoutées dynamiquement -->
                 </div>
@@ -233,6 +260,166 @@
             }
         };
 
+        // Variables globales pour la navigation dans la galerie
+        let currentProperty = null;
+        let currentImageIndex = 0;
+        let propertyImages = [];
+        let isModalOpen = false;
+        let modalCloseTimeout = null;
+        let touchStartX = 0; // Pour la détection du glissement sur mobile
+
+        // Fonction pour afficher une image spécifique
+        function showImage(index) {
+            const mainImage = document.getElementById('mainImage');
+            const thumbnails = document.querySelectorAll('.thumbnail');
+            
+            if (index >= 0 && index < propertyImages.length) {
+                // Mettre à jour l'index courant
+                currentImageIndex = index;
+                
+                // Ajouter une classe de chargement
+                mainImage.classList.remove('loaded');
+                
+                // Changer l'image après un court délai pour le fondu
+                setTimeout(() => {
+                    // Charger la nouvelle image
+                    const img = new Image();
+                    img.onload = function() {
+                        mainImage.src = this.src;
+                        mainImage.alt = propertyImages[index].alt || `Image ${index + 1}`;
+                        mainImage.classList.add('loaded');
+                        
+                        // Mettre à jour la miniature active
+                        updateActiveThumbnail(index);
+                    };
+                    img.src = propertyImages[index].src || propertyImages[index];
+                    
+                }, 150);
+            }
+        }
+        
+        // Fonction pour mettre à jour la miniature active
+        function updateActiveThumbnail(index) {
+            const thumbnails = document.querySelectorAll('.thumbnail');
+            thumbnails.forEach((thumb, i) => {
+                if (i === index) {
+                    thumb.classList.add('active');
+                    // Faire défiler jusqu'à la miniature active si nécessaire
+                    const container = thumb.parentElement;
+                    const containerRect = container.getBoundingClientRect();
+                    const thumbRect = thumb.getBoundingClientRect();
+                    
+                    if (thumbRect.left < containerRect.left || thumbRect.right > containerRect.right) {
+                        thumb.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'nearest',
+                            inline: 'center'
+                        });
+                    }
+                } else {
+                    thumb.classList.remove('active');
+                }
+            });
+        }
+
+        // Fonction pour afficher l'image suivante
+        function nextImage() {
+            if (!isModalOpen || !propertyImages.length) return;
+            const newIndex = (currentImageIndex + 1) % propertyImages.length;
+            showImage(newIndex);
+        }
+
+        // Fonction pour afficher l'image précédente
+        function prevImage() {
+            if (!isModalOpen || !propertyImages.length) return;
+            const newIndex = (currentImageIndex - 1 + propertyImages.length) % propertyImages.length;
+            showImage(newIndex);
+        }
+
+        // Gestionnaire d'événements pour les touches du clavier
+        function handleKeyDown(e) {
+            if (!isModalOpen) return;
+            
+            switch(e.key) {
+                case 'Escape':
+                    e.preventDefault();
+                    closeModal();
+                    break;
+                case 'ArrowLeft':
+                    e.preventDefault();
+                    prevImage();
+                    break;
+                case 'ArrowRight':
+                    e.preventDefault();
+                    nextImage();
+                    break;
+            }
+        }
+        
+        // Gestionnaires pour le glissement tactile sur mobile
+        function handleTouchStart(e) {
+            if (!isModalOpen) return;
+            touchStartX = e.touches[0].clientX;
+        }
+        
+        function handleTouchEnd(e) {
+            if (!isModalOpen) return;
+            
+            const touchEndX = e.changedTouches[0].clientX;
+            const diffX = touchStartX - touchEndX;
+            
+            // Seuil de glissement pour déclencher le changement d'image (50px par défaut)
+            const swipeThreshold = 50;
+            
+            if (Math.abs(diffX) > swipeThreshold) {
+                if (diffX > 0) {
+                    nextImage(); // Glissement vers la gauche -> image suivante
+                } else {
+                    prevImage(); // Glissement vers la droite -> image précédente
+                }
+            }
+        }
+
+        // Fonction pour fermer la modale
+        function closeModal() {
+            if (!isModalOpen) return;
+            
+            const modal = document.getElementById('galleryModal');
+            if (!modal) return;
+            
+            // Annuler tout timeout en attente
+            if (modalCloseTimeout) {
+                clearTimeout(modalCloseTimeout);
+                modalCloseTimeout = null;
+            }
+            
+            // Désactiver le défilement fluide pendant la fermeture
+            document.body.style.overflow = 'auto';
+            document.body.style.paddingRight = '';
+            
+            // Ajouter la classe de fermeture pour l'animation
+            modal.classList.add('closing');
+            
+            // Attendre la fin de l'animation avant de masquer la modale
+            modalCloseTimeout = setTimeout(() => {
+                modal.style.display = 'none';
+                modal.classList.remove('show', 'closing');
+                isModalOpen = false;
+                
+                // Nettoyer les écouteurs d'événements
+                document.removeEventListener('keydown', handleKeyDown);
+                document.removeEventListener('touchstart', handleTouchStart, { passive: true });
+                document.removeEventListener('touchend', handleTouchEnd, { passive: true });
+                
+                // Réinitialiser l'index
+                currentImageIndex = 0;
+                propertyImages = [];
+                currentProperty = null;
+                
+                modalCloseTimeout = null;
+            }, 300);
+        }
+
         // Script pour la galerie
         function openGallery(propertyId) {
             console.log('Opening gallery for property:', propertyId);
@@ -244,107 +431,145 @@
                 return;
             }
             
+            // Nettoyer les écouteurs d'événements précédents
+            if (isModalOpen) {
+                closeModal();
+                // Attendre que la modale soit complètement fermée avant de la rouvrir
+                setTimeout(() => openGallery(propertyId), 350);
+                return;
+            }
+            
+            // Stocker les informations de la propriété actuelle
+            currentProperty = property;
+            propertyImages = property.images || [];
+            currentImageIndex = 0;
+            
             console.log('Property data:', property);
             
             const mainImage = document.getElementById('mainImage');
             const thumbnailsContainer = document.getElementById('galleryThumbnails');
             const propertyTitle = document.getElementById('propertyTitle');
+            const propertyPrice = document.getElementById('propertyPrice');
+            const propertyLocation = document.getElementById('propertyLocation');
             const propertyDescription = document.getElementById('propertyDescription');
             const propertyFeatures = document.getElementById('propertyFeatures');
 
             // Mettre à jour les informations de la propriété
-            propertyTitle.textContent = property.title;
-            propertyDescription.innerHTML = property.description.replace(/\n/g, '<br>');
+            if (propertyTitle) propertyTitle.textContent = property.title;
+            if (propertyPrice) {
+                propertyPrice.textContent = property.price ? 
+                    property.price.toLocaleString() + ' €' : 'Prix sur demande';
+            }
             
-            // Vérifier si l'élément propertyFeatures existe avant de le modifier
+            if (propertyLocation) {
+                propertyLocation.innerHTML = property.location ? 
+                    `<i class="fas fa-map-marker-alt"></i> ${property.location}` : '';
+            }
+            
+            if (propertyDescription) {
+                propertyDescription.textContent = property.description || '';
+            }
+            
+            // Mettre à jour les caractéristiques
             if (propertyFeatures) {
-                propertyFeatures.innerHTML = `
-                    <div class="feature">
-                        <i class="fas fa-bed"></i>
-                        <div>3 Beds</div>
-                    </div>
-                    <div class="feature">
-                        <i class="fas fa-ruler-combined"></i>
-                        <div>2,770 Sq Ft</div>
-                    </div>
-                    <div class="feature">
-                        <i class="fas fa-umbrella-beach"></i>
-                        <div>Sea View</div>
-                    </div>`;
+                propertyFeatures.innerHTML = '';
+                
+                // Ajouter les caractéristiques dynamiquement depuis l'objet property
+                const features = [
+                    { icon: 'bed', text: property.beds || 'N/A', tooltip: 'Chambres' },
+                    { icon: 'bath', text: property.baths || 'N/A', tooltip: 'Salles de bain' },
+                    { icon: 'ruler-combined', text: property.area ? `${property.area} m²` : 'N/A', tooltip: 'Surface' },
+                    { icon: 'building', text: property.type || 'N/A', tooltip: 'Type de bien' }
+                ];
+                
+                features.forEach(feature => {
+                    if (feature.text && feature.text !== 'N/A') {
+                        const featureEl = document.createElement('div');
+                        featureEl.className = 'feature-item';
+                        featureEl.innerHTML = `
+                            <i class="fas fa-${feature.icon}"></i>
+                            <span>${feature.text}</span>
+                            <span class="tooltip">${feature.tooltip}</span>
+                        `;
+                        propertyFeatures.appendChild(featureEl);
+                    }
+                });
             }
 
             // Vider les miniatures précédentes
             if (thumbnailsContainer) {
+                console.log('Conteneur des miniatures trouvé:', thumbnailsContainer);
                 thumbnailsContainer.innerHTML = '';
+                console.log('Images à afficher:', propertyImages);
 
                 // Ajouter les miniatures
-                property.images.forEach((image, index) => {
+                propertyImages.forEach((image, index) => {
+                    console.log('Ajout de la miniature:', image);
                     const thumbnail = document.createElement('div');
                     thumbnail.className = 'thumbnail' + (index === 0 ? ' active' : '');
-                    thumbnail.innerHTML = `<img src="${image}" alt="Thumbnail ${index + 1}">`;
+                    thumbnail.innerHTML = `<img src="${image}" alt="Miniature ${index + 1}" loading="lazy">`;
                     
-                    thumbnail.addEventListener('click', () => {
-                        if (mainImage) {
-                            mainImage.src = image;
-                            document.querySelectorAll('.thumbnail').forEach(t => t.classList.remove('active'));
-                            thumbnail.classList.add('active');
-                        }
+                    thumbnail.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        showImage(index);
                     });
 
                     thumbnailsContainer.appendChild(thumbnail);
                 });
-            }
-
-            // Définir l'image principale
-            if (mainImage) {
-                mainImage.src = property.images[0];
+                
+                // Vérifier si des miniatures ont été ajoutées
+                console.log('Nombre de miniatures ajoutées:', thumbnailsContainer.children.length);
             }
 
             // Afficher la modale avec animation
             if (modal) {
-                modal.style.display = 'block';
+                // Empêcher le défilement du body
                 document.body.style.overflow = 'hidden';
+                document.body.style.paddingRight = window.innerWidth - document.documentElement.clientWidth + 'px';
+                
+                // Afficher la modale
+                modal.style.display = 'flex';
+                
                 // Forcer le reflow pour activer la transition
                 void modal.offsetWidth;
-                modal.classList.add('show');
-                // Forcer le reflow pour le contenu
-                const modalContent = modal.querySelector('.modal-content');
-                if (modalContent) {
-                    setTimeout(() => {
-                        modalContent.style.opacity = '1';
-                        modalContent.style.transform = 'translateY(0)';
-                    }, 10);
-                }
+                
+                // Démarrer l'animation d'entrée
+                setTimeout(() => {
+                    modal.classList.add('show');
+                    isModalOpen = true;
+                    
+                    // Afficher la première image
+                    if (mainImage && propertyImages.length > 0) {
+                        mainImage.classList.remove('loaded');
+                        mainImage.src = propertyImages[0];
+                        mainImage.onload = () => {
+                            mainImage.classList.add('loaded');
+                        };
+                        mainImage.alt = property.title || 'Image de la propriété';
+                    }
+                    
+                    // Ajouter les écouteurs d'événements
+                    document.addEventListener('keydown', handleKeyDown);
+                    document.addEventListener('touchstart', handleTouchStart, { passive: true });
+                    document.addEventListener('touchend', handleTouchEnd, { passive: true });
+                    
+                    // Gestion du clic en dehors de la modale
+                    modal.addEventListener('click', function modalClickHandler(e) {
+                        if (e.target === modal) {
+                            closeModal();
+                        }
+                    });
+                    
+                    // Empêcher la propagation du clic sur le contenu
+                    const modalContent = modal.querySelector('.modal-content');
+                    if (modalContent) {
+                        modalContent.addEventListener('click', function(e) {
+                            e.stopPropagation();
+                        });
+                    }
+                }, 10);
             }
         }
-
-        // Fermer la modale avec animation
-        document.querySelector('.close-modal').addEventListener('click', function() {
-            const modal = document.getElementById('galleryModal');
-            modal.classList.remove('show');
-            modal.querySelector('.modal-content').style.opacity = '0';
-            modal.querySelector('.modal-content').style.transform = 'translateY(20px)';
-            
-            setTimeout(() => {
-                modal.style.display = 'none';
-                document.body.style.overflow = 'auto';
-            }, 300);
-        });
-
-        // Fermer en cliquant en dehors de la modale avec animation
-        window.addEventListener('click', function(event) {
-            const modal = document.getElementById('galleryModal');
-            if (event.target === modal) {
-                modal.classList.remove('show');
-                modal.querySelector('.modal-content').style.opacity = '0';
-                modal.querySelector('.modal-content').style.transform = 'translateY(20px)';
-                
-                setTimeout(() => {
-                    modal.style.display = 'none';
-                    document.body.style.overflow = 'auto';
-                }, 300);
-            }
-        });
 
         // Initialiser les boutons de galerie
         document.querySelectorAll('.view-gallery-btn').forEach(button => {
@@ -399,7 +624,7 @@
                 
                 // Gérer le clic sur le bouton du menu
                 menuToggle.addEventListener('click', function() {
-                    nav.style.display = nav.style.display === 'none' || !nav.style.display ? 'block' : 'none';
+                    nav.style.display = nav.style.display === 'none' || nav.style.display === '' ? 'block' : 'none';
                     menuToggle.classList.toggle('active');
                     
                     // Animation des lignes du bouton
@@ -408,10 +633,12 @@
                         lines[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
                         lines[1].style.opacity = '0';
                         lines[2].style.transform = 'rotate(-45deg) translate(5px, -5px)';
+                        document.body.style.overflow = 'hidden';
                     } else {
                         lines[0].style.transform = '';
                         lines[1].style.opacity = '';
                         lines[2].style.transform = '';
+                        document.body.style.overflow = '';
                     }
                 });
                 
