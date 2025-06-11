@@ -8,586 +8,17 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/properties.css">
     <style>
-        /* Reset et styles de base */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Montserrat', sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background-color: #fff;
-            overflow-x: hidden;
-        }
-        
-        /* En-tête */
-        header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            padding: 20px 0;
-            background-color: white;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            z-index: 1000;
-        }
-        
-        .header-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 24px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        /* Styles pour le logo avec effet de survol */
-        #simple-logo {
-            position: relative;
-            display: inline-block;
-            text-decoration: none;
-            width: 120px;
-            height: 40px;
-            color: #000000 !important;
-        }
-        
-        #simple-logo-short, #simple-logo-full {
-            position: absolute;
-            top: 0;
-            left: 0;
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.8rem;
-            font-weight: 600;
-            line-height: 1;
-            transition: opacity 0.3s ease;
-        }
-        
-        #simple-logo-short {
-            opacity: 1;
-        }
-        
-        #simple-logo-full {
-            opacity: 0;
-        }
-        
-        #simple-logo:hover #simple-logo-short {
-            opacity: 0;
-        }
-        
-        #simple-logo:hover #simple-logo-full {
-            opacity: 1;
-        }
-        
-        .pink-amp {
-            color: #D14D72;
-            font-weight: 600;
-        }
-        
-        @media (max-width: 768px) {
-            #simple-logo-short, #simple-logo-full {
-                font-size: 1.5rem;
-            }
-        }
-            font-weight: 600;
-            text-decoration: none;
-            color: #000;
-        }
-        
+        /* Styles spécifiques qui doivent rester en ligne */
         .logo span {
             color: #D14D72;
-        }
-        
-        /* Navigation */
-        nav a {
-            color: #333;
-            text-decoration: none;
-            margin-left: 30px;
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
-        
-        nav a:hover {
-            color: #D14D72;
-        }
-        
-        /* Section héro */
-        .properties-hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
-                        url('https://images.unsplash.com/photo-1582407947304-fd86f028f716?ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80');
-            background-size: cover;
-            background-position: center;
-            color: white;
-            text-align: center;
-            padding: 200px 20px 150px;
-            margin-top: 0;
-        }
-        
-        .properties-hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 20px;
-            font-family: 'Cormorant Garamond', serif;
-            font-weight: 600;
-        }
-        
-        .properties-hero p {
-            font-size: 1.2rem;
-            max-width: 700px;
-            margin: 0 auto 30px;
-            opacity: 0.9;
-        }
-        
-        .btn {
-            display: inline-block;
-            background-color: #D14D72;
-            color: white;
-            padding: 12px 30px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            margin-top: 20px;
-        }
-        
-        .btn:hover {
-            background-color: #b54164;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-        /* Reset et styles de base */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Montserrat', sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background-color: #fff;
-            overflow-x: hidden;
-        }
-        
-        /* En-tête */
-        header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            padding: 20px 0;
-            background-color: white;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            z-index: 1000;
-        }
-        
-        .header-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .logo {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 24px;
-            font-weight: 600;
-            text-decoration: none;
-            color: #000;
-        }
-        
-        .logo span {
-            color: #D14D72;
-        }
-        
-        /* Navigation */
-        nav a {
-            color: #333;
-            text-decoration: none;
-            margin-left: 30px;
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
-        
-        nav a:hover {
-            color: #D14D72;
-        }
-        
-        /* Section héro */
-        .properties-hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
-                        url('https://images.unsplash.com/photo-1582407947304-fd86f028f716?ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80');
-            background-size: cover;
-            background-position: center;
-            color: white;
-            text-align: center;
-            padding: 200px 20px 150px;
-            margin-top: 0;
-        }
-        
-        .properties-hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 20px;
-            font-family: 'Cormorant Garamond', serif;
-            font-weight: 600;
-        }
-        
-        .properties-hero p {
-            font-size: 1.2rem;
-            max-width: 700px;
-            margin: 0 auto 30px;
-            opacity: 0.9;
-        }
-        
-        .btn {
-            display: inline-block;
-            background-color: #D14D72;
-            color: white;
-            padding: 12px 30px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            margin-top: 20px;
-        }
-        
-        .btn:hover {
-            background-color: #b54164;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-        
-        /* Section des propriétés */
-        .properties-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 100px 20px;
         }
         
         .properties-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
         }
         
-        .property-card {
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        
-        .property-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
-        }
-        
-        .property-image {
-            width: 100%;
-            height: 250px;
-            object-fit: cover;
-        }
-        
-        .property-details {
-            padding: 25px;
-        }
-        
-        .property-details h3 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-            color: #222;
-        }
-        
-        .property-details p {
-            color: #666;
-            margin-bottom: 20px;
-            line-height: 1.6;
-        }
-        
-        .property-features {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 20px;
-            padding-top: 15px;
-            border-top: 1px solid #eee;
-        }
-        
-        .feature {
-            text-align: center;
-        }
-        
-        .feature i {
-            color: #D14D72;
-            font-size: 1.2rem;
-            margin-bottom: 5px;
-            display: block;
-        }
-        
-        .feature span {
-            font-size: 0.9rem;
-            color: #777;
-        }
-        
-        .property-price {
-            font-size: 1.3rem;
-            font-weight: 600;
-            color: #D14D72;
-            margin-bottom: 20px;
-            display: block;
-        }
-        
-        /* Pied de page */
-        footer {
-            background-color: #1a1a1a;
-            color: #fff;
-            padding: 60px 0 20px;
-            text-align: center;
-        }
-        
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            text-align: left;
-        }
-        
-        .footer-section {
-            flex: 1;
-            min-width: 250px;
-            margin-bottom: 40px;
-            padding: 0 15px;
-        }
-        
-        .footer-section h3 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-            color: #fff;
-        }
-        
-        .footer-section p {
-            color: #bbb;
-            line-height: 1.6;
-            margin-bottom: 20px;
-        }
-        
-        .social-links a {
-            color: #fff;
-            font-size: 1.2rem;
-            margin-right: 15px;
-            transition: color 0.3s ease;
-        }
-        
-        .social-links a:hover {
-            color: #D14D72;
-        }
-        
-        .footer-bottom {
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 1px solid #333;
-            color: #999;
-            font-size: 0.9rem;
-        }
-        
-        /* Responsive */
-        @media (max-width: 768px) {
-            .properties-hero {
-                padding: 150px 20px 100px;
-            }
-            
-            .properties-hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            .properties-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            nav {
-                display: none;
-            }
-        }
-        /* Reset et styles de base */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Montserrat', sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background-color: #fff;
-            overflow-x: hidden;
-        }
-        
-        /* En-tête */
-        header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            padding: 20px 0;
-            background-color: white;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            z-index: 1000;
-        }
-        
-        .header-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .logo {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 24px;
-            font-weight: 600;
-            text-decoration: none;
-            color: #000;
-        }
-        
-        .logo span {
-            color: #D14D72;
-        }
-        
-        /* Section héro */
-        .properties-hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
-                        url('https://images.unsplash.com/photo-1582407947304-fd86f028f716?ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80');
-            background-size: cover;
-            background-position: center;
-            color: white;
-            text-align: center;
-            padding: 180px 20px 100px;
-            margin-top: 60px;
-        }
-        
-        .properties-hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 20px;
-            font-family: 'Cormorant Garamond', serif;
-            font-weight: 600;
-        }
-        
-        .properties-hero p {
-            font-size: 1.2rem;
-            max-width: 700px;
-            margin: 0 auto 30px;
-        }
-        
-        .btn {
-            display: inline-block;
-            background-color: #D14D72;
-            color: white;
-            padding: 12px 30px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-        
-        .btn:hover {
-            background-color: #b54164;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-        
-        .properties-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 60px 20px;
-        }
-        
-        .properties-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-        
-        .property-card {
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        
-        .property-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
-        }
-        
-        .property-image {
-            width: 100%;
-            height: 250px;
-            object-fit: cover;
-        }
-        
-        .property-details {
-            padding: 25px;
-        }
-        
-        .property-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-            color: #333;
-        }
-        
-        .property-location {
-            color: #666;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-family: 'Montserrat', sans-serif;
-        }
-        
-        .property-description {
-            color: #555;
-            line-height: 1.6;
-            margin-bottom: 20px;
-            font-family: 'Montserrat', sans-serif;
-        }
-        
-        .property-features {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 20px;
-            padding-top: 20px;
-            border-top: 1px solid #eee;
-        }
-        
-        .feature {
-            text-align: center;
-            flex: 1;
-        }
-        
-        .feature i {
-            color: #D14D72;
-            font-size: 1.2rem;
-            margin-bottom: 5px;
-            display: block;
-        }
-        
+        /* Styles spécifiques qui doivent rester en ligne */
         .feature div {
             color: #666;
             font-size: 0.9rem;
@@ -658,57 +89,10 @@
     <div class="progress-container">
         <div class="progress-bar" id="myBar"></div>
     </div>
-    <header style="position: fixed; top: 0; left: 0; width: 100%; padding-top: 1.25rem; padding-bottom: 1.25rem; background-color: white; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); z-index: 50; transition: all 0.3s ease;">
-        <div style="max-width: 1200px; margin-left: auto; margin-right: auto; padding-left: 1.5rem; padding-right: 1.5rem; display: flex; justify-content: space-between; align-items: center;">
-            <div style="margin-right: 3.5rem;">
-                <style>
-                    /* Style spécifique au logo, isolé du reste du CSS */
-                    #simple-logo {
-                        position: relative;
-                        display: inline-block;
-                        text-decoration: none;
-                        width: 120px;
-                        height: 40px;
-                        color: #000000 !important;
-                    }
-                    #simple-logo span {
-                        color: #000000 !important;
-                    }
-                    #simple-logo-short {
-                        font-family: 'Cormorant Garamond', serif;
-                        font-size: 1.5rem;
-                        font-weight: 500;
-                        color: #000000; /* Noir pur */
-                        display: block;
-                        position: absolute;
-                        opacity: 1;
-                        transition: opacity 0.5s ease;
-                        text-align: center;
-                        width: 100%;
-                    }
-                    #simple-logo-full {
-                        font-family: 'Cormorant Garamond', serif;
-                        font-size: 1.5rem;
-                        color: #000000; /* Noir pur */
-                        font-weight: 500;
-                        position: absolute;
-                        top: 0;
-                        left: 0;
-                        opacity: 0;
-                        transition: opacity 0.5s ease;
-                        white-space: nowrap;
-                    }
-                    #simple-logo:hover #simple-logo-short {
-                        opacity: 0;
-                    }
-                    #simple-logo:hover #simple-logo-full {
-                        opacity: 1;
-                    }
-                    .pink-amp {
-                        color: #D14D72;
-                        font-weight: 400;
-                    }
-                </style>
+    <header>
+        <div class="header-container">
+            <div class="logo">
+
                 <a href="index.html" id="simple-logo">
                     <span id="simple-logo-short">A<span class="pink-amp">&</span>C</span>
                     <span id="simple-logo-full">Alture <span class="pink-amp">&</span> Co.</span>
@@ -735,44 +119,40 @@
         </div>
     </section>
     
+    <!-- Galerie Modale -->
+    <div id="galleryModal" class="modal">
+        <span class="close-modal">&times;</span>
+        <div class="modal-content">
+            <div class="gallery-container">
+                <div class="gallery-main">
+                    <img id="mainImage" src="" alt="Property Image">
+                    <div class="property-details">
+                        <h3 id="propertyTitle"></h3>
+                        <p id="propertyDescription"></p>
+                        <div class="property-features" id="propertyFeatures"></div>
+                    </div>
+                </div>
+                <div class="gallery-thumbnails" id="galleryThumbnails">
+                    <!-- Les miniatures seront ajoutées dynamiquement -->
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div id="properties" class="properties-container">
         <h2>Featured Properties</h2>
         <div class="properties-grid">
-            <!-- Property 1 -->
+            <!-- Five Palm Jumeirah Property -->
             <div class="property-card">
-                <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Luxury Villa" class="property-image">
-                <div class="property-details">
-                    <h3 class="property-title">Luxury Villa</h3>
-                    <p class="property-location"><i class="fas fa-map-marker-alt"></i> Monaco, France</p>
-                    <p class="property-description">Stunning modern villa with panoramic sea views, infinity pool, and private beach access. Perfect for those seeking luxury and privacy.</p>
-                    <div class="property-features">
-                        <div class="feature">
-                            <i class="fas fa-bed"></i>
-                            <div>5 Beds</div>
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-bath"></i>
-                            <div>4 Baths</div>
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-ruler-combined"></i>
-                            <div>450 m²</div>
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-car"></i>
-                            <div>3 Parking</div>
-                        </div>
-                    </div>
+                <div class="property-image-container">
+                    <img src="images/Five palm Jumeirah 3BED/image0.jpeg" alt="Five Palm Jumeirah" class="property-image">
+                    <button class="view-gallery-btn" onclick="openGallery('five-palm-jumeirah')">View Gallery</button>
                 </div>
-            </div>
-            
-            <!-- Property 2 -->
-            <div class="property-card">
-                <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Modern Apartment" class="property-image">
                 <div class="property-details">
-                    <h3 class="property-title">Modern Apartment</h3>
-                    <p class="property-location"><i class="fas fa-map-marker-alt"></i> Paris, France</p>
-                    <p class="property-description">Elegant apartment in the heart of Paris with high-end finishes, smart home features, and breathtaking city views.</p>
+                    <h3 class="property-title">Five Palm Jumeirah</h3>
+                    <p class="property-location"><i class="fas fa-map-marker-alt"></i> Dubai, Palm Jumeirah</p>
+                    <p class="property-price">AED 10,000,000.00</p>
+                    <p class="property-description">Exclusive 3-bedroom residence with stunning sea views, luxury finishes, and access to world-class amenities in one of Dubai's most prestigious locations.</p>
                     <div class="property-features">
                         <div class="feature">
                             <i class="fas fa-bed"></i>
@@ -780,43 +160,15 @@
                         </div>
                         <div class="feature">
                             <i class="fas fa-bath"></i>
-                            <div>2 Baths</div>
+                            <div>3.5 Baths</div>
                         </div>
                         <div class="feature">
                             <i class="fas fa-ruler-combined"></i>
-                            <div>120 m²</div>
+                            <div>2,770 Sq Ft</div>
                         </div>
                         <div class="feature">
-                            <i class="fas fa-car"></i>
-                            <div>1 Parking</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Property 3 -->
-            <div class="property-card">
-                <img src="https://images.unsplash.com/photo-1600585152220-90363fe7e115?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Countryside Mansion" class="property-image">
-                <div class="property-details">
-                    <h3 class="property-title">Countryside Mansion</h3>
-                    <p class="property-location"><i class="fas fa-map-marker-alt"></i> Provence, France</p>
-                    <p class="property-description">Magnificent 18th-century mansion set in 5 hectares of landscaped gardens with a pool, tennis court, and guest house.</p>
-                    <div class="property-features">
-                        <div class="feature">
-                            <i class="fas fa-bed"></i>
-                            <div>7 Beds</div>
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-bath"></i>
-                            <div>5 Baths</div>
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-ruler-combined"></i>
-                            <div>800 m²</div>
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-tree"></i>
-                            <div>5 ha</div>
+                            <i class="fas fa-swimming-pool"></i>
+                            <div>Pool View</div>
                         </div>
                     </div>
                 </div>
@@ -824,69 +176,183 @@
         </div>
     </div>
     
-    <footer class="parallax-bg" style="background-image: linear-gradient(rgba(45, 35, 45, 0.95), rgba(45, 35, 45, 0.95)), url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80'); padding: 5rem 0 2rem; margin-top: 4rem;">
-        <div style="max-width: 1200px; margin: 0 auto; padding: 0 1.5rem;">
-            <div class="footer-content" style="display: flex; justify-content: space-between; flex-wrap: wrap; margin-bottom: 3rem;">
-                <div class="footer-section" style="flex: 1; min-width: 250px; margin-bottom: 2rem;">
-                    <a href="index.html" style="text-decoration: none;">
-                        <div style="color: #fff; font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 600; letter-spacing: 1px; margin-bottom: 1.5rem;">
-                            Alture <span style="color: #D14D72;">&</span> Co.
-                        </div>
-                    </a>
-                    <p style="color: rgba(255, 255, 255, 0.7); font-family: 'Montserrat', sans-serif; line-height: 1.7; margin-bottom: 1.5rem;">
-                        Specializing in luxury real estate investments and portfolio management for discerning clients worldwide.
-                    </p>
-                    <div class="social-links" style="display: flex; gap: 1rem;">
-                        <a href="#" style="color: rgba(255, 255, 255, 0.7); font-size: 1.2rem; transition: color 0.3s ease;"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" style="color: rgba(255, 255, 255, 0.7); font-size: 1.2rem; transition: color 0.3s ease;"><i class="fab fa-twitter"></i></a>
-                        <a href="#" style="color: rgba(255, 255, 255, 0.7); font-size: 1.2rem; transition: color 0.3s ease;"><i class="fab fa-instagram"></i></a>
-                        <a href="#" style="color: rgba(255, 255, 255, 0.7); font-size: 1.2rem; transition: color 0.3s ease;"><i class="fab fa-linkedin-in"></i></a>
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <div class="footer-logo">
+                        <a href="index.html">Alture & Co.</a>
+                    </div>
+                    <p>Luxury real estate in Dubai's most exclusive locations.</p>
+                    <div class="social-links">
+                        <a href="https://wa.me/971509845622" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                        <a href="https://www.instagram.com/altureco" aria-label="Instagram" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
                     </div>
                 </div>
                 
-                <div class="footer-section" style="flex: 1; min-width: 200px; padding: 0 1rem;">
-                    <h3 style="color: #fff; font-family: 'Montserrat', sans-serif; font-size: 1.1rem; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 1px;">Quick Links</h3>
-                    <ul style="list-style: none; padding: 0; margin: 0;">
-                        <li style="margin-bottom: 0.8rem;"><a href="index.html" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; font-family: 'Montserrat', sans-serif; transition: color 0.3s ease; display: block;">Home</a></li>
-                        <li style="margin-bottom: 0.8rem;"><a href="#" style="color: #D14D72; text-decoration: none; font-family: 'Montserrat', sans-serif; transition: color 0.3s ease; display: block;">Properties</a></li>
-                        <li style="margin-bottom: 0.8rem;"><a href="index.html#about" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; font-family: 'Montserrat', sans-serif; transition: color 0.3s ease; display: block;">About Us</a></li>
-                        <li style="margin-bottom: 0.8rem;"><a href="index.html#services" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; font-family: 'Montserrat', sans-serif; transition: color 0.3s ease; display: block;">Services</a></li>
-                        <li><a href="index.html#contact" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; font-family: 'Montserrat', sans-serif; transition: color 0.3s ease; display: block;">Contact</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-section" style="flex: 1; min-width: 250px;">
-                    <h3 style="color: #fff; font-family: 'Montserrat', sans-serif; font-size: 1.1rem; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 1px;">Contact Us</h3>
-                    <ul style="list-style: none; padding: 0; margin: 0;">
-                        <li style="margin-bottom: 1rem; display: flex; align-items: flex-start;">
-                            <i class="fas fa-map-marker-alt" style="color: #D14D72; margin-right: 1rem; margin-top: 0.2rem;"></i>
-                            <span style="color: rgba(255, 255, 255, 0.7); font-family: 'Montserrat', sans-serif; line-height: 1.5;">123 Avenue des Champs-Élysées, 75008 Paris, France</span>
+                <div class="footer-column">
+                    <h3 class="footer-heading">Contact</h3>
+                    <ul class="footer-contact">
+                        <li>
+                            <i class="fab fa-whatsapp"></i>
+                            <a href="https://wa.me/971509845622">+971 50 984 5622</a>
                         </li>
-                        <li style="margin-bottom: 1rem; display: flex; align-items: center;">
-                            <i class="fas fa-phone-alt" style="color: #D14D72; margin-right: 1rem;"></i>
-                            <a href="tel:+33123456789" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; font-family: 'Montserrat', sans-serif; transition: color 0.3s ease;">+33 1 23 45 67 89</a>
-                        </li>
-                        <li style="margin-bottom: 1rem; display: flex; align-items: center;">
-                            <i class="far fa-envelope" style="color: #D14D72; margin-right: 1rem;"></i>
-                            <a href="mailto:info@altureco.com" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; font-family: 'Montserrat', sans-serif; transition: color 0.3s ease;">info@altureco.com</a>
-                        </li>
-                        <li style="display: flex; align-items: center;">
-                            <i class="far fa-clock" style="color: #D14D72; margin-right: 1rem;"></i>
-                            <span style="color: rgba(255, 255, 255, 0.7); font-family: 'Montserrat', sans-serif; line-height: 1.5;">Mon - Fri: 9:00 - 18:00</span>
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <a href="mailto:info@altureco.com">info@altureco.com</a>
                         </li>
                     </ul>
                 </div>
             </div>
             
-            <div class="footer-bottom" style="border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 2rem; text-align: center;">
-                <p style="color: rgba(255, 255, 255, 0.5); font-family: 'Montserrat', sans-serif; font-size: 0.85rem; margin: 0;">
-                    &copy; 2023 Alture & Co. All rights reserved. | <a href="#" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; transition: color 0.3s;">Privacy Policy</a> | <a href="#" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; transition: color 0.3s;">Terms of Service</a>
-                </p>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Alture & Co. All rights reserved. | <a href="privacy-policy.html">Privacy Policy</a></p>
             </div>
         </div>
     </footer>
     
     <script>
+        // Données de la propriété Five Palm Jumeirah
+        const propertyData = {
+            'five-palm-jumeirah': {
+                title: 'Five Palm Jumeirah',
+                price: 'AED 10,000,000.00',
+                description: '3 Bedroom, 10th Floor | Five Palm Jumeirah\n\n3 Bedrooms + Maid\'s Room, 2,770 Sq Ft\n\nFully Furnished\n\nCorner Unit with Sea & Palm View\n\n2 Parking Spaces\n\n2 Large Balconies, including 1 with Jacuzzi\n\nArea: 2,770 Sq Ft\n\nVacant on Transfer',
+                images: [
+                    'images/Five palm Jumeirah 3BED/image0.jpeg',
+                    'images/Five palm Jumeirah 3BED/image1.jpeg',
+                    'images/Five palm Jumeirah 3BED/image2.jpeg',
+                    'images/Five palm Jumeirah 3BED/image3.jpeg',
+                    'images/Five palm Jumeirah 3BED/image4.jpeg',
+                    'images/Five palm Jumeirah 3BED/image5.jpeg',
+                    'images/Five palm Jumeirah 3BED/image6.jpeg',
+                    'images/Five palm Jumeirah 3BED/image7.jpeg',
+                    'images/Five palm Jumeirah 3BED/image8.jpeg',
+                    'images/Five palm Jumeirah 3BED/image10.jpeg'
+                ]
+            }
+        };
+
+        // Script pour la galerie
+        function openGallery(propertyId) {
+            console.log('Opening gallery for property:', propertyId);
+            const modal = document.getElementById('galleryModal');
+            const property = propertyData[propertyId];
+            
+            if (!property) {
+                console.error('Property not found:', propertyId);
+                return;
+            }
+            
+            console.log('Property data:', property);
+            
+            const mainImage = document.getElementById('mainImage');
+            const thumbnailsContainer = document.getElementById('galleryThumbnails');
+            const propertyTitle = document.getElementById('propertyTitle');
+            const propertyDescription = document.getElementById('propertyDescription');
+            const propertyFeatures = document.getElementById('propertyFeatures');
+
+            // Mettre à jour les informations de la propriété
+            propertyTitle.textContent = property.title;
+            propertyDescription.innerHTML = property.description.replace(/\n/g, '<br>');
+            
+            // Vérifier si l'élément propertyFeatures existe avant de le modifier
+            if (propertyFeatures) {
+                propertyFeatures.innerHTML = `
+                    <div class="feature">
+                        <i class="fas fa-bed"></i>
+                        <div>3 Beds</div>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-ruler-combined"></i>
+                        <div>2,770 Sq Ft</div>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-umbrella-beach"></i>
+                        <div>Sea View</div>
+                    </div>`;
+            }
+
+            // Vider les miniatures précédentes
+            if (thumbnailsContainer) {
+                thumbnailsContainer.innerHTML = '';
+
+                // Ajouter les miniatures
+                property.images.forEach((image, index) => {
+                    const thumbnail = document.createElement('div');
+                    thumbnail.className = 'thumbnail' + (index === 0 ? ' active' : '');
+                    thumbnail.innerHTML = `<img src="${image}" alt="Thumbnail ${index + 1}">`;
+                    
+                    thumbnail.addEventListener('click', () => {
+                        if (mainImage) {
+                            mainImage.src = image;
+                            document.querySelectorAll('.thumbnail').forEach(t => t.classList.remove('active'));
+                            thumbnail.classList.add('active');
+                        }
+                    });
+
+                    thumbnailsContainer.appendChild(thumbnail);
+                });
+            }
+
+            // Définir l'image principale
+            if (mainImage) {
+                mainImage.src = property.images[0];
+            }
+
+            // Afficher la modale avec animation
+            if (modal) {
+                modal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+                // Forcer le reflow pour activer la transition
+                void modal.offsetWidth;
+                modal.classList.add('show');
+                // Forcer le reflow pour le contenu
+                const modalContent = modal.querySelector('.modal-content');
+                if (modalContent) {
+                    setTimeout(() => {
+                        modalContent.style.opacity = '1';
+                        modalContent.style.transform = 'translateY(0)';
+                    }, 10);
+                }
+            }
+        }
+
+        // Fermer la modale avec animation
+        document.querySelector('.close-modal').addEventListener('click', function() {
+            const modal = document.getElementById('galleryModal');
+            modal.classList.remove('show');
+            modal.querySelector('.modal-content').style.opacity = '0';
+            modal.querySelector('.modal-content').style.transform = 'translateY(20px)';
+            
+            setTimeout(() => {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }, 300);
+        });
+
+        // Fermer en cliquant en dehors de la modale avec animation
+        window.addEventListener('click', function(event) {
+            const modal = document.getElementById('galleryModal');
+            if (event.target === modal) {
+                modal.classList.remove('show');
+                modal.querySelector('.modal-content').style.opacity = '0';
+                modal.querySelector('.modal-content').style.transform = 'translateY(20px)';
+                
+                setTimeout(() => {
+                    modal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }, 300);
+            }
+        });
+
+        // Initialiser les boutons de galerie
+        document.querySelectorAll('.view-gallery-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                openGallery(this.getAttribute('data-property'));
+            });
+        });
+
         // Script pour le préchargeur
         document.addEventListener('DOMContentLoaded', function() {
             const preloader = document.querySelector('.preloader');
@@ -1016,6 +482,34 @@
                 element.style.transform = 'translateY(20px)';
                 element.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
                 fadeOnScroll.observe(element);
+            });
+        });
+    </script>
+    <script>
+        // Menu Burger
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuToggle = document.querySelector('.menu-toggle');
+            const nav = document.querySelector('header nav');
+            
+            menuToggle.addEventListener('click', function() {
+                nav.classList.toggle('active');
+                document.body.style.overflow = nav.classList.contains('active') ? 'hidden' : '';
+            });
+            
+            // Fermer le menu quand on clique sur un lien
+            document.querySelectorAll('header nav a').forEach(link => {
+                link.addEventListener('click', () => {
+                    nav.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
+            });
+            
+            // Fermer le menu quand on clique en dehors
+            document.addEventListener('click', function(e) {
+                if (!nav.contains(e.target) && !menuToggle.contains(e.target)) {
+                    nav.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
             });
         });
     </script>
