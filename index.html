@@ -38,6 +38,7 @@
     </div>
     <header style="position: fixed; top: 0; left: 0; width: 100%; padding-top: 1.25rem; padding-bottom: 1.25rem; background-color: white; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); z-index: 50; transition: all 0.3s ease;">
         <div style="max-width: 1200px; margin-left: auto; margin-right: auto; padding-left: 1.5rem; padding-right: 1.5rem; display: flex; justify-content: space-between; align-items: center;">
+
             <div style="margin-right: 3.5rem;">
                 <style>
                     /* Style spécifique au logo, isolé du reste du CSS */
@@ -92,12 +93,8 @@
                     <span id="simple-logo-full">Alture <span class="pink-amp">&</span> Co.</span>
                 </a>
             </div>
-            <button class="menu-toggle" aria-label="Menu">
-                <span class="menu-line"></span>
-                <span class="menu-line"></span>
-                <span class="menu-line"></span>
-            </button>
-            <nav class="main-navigation">
+
+            <nav id="main-navigation" class="main-navigation" aria-label="Navigation principale">
                 <ul style="display: flex; gap: 1.5rem;">
                     <li><a href="#who-we-are" class="nav-link" style="color: black; transition: color 0.3s ease; font-size: 0.875rem; font-family: 'Montserrat', sans-serif; font-weight: 500; letter-spacing: 0.05em;" onmouseover="this.style.color='#D14D72'" onmouseout="this.style.color='black'">WHO WE ARE</a></li>
                     <li><a href="#what-we-offer" class="nav-link" style="color: black; transition: color 0.3s ease; font-size: 0.875rem; font-family: 'Montserrat', sans-serif; font-weight: 500; letter-spacing: 0.05em;" onmouseover="this.style.color='#D14D72'" onmouseout="this.style.color='black'">WHAT WE OFFER</a></li>
@@ -140,7 +137,14 @@
                     <p>Strategic wealth alignment between Europe & UAE</p>
                 </div>
             </div>
-            <a href="#what-we-offer" class="btn hero-btn">Discover Our Services</a>
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2rem;">
+                <a href="#what-we-offer" class="btn hero-btn" style="background-color: transparent; border: 2px solid white; transition: all 0.3s ease;">
+                    Discover Our Services
+                </a>
+                <a href="properties.html" class="btn hero-btn" style="background-color: #D14D72; border: 2px solid #D14D72; transition: all 0.3s ease;">
+                    View Our Properties
+                </a>
+            </div>
             <div class="scroll-indicator">
                 <span>Scroll</span>
                 <i class="fas fa-chevron-down"></i>
@@ -238,7 +242,32 @@
         </div>
     </section>
 
-
+    <!-- Section Properties -->
+    <section id="properties" style="padding: 80px 0; background-color: #f9f9f9;">
+        <div style="max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; text-align: center;">
+            <h2 style="font-size: 2.5rem; margin-bottom: 1.5rem; color: #333; font-family: 'Cormorant Garamond', serif;">
+                Our Properties
+            </h2>
+            <p style="max-width: 700px; margin: 0 auto 2rem; font-size: 1.1rem; line-height: 1.6; color: #555;">
+                Discover our exclusive selection of premium properties. Each property is carefully selected to offer you 
+                the best in luxury, comfort, and prime locations. Whether you're looking for a modern apartment, 
+                a cozy house, or a commercial space, we have the perfect property for you.
+            </p>
+            <a href="properties.html" 
+               style="display: inline-block; 
+                      padding: 12px 30px; 
+                      background-color: #D14D72; 
+                      color: white; 
+                      text-decoration: none; 
+                      border-radius: 4px; 
+                      font-weight: 500; 
+                      transition: background-color 0.3s ease;"
+               onmouseover="this.style.backgroundColor='#b84262'"
+               onmouseout="this.style.backgroundColor='#D14D72'">
+                View All Properties
+            </a>
+        </div>
+    </section>
 
     <section id="contact" class="contact parallax-bg" style="background-image: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80');">
         <div class="container">
@@ -300,7 +329,7 @@
     <script src="js/back-to-top.js"></script>
     <script src="js/loading-animation.js"></script>
     <script src="js/main.js"></script>
-    <script src="js/mobile-menu.js"></script>
     <script src="js/service-cards.js"></script>
+    
 </body>
 </html>

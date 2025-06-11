@@ -1,96 +1,95 @@
-console.log('mobile-menu.js chargé');
+document.addEventListener('DOMContentLoaded', () => {
+  // Sélection des éléments
+  const menuToggle = document.querySelector('.menu-toggle');
+  const nav = document.querySelector('.main-navigation');
+  const overlay = document.querySelector('.nav-overlay');
+  const body = document.body;
+  const navLinks = document.querySelectorAll('.nav-link');
 
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('DOM entièrement chargé, initialisation du menu mobile...');
+  // Fonction pour ouvrir le menu
+  function openMenu() {
+    nav.classList.add('is-open');
+    overlay.classList.add('is-visible');
+    body.classList.add('menu-open');
+    menuToggle.classList.add('active');
+    menuToggle.setAttribute('aria-expanded', 'true');
     
-    // Sélection des éléments
-    const menuToggle = document.querySelector('.menu-toggle');
-    const nav = document.querySelector('.main-navigation'); // Modifié pour cibler la bonne classe
-    const body = document.body;
+    // Bloquer le défilement du body
+    document.documentElement.style.overflow = 'hidden';
     
-    // Créer l'overlay s'il n'existe pas
-    let overlay = document.querySelector('.nav-overlay');
-    if (!overlay) {
-        overlay = document.createElement('div');
-        overlay.className = 'nav-overlay';
-        document.body.appendChild(overlay);
-    }
+    // Mettre à jour l'état du bouton
+    menuToggle.setAttribute('aria-label', 'Fermer le menu');
+  }
+
+  // Fonction pour fermer le menu
+  function closeMenu() {
+    nav.classList.remove('is-open');
+    overlay.classList.remove('is-visible');
+    body.classList.remove('menu-open');
+    menuToggle.classList.remove('active');
+    menuToggle.setAttribute('aria-expanded', 'false');
     
-    // Fonction pour basculer le menu
-    function toggleMenu() {
-        const isOpening = !nav.classList.contains('is-open');
-        
-        // Basculer les classes
-        nav.classList.toggle('is-open');
-        overlay.classList.toggle('is-visible');
-        menuToggle.setAttribute('aria-expanded', isOpening);
-        
-        // Empêcher le défilement du corps lorsque le menu est ouvert
-        if (isOpening) {
-            body.style.overflow = 'hidden';
-            // Focus sur le premier lien du menu pour l'accessibilité
-            const firstLink = nav.querySelector('a');
-            if (firstLink) firstLink.focus();
-        } else {
-            body.style.overflow = '';
-            // Remettre le focus sur le bouton menu
-            menuToggle.focus();
-        }
-    }
+    // Rétablir le défilement du body
+    document.documentElement.style.overflow = '';
     
-    // Vérifier que les éléments existent avant d'ajouter les écouteurs
-    if (menuToggle && nav) {
-        console.log('Éléments du menu trouvés');
-        
-        // Gestionnaire de clic pour le bouton menu
-        menuToggle.addEventListener('click', function(e) {
-            console.log('Clic sur le bouton menu');
-            e.preventDefault();
-            e.stopPropagation();
-            toggleMenu();
-        });
-        
-        // Fermer le menu lors du clic sur un lien
-        const navLinks = document.querySelectorAll('.nav-link');
-        navLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                console.log('Clic sur un lien du menu');
-                if (nav.classList.contains('is-open')) {
-                    toggleMenu();
-                }
-            });
-        });
-        
-        // Fermer le menu lors d'un clic sur l'overlay
-        overlay.addEventListener('click', function(e) {
-            console.log('Clic sur l\'overlay');
-            if (nav.classList.contains('is-open')) {
-                toggleMenu();
-            }
-        });
-        
-        // Fermer avec la touche Échap
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape' && nav.classList.contains('is-open')) {
-                console.log('Touche Échap pressée');
-                toggleMenu();
-            }
-        });
-        
-        // Gérer le redimensionnement de la fenêtre
-        let resizeTimer;
-        window.addEventListener('resize', function() {
-            clearTimeout(resizeTimer);
-            resizeTimer = setTimeout(function() {
-                if (window.innerWidth > 992 && nav.classList.contains('is-open')) {
-                    console.log('Redimensionnement détecté, fermeture du menu');
-                    toggleMenu();
-                }
-            }, 100);
-        });
+    // Mettre à jour l'état du bouton
+    menuToggle.setAttribute('aria-label', 'Ouvrir le menu');
+  }
+
+  // Fonction pour basculer le menu
+  function toggleMenu(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    
+    if (nav.classList.contains('is-open')) {
+      closeMenu();
     } else {
-        console.error('Erreur: Éléments du menu non trouvés');
-        if (!menuToggle) console.error('Bouton menu (.menu-toggle) non trouvé');
-        if (!nav) console.error('Navigation (.main-navigation) non trouvée');
+      openMenu();
     }
+  }
+
+  // Vérifier que les éléments existent avant d'ajouter les écouteurs
+  if (menuToggle && nav && overlay) {
+    // Gestionnaire de clic pour le bouton menu
+    menuToggle.addEventListener('click', toggleMenu);
+    
+    // Fermer le menu en cliquant sur l'overlay
+    overlay.addEventListener('click', closeMenu);
+    
+    // Fermer le menu en cliquant sur un lien
+    if (navLinks.length > 0) {
+      navLinks.forEach(link => {
+        link.addEventListener('click', closeMenu);
+      });
+    }
+    
+    // Fermer avec la touche Échap
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && nav.classList.contains('is-open')) {
+        closeMenu();
+      }
+    });
+    
+    // Fermer le menu si la fenêtre est redimensionnée au-dessus de 992px
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        if (window.innerWidth > 992) {
+          closeMenu();
+        }
+      }, 250);
+    });
+    
+    // Fermer le menu en cliquant en dehors
+    document.addEventListener('click', (e) => {
+      const isClickInside = nav.contains(e.target) || menuToggle.contains(e.target);
+      if (!isClickInside && nav.classList.contains('is-open')) {
+        closeMenu();
+      }
+    });
+    
+  } else {
+    console.error('Éléments du menu non trouvés :', { menuToggle, nav, overlay });
+  }
 });

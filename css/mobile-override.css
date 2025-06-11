@@ -1,31 +1,34 @@
-/* Styles pour le menu mobile */
+/* Reset et styles de base */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Bouton menu hamburger */
 .menu-toggle {
-    display: none; /* Caché par défaut, affiché en dessous de 992px */
+    display: none; /* Caché par défaut sur desktop */
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    width: 50px;
-    height: 40px;
+    width: 40px;
+    height: 30px;
     background: white;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    cursor: pointer;
-    padding: 10px 8px;
     z-index: 1003;
     position: fixed;
-    top: 15px;
-    right: 15px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-    transition: all 0.3s ease;
+    top: 25px;
+    right: 20px;
+    cursor: pointer;
+    padding: 6px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
 }
 
-/* Style pour le bouton de menu au survol */
 .menu-toggle:hover {
     background: #f5f5f5;
-    border-color: #ccc;
+    border-color: #999;
 }
 
-/* Style pour le bouton de menu actif */
 .menu-toggle.active {
     background: #f0f0f0;
 }
@@ -36,6 +39,7 @@
     height: 3px;
     background-color: #000;
     transition: all 0.3s ease;
+    border-radius: 3px;
 }
 
 .menu-toggle.active .menu-line:nth-child(1) {
@@ -44,84 +48,131 @@
 
 .menu-toggle.active .menu-line:nth-child(2) {
     opacity: 0;
+    transform: translateX(-20px);
 }
 
 .menu-toggle.active .menu-line:nth-child(3) {
     transform: translateY(-9px) rotate(-45deg);
 }
 
-/* Reset complet pour mobile */
-/* Overlay pour le menu mobile */
+/* Overlay du menu */
 .nav-overlay {
-    display: none;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
+    background: rgba(0, 0, 0, 0.7);
     z-index: 1001;
     opacity: 0;
-    transition: opacity 0.3s ease;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
     pointer-events: none;
 }
 
 .nav-overlay.is-visible {
-    display: block;
     opacity: 1;
+    visibility: visible;
     pointer-events: auto;
 }
 
-/* Styles pour la navigation mobile */
-.main-navigation {
-    transition: transform 0.3s ease-in-out;
-}
-
-.main-navigation.is-open {
-    transform: translateX(0) !important;
-}
-
-@media screen and (max-width: 992px) {
-    /* Afficher le bouton menu en mode mobile */
+/* Styles pour mobile (moins de 992px) */
+@media (max-width: 992px) {
+    /* Empêche le défilement quand le menu est ouvert */
+    body.menu-open {
+        overflow: hidden;
+        height: 100vh;
+    }
+    
+    /* Affiche le bouton menu */
     .menu-toggle {
         display: flex;
     }
     
-    /* Styles pour la navigation en mode mobile */
+    /* Styles de la navigation mobile */
     .main-navigation {
         position: fixed;
         top: 0;
-        right: 0;
-        width: 80%;
-        max-width: 300px;
+        right: -300px;
+        width: 280px;
         height: 100vh;
         background: white;
         z-index: 1002;
-        padding: 80px 30px 30px;
-        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
-        transform: translateX(100%);
+        padding: 80px 20px 30px;
+        transition: right 0.3s ease-in-out;
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
         overflow-y: auto;
     }
     
-    /* Styles pour les liens de navigation en mode mobile */
+    /* État ouvert du menu */
+    .main-navigation.is-open {
+        right: 0;
+    }
+    
+    /* Styles des liens du menu */
     .main-navigation ul {
         flex-direction: column;
-        padding: 0;
+        gap: 15px;
     }
     
     .main-navigation li {
-        margin: 15px 0;
+        margin: 10px 0;
     }
     
     .main-navigation a {
-        font-size: 1.1rem;
-        padding: 10px 0;
         display: block;
+        padding: 10px 15px;
+        color: #333;
+        text-decoration: none;
+        font-size: 16px;
+        transition: all 0.2s ease;
+        border-radius: 4px;
     }
     
-    /* Empêcher le défilement du corps quand le menu est ouvert */
-    body.menu-open {
-        overflow: hidden;
+    .main-navigation a:hover {
+        background: #f5f5f5;
+        color: #D14D72;
+    }
+    
+    /* Ajustement de l'overlay */
+    .nav-overlay {
+        z-index: 1001;
+        height: 100%;
+        width: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        opacity: 0;
+        visibility: hidden;
+        z-index: 1001;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .nav-overlay.is-visible {
+        opacity: 1;
+        visibility: visible;
+    }
+    
+    /* Styles pour les liens du menu */
+    .main-navigation ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    
+    .main-navigation li {
+        margin: 0;
+    }
+    
+    .main-navigation a {
+        display: block;
+        padding: 12px 15px;
+        color: #333;
+        text-decoration: none;
+        font-size: 1.1rem;
+        transition: background-color 0.2s;
+    }
+    
+    .main-navigation a:hover {
+        background-color: #f5f5f5;
     }
 }
 
