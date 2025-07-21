@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login | Alture & Co.</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .login-container {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .logo h1 {
+            font-size: 2rem;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .logo span {
+            color: #D14D72;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e1e1e1;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #D14D72;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: #D14D72;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .login-btn:hover {
+            background-color: #b13a5c;
+        }
+
+        .error-message {
+            background-color: #f8d7da;
+            color: #721c24;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .loading {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="logo">
+            <h1>Alture <span>&</span> Co.</h1>
+            <p>Admin Dashboard</p>
+        </div>
+
+        <div class="error-message" id="errorMessage"></div>
+
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+
+            <button type="submit" class="login-btn" id="loginBtn">Login</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const errorMessage = document.getElementById('errorMessage');
+            const loginBtn = document.getElementById('loginBtn');
+            
+            // Reset error message
+            errorMessage.style.display = 'none';
+            
+            // Show loading state
+            loginBtn.classList.add('loading');
+            loginBtn.textContent = 'Logging in...';
+            
+            // Simple authentication (in production, this should be server-side)
+            setTimeout(() => {
+                if (username === 'admin' && password === 'alture2024!') {
+                    // Store authentication token
+                    localStorage.setItem('adminToken', 'authenticated');
+                    localStorage.setItem('loginTime', Date.now());
+                    
+                    // Redirect to dashboard
+                    window.location.href = 'dashboard.html';
+                } else {
+                    // Show error
+                    errorMessage.textContent = 'Invalid username or password';
+                    errorMessage.style.display = 'block';
+                    
+                    // Reset button
+                    loginBtn.classList.remove('loading');
+                    loginBtn.textContent = 'Login';
+                }
+            }, 1000);
+        });
+
+        // Check if already logged in
+        if (localStorage.getItem('adminToken') === 'authenticated') {
+            const loginTime = localStorage.getItem('loginTime');
+            const currentTime = Date.now();
+            
+            // Session expires after 24 hours
+            if (currentTime - loginTime < 24 * 60 * 60 * 1000) {
+                window.location.href = 'dashboard.html';
+            } else {
+                localStorage.removeItem('adminToken');
+                localStorage.removeItem('loginTime');
+            }
+        }
+    </script>
+</body>
+</html>

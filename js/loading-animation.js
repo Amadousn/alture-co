@@ -1,66 +1,44 @@
 // Loading animation script for Alture & Co.
 
-document.addEventListener('DOMContentLoaded', function() {
-    // Add 'loaded' class to body after DOM is loaded
+// Attendre que TOUS les CSS et ressources soient chargés
+window.addEventListener('load', function() {
+    // Add 'loaded' class to body after ALL resources are loaded
     document.body.classList.add('loaded');
     
-    // Hide preloader after a short delay
+    // Hide preloader after ALL CSS files and resources are fully loaded
     setTimeout(function() {
         const preloader = document.querySelector('.preloader');
         if (preloader) {
             preloader.classList.add('fade-out');
         }
-    }, 800);
+    }, 1500); // Délai réduit car on attend déjà le 'load' complet
+});
+
+// Backup: si le load prend trop de temps, forcer l'affichage après 5 secondes
+document.addEventListener('DOMContentLoaded', function() {
+    setTimeout(function() {
+        const preloader = document.querySelector('.preloader');
+        if (preloader && !preloader.classList.contains('fade-out')) {
+            preloader.classList.add('fade-out');
+        }
+    }, 5000); // Sécurité: maximum 5 secondes
     
-    // Handle page transitions
+    // Simplified page transitions - OPTIMIZED
     const links = document.querySelectorAll('a[href^="/"]:not([target]), a[href^="./"]:not([target]), a[href^="../"]:not([target])');
     
     links.forEach(link => {
         link.addEventListener('click', function(e) {
             // Only handle internal links
             if (this.hostname === window.location.hostname) {
-                e.preventDefault();
-                const href = this.getAttribute('href');
-                
-                // Create transition element if it doesn't exist
-                let transition = document.querySelector('.page-transition');
-                if (!transition) {
-                    transition = document.createElement('div');
-                    transition.className = 'page-transition';
-                    document.body.appendChild(transition);
-                }
-                
-                // Activate transition
-                transition.classList.add('active');
-                
-                // Navigate to new page after transition
-                setTimeout(function() {
-                    window.location.href = href;
-                }, 600);
+                // Direct navigation without complex transitions
+                // This eliminates the instability and movements
+                window.location.href = this.getAttribute('href');
             }
         });
     });
     
-    // Initialize scroll reveal animations
-    const scrollRevealItems = document.querySelectorAll('.scroll-reveal');
-    
-    // Create observer for scroll animations
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-                observer.unobserve(entry.target);
-            }
-        });
-    }, {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    });
-    
-    // Observe all scroll reveal items
-    scrollRevealItems.forEach(item => {
-        observer.observe(item);
-    });
+    // Scroll reveal animations SUPPRIMÉES pour éliminer l'instabilité
+    // Les animations sont maintenant gérées par CSS uniquement
     
     // Update scroll progress indicator
     const scrollProgress = document.querySelector('.scroll-progress');

@@ -6,9 +6,10 @@
     overflow: hidden;
     border-radius: 8px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     background-color: #fff;
     z-index: 1;
+    will-change: transform;
 }
 
 .service-card::before {

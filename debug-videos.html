@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug Videos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .debug-container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        pre {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        .btn {
+            background: #D14D72;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px 5px;
+        }
+        .btn:hover {
+            background: #b13a5c;
+        }
+    </style>
+</head>
+<body>
+    <div class="debug-container">
+        <h1>Debug Videos - Diagnostic des Vidéos</h1>
+        
+        <button class="btn" onclick="checkLocalStorage()">Vérifier localStorage</button>
+        <button class="btn" onclick="checkMainSiteProperties()">Vérifier mainSiteProperties</button>
+        <button class="btn" onclick="checkDynamicProperties()">Vérifier dynamicProperties</button>
+        <button class="btn" onclick="clearAll()">Effacer tout</button>
+        
+        <div id="results"></div>
+    </div>
+
+    <script>
+        function checkLocalStorage() {
+            const results = document.getElementById('results');
+            const properties = localStorage.getItem('properties');
+            
+            results.innerHTML = `
+                <h2>localStorage 'properties':</h2>
+                <pre>${properties ? JSON.stringify(JSON.parse(properties), null, 2) : 'Aucune donnée trouvée'}</pre>
+            `;
+        }
+        
+        function checkMainSiteProperties() {
+            const results = document.getElementById('results');
+            const mainSiteProperties = localStorage.getItem('mainSiteProperties');
+            
+            results.innerHTML = `
+                <h2>localStorage 'mainSiteProperties':</h2>
+                <pre>${mainSiteProperties ? JSON.stringify(JSON.parse(mainSiteProperties), null, 2) : 'Aucune donnée trouvée'}</pre>
+            `;
+        }
+        
+        function checkDynamicProperties() {
+            const results = document.getElementById('results');
+            
+            results.innerHTML = `
+                <h2>window.dynamicProperties:</h2>
+                <pre>${window.dynamicProperties ? JSON.stringify(window.dynamicProperties, null, 2) : 'Aucune donnée trouvée'}</pre>
+                
+                <h2>window.getDynamicProperty function:</h2>
+                <pre>${window.getDynamicProperty ? 'Fonction disponible' : 'Fonction non disponible'}</pre>
+            `;
+        }
+        
+        function clearAll() {
+            localStorage.removeItem('properties');
+            localStorage.removeItem('mainSiteProperties');
+            alert('Toutes les données ont été effacées');
+        }
+        
+        // Auto-check on load
+        window.onload = function() {
+            checkMainSiteProperties();
+        };
+    </script>
+</body>
+</html>

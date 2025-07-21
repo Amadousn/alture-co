@@ -1,0 +1,26 @@
+/*
+ * FIX FINAL POUR LE TITRE ÉCRASÉ
+ * Ce fichier doit être chargé EN DERNIER pour forcer la correction
+ * Sans changer aucun autre aspect du design
+ */
+
+/* Desktop - Correction du titre écrasé par le header fixe */
+@media only screen and (min-width: 769px) {
+    .hero {
+        padding-top: 120px !important;
+    }
+}
+
+/* Mobile - Correction du titre écrasé par le header fixe */
+@media only screen and (max-width: 768px) {
+    .hero {
+        padding-top: 120px !important;
+    }
+}
+
+/* Force l'affichage du titre au-dessus du header */
+.hero h1,
+.hero-title {
+    position: relative !important;
+    z-index: 100 !important;
+}

@@ -1,0 +1,63 @@
+[
+  {
+    "id": "five-palm-jumeirah",
+    "title": "Five Palm Jumeirah",
+    "location": "Dubai, Palm Jumeirah",
+    "price": "AED 10,000,000",
+    "description": "Stunning contemporary residence with breathtaking panoramic sea views, offering luxury and elegance in every detail.",
+    "area": 2500,
+    "bedrooms": 3,
+    "bathrooms": 4,
+    "view": "Pool View",
+    "floor": "15th Floor",
+    "amenities": ["Jacuzzi", "Balcony", "Parking", "Pool Access"],
+    "images": [
+      "images/Five palm Jumeirah 3BED/image0.jpeg",
+      "images/Five palm Jumeirah 3BED/image1.jpeg",
+      "images/Five palm Jumeirah 3BED/image2.jpeg"
+    ],
+    "featured": true,
+    "createdAt": "2024-01-01T00:00:00.000Z",
+    "updatedAt": "2024-01-01T00:00:00.000Z"
+  },
+  {
+    "id": "jumeirah-islands",
+    "title": "Jumeirah Islands Villa",
+    "location": "Dubai, Jumeirah Islands",
+    "price": "AED 8,500,000",
+    "description": "Luxurious waterfront villa with private beach access and stunning lake views in the prestigious Jumeirah Islands community.",
+    "area": 3200,
+    "bedrooms": 4,
+    "bathrooms": 5,
+    "view": "Lake View",
+    "floor": "Ground Floor",
+    "amenities": ["Private Beach", "Garden", "Parking", "Maid's Room"],
+    "images": [
+      "images/Jumeirah Islands/villa1.jpg",
+      "images/Jumeirah Islands/villa2.jpg"
+    ],
+    "featured": true,
+    "createdAt": "2024-01-02T00:00:00.000Z",
+    "updatedAt": "2024-01-02T00:00:00.000Z"
+  },
+  {
+    "id": "downtown-apartment",
+    "title": "Downtown Dubai Apartment",
+    "location": "Dubai, Downtown",
+    "price": "AED 6,200,000",
+    "description": "Modern high-rise apartment with spectacular city views and world-class amenities in the heart of Downtown Dubai.",
+    "area": 1800,
+    "bedrooms": 2,
+    "bathrooms": 3,
+    "view": "City View",
+    "floor": "25th Floor",
+    "amenities": ["Gym", "Pool", "Concierge", "Valet Parking"],
+    "images": [
+      "images/Downtown/apt1.jpg",
+      "images/Downtown/apt2.jpg"
+    ],
+    "featured": false,
+    "createdAt": "2024-01-03T00:00:00.000Z",
+    "updatedAt": "2024-01-03T00:00:00.000Z"
+  }
+]

@@ -1,0 +1,50 @@
+/*
+ * FIX DÉFINITIF POUR LE TITRE ÉCRASÉ
+ * Calcul précis de la hauteur du header pour éviter l'écrasement
+ */
+
+/* CALCUL PRÉCIS DE LA HAUTEUR DU HEADER :
+ * - Header padding: 20px top + 20px bottom = 40px
+ * - Contenu header (logo + nav): ~40-50px
+ * - TOTAL HEADER: ~80-90px
+ * - MARGE SÉCURITÉ: +30px
+ * - PADDING TOTAL NÉCESSAIRE: 110-120px
+ */
+
+/* Desktop - Correction avec hauteur précise */
+.hero {
+    padding-top: 110px !important; /* Hauteur header (80px) + marge sécurité (30px) */
+    position: relative !important;
+    z-index: 1 !important;
+}
+
+/* Mobile - Même correction */
+@media only screen and (max-width: 768px) {
+    .hero {
+        padding-top: 110px !important; /* Même calcul pour mobile */
+    }
+}
+
+/* Force l'affichage du titre au-dessus de tout */
+.hero h1,
+.hero-title,
+.hero h1 strong {
+    position: relative !important;
+    z-index: 100 !important;
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
+
+/* S'assurer que le hero-content n'a pas de margin négatif */
+.hero-content {
+    position: relative !important;
+    z-index: 10 !important;
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
+
+/* Forcer le hero à être au-dessus du header */
+.hero {
+    margin-top: 0 !important;
+    top: 0 !important;
+}

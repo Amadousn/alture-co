@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Upload Vidéo - Debug</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .test-section {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background: #f9f9f9;
+        }
+        .video-preview {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 10px 0;
+        }
+        .video-item {
+            position: relative;
+            width: 200px;
+        }
+        .video-item video {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .log {
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: monospace;
+            white-space: pre-wrap;
+            max-height: 300px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+        }
+        .success { color: green; }
+        .error { color: red; }
+        .warning { color: orange; }
+    </style>
+</head>
+<body>
+    <h1>🎥 Test Upload Vidéo - Diagnostic Complet</h1>
+    
+    <div class="test-section">
+        <h2>📁 Étape 1: Sélectionner une vidéo</h2>
+        <input type="file" id="videoInput" accept="video/*" multiple>
+        <p><em>Sélectionnez un fichier vidéo (MP4, WebM, MOV) pour tester l'upload.</em></p>
+    </div>
+    
+    <div class="test-section">
+        <h2>👀 Étape 2: Prévisualisation</h2>
+        <div id="videoPreview" class="video-preview"></div>
+        <p id="previewStatus">Aucune vidéo sélectionnée</p>
+    </div>
+    
+    <div class="test-section">
+        <h2>🔧 Étape 3: Tests des fonctions</h2>
+        <button onclick="testGetUploadedVideos()">Tester getUploadedVideos()</button>
+        <button onclick="simulateFormSubmit()">Simuler soumission formulaire</button>
+        <button onclick="checkLocalStorage()">Vérifier localStorage</button>
+        <button onclick="clearAll()">Tout effacer</button>
+    </div>
+    
+    <div class="test-section">
+        <h2>📋 Journal de debug</h2>
+        <div id="debugLog" class="log">Prêt pour les tests...\n</div>
+    </div>
+
+    <script>
+        let debugLog = document.getElementById('debugLog');
+        let videoCount = 0;
+        
+        function log(message, type = 'info') {
+            const timestamp = new Date().toLocaleTimeString();
+            const className = type === 'error' ? 'error' : type === 'success' ? 'success' : type === 'warning' ? 'warning' : '';
+            console.log(`[${timestamp}] ${message}`);
+            debugLog.innerHTML += `<span class="${className}">[${timestamp}] ${message}</span>\n`;
+            debugLog.scrollTop = debugLog.scrollHeight;
+        }
+        
+        // Fonction exacte du dashboard.js
+        function addVideoToPreview(videoSrc, id) {
+            const previewContainer = document.getElementById('videoPreview');
+            const videoItem = document.createElement('div');
+            videoItem.className = 'video-item';
+            videoItem.innerHTML = `
+                <video controls muted src="${videoSrc}">
+                    Votre navigateur ne supporte pas la vidéo.
+                </video>
+                <button type="button" onclick="removeVideo(this)" style="position: absolute; top: 5px; right: 5px; background: red; color: white; border: none; border-radius: 50%; width: 25px; height: 25px;">×</button>
+            `;
+            previewContainer.appendChild(videoItem);
+            videoCount++;
+            
+            // Vérification que le src est bien défini
+            const videoElement = videoItem.querySelector('video');
+            log(`🔧 Attribut src défini: ${videoElement.src ? 'OUI' : 'NON'} (${videoElement.src ? videoElement.src.length : 0} caractères)`, videoElement.src ? 'success' : 'error');
+            
+            document.getElementById('previewStatus').textContent = `${videoCount} vidéo(s) en prévisualisation`;
+            log(`✅ Vidéo ajoutée à la prévisualisation (ID: ${id})`, 'success');
+            log(`📏 Taille des données: ${(videoSrc.length / 1024).toFixed(2)} KB`, 'info');
+        }
+        
+        function removeVideo(button) {
+            button.parentElement.remove();
+            videoCount--;
+            document.getElementById('previewStatus').textContent = `${videoCount} vidéo(s) en prévisualisation`;
+            log('🗑️ Vidéo supprimée de la prévisualisation', 'warning');
+        }
+        
+        // Fonction exacte du dashboard.js avec debugging amélioré
+        function getUploadedVideos() {
+            const videos = [];
+            const previewContainer = document.getElementById('videoPreview');
+            
+            if (!previewContainer) {
+                log('❌ ERREUR: Conteneur videoPreview introuvable!', 'error');
+                return videos;
+            }
+            
+            const videoElements = previewContainer.querySelectorAll('video');
+            log(`🔍 Recherche de vidéos dans le conteneur...`, 'info');
+            log(`📊 ${videoElements.length} éléments vidéo trouvés`, 'info');
+            
+            videoElements.forEach((video, index) => {
+                log(`🎬 Vidéo ${index + 1}:`, 'info');
+                log(`   - src présent: ${video.src ? '✅ OUI' : '❌ NON'}`, video.src ? 'success' : 'error');
+                log(`   - longueur src: ${video.src ? video.src.length : 0} caractères`, 'info');
+                log(`   - type de données: ${video.src ? (video.src.startsWith('data:') ? 'base64' : 'URL') : 'aucun'}`, 'info');
+                
+                if (video.src && video.src.startsWith('data:')) {
+                    videos.push(video.src);
+                    log(`   ✅ Vidéo ${index + 1} ajoutée à la collection`, 'success');
+                } else {
+                    log(`   ⚠️ Vidéo ${index + 1} ignorée (src invalide ou manquant)`, 'warning');
+                }
+            });
+            
+            log(`📦 Total des vidéos collectées: ${videos.length}`, videos.length > 0 ? 'success' : 'warning');
+            return videos;
+        }
+        
+        function handleVideoFiles(files) {
+            log(`📥 Traitement de ${files.length} fichier(s)...`, 'info');
+            
+            Array.from(files).forEach((file, index) => {
+                if (file.type.startsWith('video/')) {
+                    if (file.size > 50 * 1024 * 1024) {
+                        log(`❌ Fichier trop volumineux: ${file.name} (${(file.size / 1024 / 1024).toFixed(2)} MB)`, 'error');
+                        return;
+                    }
+                    
+                    log(`📖 Lecture du fichier: ${file.name} (${(file.size / 1024 / 1024).toFixed(2)} MB)`, 'info');
+                    const reader = new FileReader();
+                    
+                    reader.onload = function(e) {
+                        const id = 'video_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+                        log(`🎯 Fichier lu avec succès, création de la prévisualisation...`, 'success');
+                        addVideoToPreview(e.target.result, id);
+                    };
+                    
+                    reader.onerror = function() {
+                        log(`❌ Erreur lors de la lecture du fichier: ${file.name}`, 'error');
+                    };
+                    
+                    reader.readAsDataURL(file);
+                } else {
+                    log(`❌ Type de fichier non supporté: ${file.type}`, 'error');
+                }
+            });
+        }
+        
+        function testGetUploadedVideos() {
+            log('🧪 === TEST DE getUploadedVideos() ===', 'info');
+            const videos = getUploadedVideos();
+            
+            if (videos.length === 0) {
+                log('⚠️ Aucune vidéo trouvée! Vérifiez que des vidéos sont bien uploadées.', 'warning');
+            } else {
+                log(`✅ Test réussi! ${videos.length} vidéo(s) récupérée(s)`, 'success');
+                videos.forEach((video, index) => {
+                    log(`   Vidéo ${index + 1}: ${video.substring(0, 50)}... (${video.length} caractères)`, 'info');
+                });
+            }
+        }
+        
+        function simulateFormSubmit() {
+            log('🧪 === SIMULATION SOUMISSION FORMULAIRE ===', 'info');
+            
+            const uploadedVideos = getUploadedVideos();
+            
+            const testProperty = {
+                id: 'test_' + Date.now(),
+                title: 'Propriété de test',
+                location: 'Test Location',
+                price: 100000,
+                videos: uploadedVideos,
+                images: [],
+                createdAt: new Date().toISOString()
+            };
+            
+            log(`📋 Propriété créée:`, 'info');
+            log(`   - ID: ${testProperty.id}`, 'info');
+            log(`   - Titre: ${testProperty.title}`, 'info');
+            log(`   - Vidéos: ${testProperty.videos.length}`, testProperty.videos.length > 0 ? 'success' : 'warning');
+            
+            // Simulation sauvegarde localStorage
+            let properties = JSON.parse(localStorage.getItem('properties')) || [];
+            properties.push(testProperty);
+            localStorage.setItem('properties', JSON.stringify(properties));
+            
+            log(`💾 Propriété sauvegardée dans localStorage`, 'success');
+            
+            // Vérification
+            const savedProperties = JSON.parse(localStorage.getItem('properties')) || [];
+            const savedProperty = savedProperties.find(p => p.id === testProperty.id);
+            
+            if (savedProperty && savedProperty.videos.length === uploadedVideos.length) {
+                log(`✅ VÉRIFICATION RÉUSSIE: Propriété sauvegardée avec ${savedProperty.videos.length} vidéo(s)`, 'success');
+            } else {
+                log(`❌ ÉCHEC DE VÉRIFICATION: Problème lors de la sauvegarde`, 'error');
+            }
+        }
+        
+        function checkLocalStorage() {
+            log('🧪 === VÉRIFICATION LOCALSTORAGE ===', 'info');
+            
+            const properties = JSON.parse(localStorage.getItem('properties')) || [];
+            log(`📊 ${properties.length} propriété(s) trouvée(s) dans localStorage`, 'info');
+            
+            properties.forEach((property, index) => {
+                log(`🏠 Propriété ${index + 1}: ${property.title}`, 'info');
+                log(`   - Images: ${property.images ? property.images.length : 0}`, 'info');
+                log(`   - Vidéos: ${property.videos ? property.videos.length : 0}`, property.videos && property.videos.length > 0 ? 'success' : 'warning');
+                
+                if (property.videos && property.videos.length > 0) {
+                    property.videos.forEach((video, vIndex) => {
+                        log(`     Vidéo ${vIndex + 1}: ${video.length} caractères`, 'info');
+                    });
+                }
+            });
+        }
+        
+        function clearAll() {
+            document.getElementById('videoPreview').innerHTML = '';
+            videoCount = 0;
+            document.getElementById('previewStatus').textContent = 'Aucune vidéo sélectionnée';
+            localStorage.removeItem('properties');
+            debugLog.innerHTML = 'Tout effacé. Prêt pour de nouveaux tests...\n';
+            log('🧹 Tout a été effacé', 'info');
+        }
+        
+        // Configuration de l'input fichier
+        document.getElementById('videoInput').addEventListener('change', function(e) {
+            if (e.target.files.length > 0) {
+                log(`📁 ${e.target.files.length} fichier(s) sélectionné(s)`, 'info');
+                handleVideoFiles(e.target.files);
+            }
+        });
+        
+        log('🚀 Page de test chargée avec succès!', 'success');
+        log('👆 Sélectionnez une vidéo pour commencer les tests...', 'info');
+    </script>
+</body>
+</html>

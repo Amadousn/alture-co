@@ -1,6 +1,6 @@
 /* Fix pour l'espacement entre le header fixe et la section hero */
 .hero {
-    padding-top: 120px; /* Espacement réduit car le titre est plus petit */
+    padding-top: 120px !important; /* Espacement pour éviter que le header écrase le titre */
     position: relative;
     z-index: 1;
     padding-bottom: 80px;
@@ -30,7 +30,7 @@
 /* Ajustement pour les écrans mobiles */
 @media (max-width: 768px) {
     .hero {
-        padding-top: 120px; /* Réduire l'espacement sur mobile si nécessaire */
+        padding-top: 120px !important; /* IMPORTANT : Éviter que le header écrase le titre */
         padding-bottom: 80px; /* Réduire l'espacement en bas sur mobile */
     }
 }

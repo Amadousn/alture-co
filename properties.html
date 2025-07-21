@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="css/properties.css">
+    <link rel="stylesheet" href="css/mobile-menu.css">
     <style>
         /* Styles spécifiques qui doivent rester en ligne */
         .logo span {
@@ -16,6 +17,8 @@
         }
         
         .properties-grid {
+            display: grid;
+            gap: 2rem;
         }
         
         /* Styles spécifiques qui doivent rester en ligne */
@@ -51,7 +54,9 @@
         </style>
 </head>
 <body>
-    <!-- Préchargeur -->
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay"></div>
+    <!-- Préchargeur UNIQUE -->
     <div class="preloader">
         <div class="preloader-inner">
             <div class="loading-text">
@@ -66,26 +71,7 @@
         </div>
     </div>
     
-    <!-- Barre de progression -->
-    <div class="progress-container">
-        <div class="progress-bar" id="myBar"></div>
-    </div>
-    <!-- Préchargeur -->
-    <div class="preloader">
-        <div class="preloader-inner">
-            <div class="loading-text">
-                <span class="char">L</span>
-                <span class="char">O</span>
-                <span class="char">A</span>
-                <span class="char">D</span>
-                <span class="char">I</span>
-                <span class="char">N</span>
-                <span class="char">G</span>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Barre de progression -->
+    <!-- Barre de progression UNIQUE -->
     <div class="progress-container">
         <div class="progress-bar" id="myBar"></div>
     </div>
@@ -171,68 +157,10 @@
     <div id="properties" class="properties-container">
         <h2>Featured Properties</h2>
         <div class="properties-grid">
-            <!-- Five Palm Jumeirah Property -->
-            <div class="property-card">
-                <div class="property-image-container">
-                    <img src="images/Five palm Jumeirah 3BED/image0.jpeg" alt="Five Palm Jumeirah" class="property-image">
-                    <button class="view-gallery-btn" data-property="five-palm-jumeirah">View Gallery</button>
-                </div>
-                <div class="property-details">
-                    <h3 class="property-title">Five Palm Jumeirah</h3>
-                    <p class="property-location"><i class="fas fa-map-marker-alt"></i> Dubai, Palm Jumeirah</p>
-                    <p class="property-price">AED 10,000,000.00</p>
-                    <p class="property-description">Exclusive 3-bedroom residence with stunning sea views, luxury finishes, and access to world-class amenities in one of Dubai's most prestigious locations.</p>
-                    <div class="property-features">
-                        <div class="feature">
-                            <i class="fas fa-bed"></i>
-                            <div>3 Beds</div>
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-bath"></i>
-                            <div>3.5 Baths</div>
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-ruler-combined"></i>
-                            <div>2,770 Sq Ft</div>
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-swimming-pool"></i>
-                            <div>Pool View</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Jumeirah Islands Property -->
-            <div class="property-card">
-                <div class="property-image-container">
-                    <img src="images/Jumeirah Islands/Main.jpg" alt="Jumeirah Islands Entertainment Foyer Villa" class="property-image">
-                    <button class="view-gallery-btn" data-property="jumeirah-islands">View Gallery</button>
-                </div>
-                <div class="property-details">
-                    <h3 class="property-title">Jumeirah Islands</h3>
-                    <p class="property-location"><i class="fas fa-map-marker-alt"></i> Dubai, Jumeirah Islands</p>
-                    <p class="property-price">Price on Request</p>
-                    <p class="property-description">Entertainment Foyer Villa with stunning lake views, private pool, and luxurious finishes in the prestigious Jumeirah Islands community.</p>
-                    <div class="property-features">
-                        <div class="feature">
-                            <i class="fas fa-bed"></i>
-                            <div>4 Beds</div>
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-home"></i>
-                            <div>5,231 Sq Ft</div>
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-vector-square"></i>
-                            <div>8,796 Sq Ft Plot</div>
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-umbrella-beach"></i>
-                            <div>Lake View</div>
-                        </div>
-                    </div>
-                </div>
+            <!-- Properties will be loaded dynamically by properties-loader.js -->
+            <div class="loading-placeholder" style="grid-column: 1/-1; text-align: center; padding: 3rem; color: #666;">
+                <i class="fas fa-spinner fa-spin" style="font-size: 2rem; margin-bottom: 1rem;"></i>
+                <p>Loading properties...</p>
             </div>
         </div>
     </div>
@@ -847,143 +775,56 @@
                 }
             };
             
-            // Menu mobile
+            // Menu Mobile Optimisé
             const menuToggle = document.querySelector('.menu-toggle');
             const nav = document.querySelector('nav');
+            const overlay = document.querySelector('.mobile-menu-overlay');
             
-            // Vérifier si les éléments existent
-            if (menuToggle && nav) {
-                // Initialiser le menu pour les mobiles
-                function initMobileMenu() {
-                    if (window.innerWidth <= 992) { // Breakpoint pour le menu mobile
-                        nav.style.display = 'none';
-                        menuToggle.style.display = 'flex';
-                    } else {
-                        nav.style.display = '';
-                        menuToggle.style.display = 'none';
-                    }
-                }
-                
-                // Initialiser au chargement
-                initMobileMenu();
-                
-                // Gérer le clic sur le bouton du menu
-                menuToggle.addEventListener('click', function() {
-                    nav.style.display = nav.style.display === 'none' || nav.style.display === '' ? 'block' : 'none';
-                    menuToggle.classList.toggle('active');
-                    
-                    // Animation des lignes du bouton
-                    const lines = menuToggle.querySelectorAll('.menu-line');
-                    if (nav.style.display === 'block') {
-                        lines[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
-                        lines[1].style.opacity = '0';
-                        lines[2].style.transform = 'rotate(-45deg) translate(5px, -5px)';
-                        document.body.style.overflow = 'hidden';
-                    } else {
-                        lines[0].style.transform = '';
-                        lines[1].style.opacity = '';
-                        lines[2].style.transform = '';
-                        document.body.style.overflow = '';
-                    }
-                });
-                
-                // Gérer le redimensionnement de la fenêtre
-                window.addEventListener('resize', initMobileMenu);
+            function closeMenu() {
+                if (nav) nav.classList.remove('active');
+                if (menuToggle) menuToggle.classList.remove('active');
+                if (overlay) overlay.classList.remove('active');
+                document.body.classList.remove('menu-open');
             }
-        });
-    </script>
-    <script>
-        // Script pour le défilement fluide
-        document.addEventListener('DOMContentLoaded', function() {
-            // Désactiver le comportement par défaut des liens avec #
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
-                    // Ne pas empêcher le comportement des liens vers des pages externes
-                    if (this.getAttribute('href').startsWith('#') && 
-                        this.getAttribute('href') !== '#') {
-                        e.preventDefault();
-                        
-                        const targetId = this.getAttribute('href');
-                        const targetElement = document.querySelector(targetId);
-                        
-                        if (targetElement) {
-                            window.scrollTo({
-                                top: targetElement.offsetTop - 80, // Ajuster pour le header fixe
-                                behavior: 'smooth'
-                            });
-                        }
-                    }
-                });
-            });
             
-            // Ajouter une classe au header lors du défilement
-            const header = document.querySelector('header');
-            if (header) {
-                window.addEventListener('scroll', function() {
-                    if (window.scrollY > 50) {
-                        header.style.padding = '10px 0';
-                        header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
-                    } else {
-                        header.style.padding = '20px 0';
-                        header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
-                    }
+            function toggleMenu() {
+                if (nav && nav.classList.contains('active')) {
+                    closeMenu();
+                } else {
+                    if (nav) nav.classList.add('active');
+                    if (menuToggle) menuToggle.classList.add('active');
+                    if (overlay) overlay.classList.add('active');
+                    document.body.classList.add('menu-open');
+                }
+            }
+            
+            // Menu toggle click
+            if (menuToggle) {
+                menuToggle.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    toggleMenu();
                 });
             }
             
-            // Ajouter une animation de fondu pour les sections
-            const fadeElements = document.querySelectorAll('.property-card');
-            const fadeOptions = {
-                threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
-            };
+            // Overlay click to close
+            if (overlay) {
+                overlay.addEventListener('click', closeMenu);
+            }
             
-            const fadeOnScroll = new IntersectionObserver(function(entries, fadeOnScroll) {
-                entries.forEach(entry => {
-                    if (!entry.isIntersecting) {
-                        return;
-                    } else {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
-                        fadeOnScroll.unobserve(entry.target);
-                    }
+            // Close on nav link click
+            if (nav) {
+                const navLinks = nav.querySelectorAll('a');
+                navLinks.forEach(link => {
+                    link.addEventListener('click', closeMenu);
                 });
-            }, fadeOptions);
-            
-            fadeElements.forEach(element => {
-                element.style.opacity = '0';
-                element.style.transform = 'translateY(20px)';
-                element.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
-                fadeOnScroll.observe(element);
-            });
+            }
         });
     </script>
-    <script>
-        // Menu Burger
-        document.addEventListener('DOMContentLoaded', function() {
-            const menuToggle = document.querySelector('.menu-toggle');
-            const nav = document.querySelector('header nav');
-            
-            menuToggle.addEventListener('click', function() {
-                nav.classList.toggle('active');
-                document.body.style.overflow = nav.classList.contains('active') ? 'hidden' : '';
-            });
-            
-            // Fermer le menu quand on clique sur un lien
-            document.querySelectorAll('header nav a').forEach(link => {
-                link.addEventListener('click', () => {
-                    nav.classList.remove('active');
-                    document.body.style.overflow = '';
-                });
-            });
-            
-            // Fermer le menu quand on clique en dehors
-            document.addEventListener('click', function(e) {
-                if (!nav.contains(e.target) && !menuToggle.contains(e.target)) {
-                    nav.classList.remove('active');
-                    document.body.style.overflow = '';
-                }
-            });
-        });
-    </script>
+    
+    <!-- Dynamic Properties Loader -->
+    <script src="js/properties-loader.js"></script>
+    <!-- Simple Gallery Integration (Fixed Version) -->
+    <script src="js/gallery-simple.js"></script>
 </body>
 </html>

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug Video Save</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .debug-section {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .video-preview {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 10px 0;
+        }
+        .video-item {
+            position: relative;
+            width: 200px;
+        }
+        .video-item video {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+        }
+        .remove-btn {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: red;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            cursor: pointer;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .log {
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: monospace;
+            white-space: pre-wrap;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Debug Video Save Process</h1>
+    
+    <div class="debug-section">
+        <h2>Step 1: Upload Videos</h2>
+        <input type="file" id="videoInput" accept="video/*" multiple>
+        <div id="videoPreview" class="video-preview"></div>
+    </div>
+    
+    <div class="debug-section">
+        <h2>Step 2: Test Functions</h2>
+        <button onclick="testGetUploadedVideos()">Test getUploadedVideos()</button>
+        <button onclick="testSaveToLocalStorage()">Test Save to localStorage</button>
+        <button onclick="checkLocalStorage()">Check localStorage</button>
+        <button onclick="clearLocalStorage()">Clear localStorage</button>
+    </div>
+    
+    <div class="debug-section">
+        <h2>Debug Log</h2>
+        <div id="debugLog" class="log"></div>
+    </div>
+
+    <script>
+        let debugLog = document.getElementById('debugLog');
+        
+        function log(message) {
+            console.log(message);
+            debugLog.textContent += new Date().toLocaleTimeString() + ': ' + message + '\n';
+            debugLog.scrollTop = debugLog.scrollHeight;
+        }
+        
+        // Copy the functions from dashboard.js
+        function addVideoToPreview(videoSrc, id) {
+            const previewContainer = document.getElementById('videoPreview');
+            const videoItem = document.createElement('div');
+            videoItem.className = 'video-item';
+            videoItem.innerHTML = `
+                <video controls muted>
+                    <source src="${videoSrc}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <button type="button" class="remove-btn" onclick="removeVideo(this)">×</button>
+            `;
+            previewContainer.appendChild(videoItem);
+            log('Added video to preview: ' + videoSrc.substring(0, 50) + '...');
+        }
+        
+        function removeVideo(button) {
+            button.parentElement.remove();
+            log('Removed video from preview');
+        }
+        
+        function handleVideoFiles(files) {
+            log('Processing ' + files.length + ' video files');
+            Array.from(files).forEach(file => {
+                if (file.type.startsWith('video/')) {
+                    if (file.size > 50 * 1024 * 1024) {
+                        log('ERROR: Video file is too large. Maximum size is 50MB.');
+                        return;
+                    }
+                    
+                    log('Reading video file: ' + file.name + ' (size: ' + (file.size / 1024 / 1024).toFixed(2) + 'MB)');
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        const id = 'video_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+                        addVideoToPreview(e.target.result, id);
+                        log('Video loaded successfully, data URL length: ' + e.target.result.length);
+                    };
+                    reader.readAsDataURL(file);
+                } else {
+                    log('ERROR: Please select only video files');
+                }
+            });
+        }
+        
+        function getUploadedVideos() {
+            const videos = [];
+            const previewContainer = document.getElementById('videoPreview');
+            const videoElements = previewContainer.querySelectorAll('video');
+            
+            log('Found ' + videoElements.length + ' video elements in preview');
+            videoElements.forEach((video, index) => {
+                if (video.src) {
+                    videos.push(video.src);
+                    log('Video ' + (index + 1) + ' src length: ' + video.src.length);
+                } else {
+                    log('Video ' + (index + 1) + ' has no src');
+                }
+            });
+            
+            return videos;
+        }
+        
+        function testGetUploadedVideos() {
+            const videos = getUploadedVideos();
+            log('getUploadedVideos() returned ' + videos.length + ' videos');
+            videos.forEach((video, index) => {
+                log('Video ' + (index + 1) + ': ' + video.substring(0, 100) + '...');
+            });
+        }
+        
+        function testSaveToLocalStorage() {
+            const videos = getUploadedVideos();
+            const testProperty = {
+                id: 'test_' + Date.now(),
+                title: 'Test Property',
+                videos: videos,
+                images: [],
+                createdAt: new Date().toISOString()
+            };
+            
+            let properties = JSON.parse(localStorage.getItem('properties')) || [];
+            properties.push(testProperty);
+            localStorage.setItem('properties', JSON.stringify(properties));
+            
+            log('Saved test property with ' + videos.length + ' videos to localStorage');
+            log('Property ID: ' + testProperty.id);
+        }
+        
+        function checkLocalStorage() {
+            const properties = JSON.parse(localStorage.getItem('properties')) || [];
+            log('Found ' + properties.length + ' properties in localStorage');
+            
+            properties.forEach((property, index) => {
+                log('Property ' + (index + 1) + ': ' + property.title);
+                log('  - Images: ' + (property.images ? property.images.length : 0));
+                log('  - Videos: ' + (property.videos ? property.videos.length : 0));
+                if (property.videos && property.videos.length > 0) {
+                    property.videos.forEach((video, vIndex) => {
+                        log('    Video ' + (vIndex + 1) + ' length: ' + video.length);
+                    });
+                }
+            });
+        }
+        
+        function clearLocalStorage() {
+            localStorage.removeItem('properties');
+            log('Cleared properties from localStorage');
+        }
+        
+        // Setup video input
+        document.getElementById('videoInput').addEventListener('change', function(e) {
+            handleVideoFiles(e.target.files);
+        });
+        
+        log('Debug page loaded successfully');
+    </script>
+</body>
+</html>

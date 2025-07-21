@@ -4,42 +4,138 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alture & Co. | <strong>Strategic Portfolio Management</strong></title>
+    <!-- CSS ESSENTIELS POUR VISUEL EXACT + EFFET HOVER CARTES -->
     <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/simple-gallery.css">
-    <link rel="stylesheet" href="css/enhanced-animations.css">
-    <link rel="stylesheet" href="css/enhanced-cards.css">
+    <link rel="stylesheet" href="css/properties.css">
+    <link rel="stylesheet" href="css/enhanced-cards.css"> <!-- EFFET HOVER/FLIP CARTES -->
+    <link rel="stylesheet" href="css/service-cards-hover.css"> <!-- EFFET HOVER CARTES RESTAURÉ -->
     <link rel="stylesheet" href="css/loading-animation.css">
-    <link rel="stylesheet" href="css/text-contrast-fix.css">
-    <link rel="stylesheet" href="css/high-contrast-fix.css">
-    <link rel="stylesheet" href="css/hero-title-fix.css">
-    <link rel="stylesheet" href="css/white-subtitle-fix.css">
-    <link rel="stylesheet" href="css/force-white-text.css">
-    <link rel="stylesheet" href="css/simple-logo-spacing.css">
-    <link rel="stylesheet" href="css/contact-info-fix.css">
-    <link rel="stylesheet" href="css/service-cards-hover.css">
+    <link rel="stylesheet" href="css/mobile-menu.css">
     <link rel="stylesheet" href="css/who-we-are-styling.css">
-    <link rel="stylesheet" href="css/pure-white-title.css">
-    <link rel="stylesheet" href="css/testimonials-coming-soon.css">
     <link rel="stylesheet" href="css/strategic-vision-fix.css">
-    <link rel="stylesheet" href="css/mobile-override.css">
+    
+    <!-- CSS REDONDANTS COMMENTÉS (peuvent être restaurés si besoin) -->
+    <!-- <link rel="stylesheet" href="css/simple-gallery.css"> -->
+    <!-- <link rel="stylesheet" href="css/enhanced-animations.css"> -->
+    <!-- <link rel="stylesheet" href="css/text-contrast-fix.css"> -->
+    <!-- <link rel="stylesheet" href="css/high-contrast-fix.css"> -->
+    <!-- <link rel="stylesheet" href="css/hero-title-fix.css"> -->
+    <!-- <link rel="stylesheet" href="css/white-subtitle-fix.css"> -->
+    <!-- <link rel="stylesheet" href="css/force-white-text.css"> -->
+    <!-- <link rel="stylesheet" href="css/simple-logo-spacing.css"> -->
+    <!-- <link rel="stylesheet" href="css/contact-info-fix.css"> -->
+    <!-- <link rel="stylesheet" href="css/pure-white-title.css"> -->
+    <!-- <link rel="stylesheet" href="css/testimonials-coming-soon.css"> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/logo-black-fix.css">
-    <link rel="stylesheet" href="css/service-cards-fix.css">
-    <link rel="stylesheet" href="css/hero-fix.css">
-    <link rel="stylesheet" href="css/whatsapp-button.css">
+    <!-- CSS SUPPLÉMENTAIRES COMMENTÉS (peuvent être restaurés si besoin) -->
+    <!-- <link rel="stylesheet" href="css/logo-black-fix.css"> -->
+    <!-- <link rel="stylesheet" href="css/service-cards-fix.css"> -->
+    <!-- <link rel="stylesheet" href="css/hero-fix.css"> -->
+    <!-- <link rel="stylesheet" href="css/whatsapp-button.css"> -->
+    
+    <!-- FIX DÉFINITIF TITRE - CALCUL PRÉCIS HAUTEUR HEADER -->
+    <!-- <link rel="stylesheet" href="css/hero-title-definitive-fix.css"> CSS CONFLICTUEL COMMENTÉ -->
+    
+    <!-- FORCE TITRE EN BLANC - SPÉCIFICITÉ MAXIMALE -->
+    <style>
+        .hero h1,
+        section.hero h1,
+        .hero-content h1,
+        section.hero .hero-content h1 {
+            color: #FFFFFF !important;
+            font-family: 'Montserrat', sans-serif !important;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.7) !important;
+            background: transparent !important;
+            background-color: transparent !important;
+        }
+        
+        /* Spécificité encore plus élevée */
+        body section.hero .hero-content h1 {
+            color: #FFFFFF !important;
+        }
+        
+        /* SUPPRESSION COMPLÈTE EFFET ROSÂTRE/VIOLET */
+        .hero::before,
+        .hero::after,
+        section.hero::before,
+        section.hero::after {
+            display: none !important;
+            background: none !important;
+        }
+        
+        .hero {
+            background-blend-mode: normal !important;
+        }
+        
+        /* Neutraliser tous les overlays colorés */
+        .hero .overlay,
+        .hero-overlay,
+        .parallax-overlay {
+            display: none !important;
+            background: none !important;
+        }
+        
+        /* EFFET HOVER CARTES WHAT WE MANAGE - STYLE ORIGINAL */
+        
+        /* CORRECTION SECTION CONTACT - VISIBILITÉ */
+        #contact h2 {
+            color: #333333 !important;
+            font-weight: 600 !important;
+        }
+        
+        .contact-form input,
+        .contact-form textarea {
+            color: #333333 !important;
+            background: rgba(255, 255, 255, 0.9) !important;
+            border: 1px solid #ddd !important;
+        }
+        
+        .contact-form input::placeholder,
+        .contact-form textarea::placeholder {
+            color: #666666 !important;
+            opacity: 1 !important;
+        }
+        
+        /* BOUTON WHATSAPP STYLÉ */
+        .whatsapp-contact {
+            display: inline-block;
+            background: #25D366;
+            color: white !important;
+            padding: 12px 24px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+        }
+        
+        .whatsapp-contact:hover {
+            background: #20b954;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+            color: white !important;
+        }
+        
+        .whatsapp-contact i {
+            margin-right: 8px;
+            font-size: 1.2em;
+        }
+    </style>
 </head>
 <body>
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay"></div>
     <div class="scroll-progress"></div>
     <div class="preloader">
         <div class="preloader-logo">A<span style="color: #000000 !important; text-shadow: none !important;">&</span>Co.</div>
     </div>
-    <header style="position: fixed; top: 0; left: 0; width: 100%; padding-top: 1.25rem; padding-bottom: 1.25rem; background-color: white; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); z-index: 50; transition: all 0.3s ease;">
-        <div style="max-width: 1200px; margin-left: auto; margin-right: auto; padding-left: 1.5rem; padding-right: 1.5rem; display: flex; justify-content: space-between; align-items: center;">
+    <header>
+        <div class="header-container">
 
-            <div style="margin-right: 3.5rem;">
+            <div class="logo-container">
                 <style>
                     /* Style spécifique au logo, isolé du reste du CSS */
                     #simple-logo {
@@ -93,51 +189,55 @@
                     <span id="simple-logo-full">Alture <span class="pink-amp">&</span> Co.</span>
                 </a>
             </div>
-
+            <button class="menu-toggle" aria-label="Menu">
+                <span class="menu-line"></span>
+                <span class="menu-line"></span>
+                <span class="menu-line"></span>
+            </button>
             <nav id="main-navigation" class="main-navigation" aria-label="Navigation principale">
-                <ul style="display: flex; gap: 1.5rem;">
-                    <li><a href="#who-we-are" class="nav-link" style="color: black; transition: color 0.3s ease; font-size: 0.875rem; font-family: 'Montserrat', sans-serif; font-weight: 500; letter-spacing: 0.05em;" onmouseover="this.style.color='#D14D72'" onmouseout="this.style.color='black'">WHO WE ARE</a></li>
-                    <li><a href="#what-we-offer" class="nav-link" style="color: black; transition: color 0.3s ease; font-size: 0.875rem; font-family: 'Montserrat', sans-serif; font-weight: 500; letter-spacing: 0.05em;" onmouseover="this.style.color='#D14D72'" onmouseout="this.style.color='black'">WHAT WE OFFER</a></li>
-                    <li><a href="properties.html" class="nav-link" style="color: black; transition: color 0.3s ease; font-size: 0.875rem; font-family: 'Montserrat', sans-serif; font-weight: 500; letter-spacing: 0.05em;" onmouseover="this.style.color='#D14D72'" onmouseout="this.style.color='black'">PROPERTIES</a></li>
-                    <li><a href="#strategic-vision" class="nav-link" style="color: black; transition: color 0.3s ease; font-size: 0.875rem; font-family: 'Montserrat', sans-serif; font-weight: 500; letter-spacing: 0.05em;" onmouseover="this.style.color='#D14D72'" onmouseout="this.style.color='black'">STRATEGIC VISION</a></li>
-                    <li><a href="#contact" class="nav-link" style="color: black; transition: color 0.3s ease; font-size: 0.875rem; font-family: 'Montserrat', sans-serif; font-weight: 500; letter-spacing: 0.05em;" onmouseover="this.style.color='#D14D72'" onmouseout="this.style.color='black'">CONTACT</a></li>
+                <ul>
+                    <li><a href="#who-we-are" class="nav-link" style="color: #000000 !important;">WHO WE ARE</a></li>
+                    <li><a href="#what-we-offer" class="nav-link" style="color: #000000 !important;">WHAT WE OFFER</a></li>
+                    <li><a href="properties.html" class="nav-link" style="color: #000000 !important;">PROPERTIES</a></li>
+                    <li><a href="#strategic-vision" class="nav-link" style="color: #000000 !important;">STRATEGIC VISION</a></li>
+                    <li><a href="#contact" class="nav-link" style="color: #000000 !important;">CONTACT</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
-    <section class="hero parallax-bg" style="background-image: url('https://images.unsplash.com/photo-1582407947304-fd86f028f716?ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80');">
-        <div class="hero-content">
-            <h1 style="font-size: 4.5rem; letter-spacing: 1px; color: #ffffff; font-weight: 600;"><strong>Strategic Portfolio Management</strong></h1>
-            <div style="margin-top: 1.5rem; margin-bottom: 3rem;">
-                <p class="pure-white-text" style="display: inline-block; font-family: 'Montserrat', sans-serif; font-size: 1.5rem; color: #FFFFFF; letter-spacing: 0.05em; text-transform: uppercase; font-weight: 600; text-shadow: 0 2px 4px rgba(0,0,0,0.7);">
+    <section class="hero parallax-bg" style="background-image: url('https://images.unsplash.com/photo-1582407947304-fd86f028f716?ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80'); background-size: cover; background-position: center; background-repeat: no-repeat; padding-top: 150px !important; margin-top: 0 !important; position: relative;">
+        <div class="hero-content" style="margin-top: 60px !important; padding-top: 20px !important;">
+            <div style="font-family: 'Montserrat', sans-serif; font-size: 3.0rem; letter-spacing: 1px; color: #FFFFFF; font-weight: 600; margin-top: 40px; padding-top: 10px; margin-bottom: 1rem; text-shadow: 0 2px 4px rgba(0,0,0,0.7); background: transparent; text-decoration: none; line-height: 1.2; display: block;">Strategic Portfolio Management</div>
+            <div style="margin-top: 0.8rem; margin-bottom: 1.8rem;">
+                <p class="pure-white-text" style="display: inline-block; font-family: 'Montserrat', sans-serif; font-size: 1.2rem; color: #FFFFFF; letter-spacing: 0.05em; text-transform: uppercase; font-weight: 600; text-shadow: 0 2px 4px rgba(0,0,0,0.7);">
                     REAL ESTATE AND DIGITAL ASSET STRUCTURING
                 </p>
             </div>
-            <div class="hero-services">
-                <div class="hero-service">
-                    <div class="hero-service-icon">
-                        <i class="fas fa-building"></i>
+            <div class="hero-services" style="margin-bottom: 1.5rem !important;">
+                <div class="hero-service" style="padding: 15px !important; width: 180px !important;">
+                    <div class="hero-service-icon" style="margin-bottom: 8px !important;">
+                        <i class="fas fa-building" style="font-size: 1.2rem !important;"></i>
                     </div>
-                    <h3>Real Estate</h3>
-                    <p>Premium Dubai properties & strategic investments</p>
+                    <h3 style="font-size: 1rem !important; margin-bottom: 6px !important;">Real Estate</h3>
+                    <p style="font-size: 0.8rem !important; line-height: 1.3 !important;">Premium Dubai properties & strategic investments</p>
                 </div>
-                <div class="hero-service">
-                    <div class="hero-service-icon">
-                        <i class="fas fa-chart-line"></i>
+                <div class="hero-service" style="padding: 15px !important; width: 180px !important;">
+                    <div class="hero-service-icon" style="margin-bottom: 8px !important;">
+                        <i class="fas fa-chart-line" style="font-size: 1.2rem !important;"></i>
                     </div>
-                    <h3>Digital Assets</h3>
-                    <p>Crypto portfolio structuring & secure custody</p>
+                    <h3 style="font-size: 1rem !important; margin-bottom: 6px !important;">Digital Assets</h3>
+                    <p style="font-size: 0.8rem !important; line-height: 1.3 !important;">Crypto portfolio structuring & secure custody</p>
                 </div>
-                <div class="hero-service">
-                    <div class="hero-service-icon">
-                        <i class="fas fa-globe"></i>
+                <div class="hero-service" style="padding: 15px !important; width: 180px !important;">
+                    <div class="hero-service-icon" style="margin-bottom: 8px !important;">
+                        <i class="fas fa-globe" style="font-size: 1.2rem !important;"></i>
                     </div>
-                    <h3>Cross-Border</h3>
-                    <p>Strategic wealth alignment between Europe & UAE</p>
+                    <h3 style="font-size: 1rem !important; margin-bottom: 6px !important;">Cross-Border</h3>
+                    <p style="font-size: 0.8rem !important; line-height: 1.3 !important;">Strategic wealth alignment between Europe & UAE</p>
                 </div>
             </div>
-            <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; margin: 3rem 0 2rem;">
+            <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; margin: 3rem 0 4rem; padding-bottom: 2rem;">
                 <a href="#what-we-offer" style="padding: 1rem 2.5rem; font-size: 0.8rem; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; text-decoration: none; border: 1px solid white; color: white; background: transparent; transition: all 0.3s ease;">
                     Discover Our Services
                 </a>
@@ -181,10 +281,10 @@
 
     <section id="what-we-offer" class="what-we-offer parallax-bg" style="background-image: linear-gradient(rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.95)), url('https://images.unsplash.com/photo-1560520031-3a4dc4e9de0c?ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80');">
         <div class="container">
-            <h2 class="scroll-reveal" style="color: #333333; font-weight: 600;">What We Manage</h2>
-            <div class="section-divider light scroll-reveal" style="background-color: var(--velvet-rose);"></div>
+            <h2 style="color: #333333; font-weight: 600;">What We Manage</h2>
+            <div class="section-divider light" style="background-color: var(--velvet-rose);"></div>
             <div class="services-grid">
-                <div class="service-card scroll-reveal">
+                <div class="service-card">
                     <div class="service-icon">
                         <i class="fas fa-building"></i>
                     </div>
@@ -199,7 +299,7 @@
                         <p class="solution">We act as your single trusted contact, coordinating only proven agents with clear strategies for each asset.</p>
                     </div>
                 </div>
-                <div class="service-card scroll-reveal">
+                <div class="service-card">
                     <div class="service-icon">
                         <i class="fas fa-chart-line"></i>
                     </div>
@@ -212,7 +312,7 @@
                         <p class="solution">We secure portfolios with cold wallets and provide strategic asset management aligned with residency needs.</p>
                     </div>
                 </div>
-                <div class="service-card scroll-reveal">
+                <div class="service-card">
                     <div class="service-icon">
                         <i class="fas fa-globe"></i>
                     </div>
@@ -232,8 +332,8 @@
 
     <section id="who-its-for" class="who-its-for parallax-bg" style="background-image: linear-gradient(rgba(62, 0, 47, 0.9), rgba(62, 0, 47, 0.9)), url('https://images.unsplash.com/photo-1560520031-3a4dc4e9de0c?ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80');">
         <div class="container">
-            <h2 class="scroll-reveal" style="color: #ffffff; font-weight: 600;">Who It's For</h2>
-            <div class="section-divider light scroll-reveal" style="background-color: var(--velvet-rose);"></div>
+            <h2 style="color: #ffffff; font-weight: 600;">Who It's For</h2>
+            <div class="section-divider light" style="background-color: var(--velvet-rose);"></div>
             <div class="vision-content" style="padding: 2rem; max-width: 800px; margin: 0 auto; text-align: center;">
                 <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 1.5rem; color: #ffffff;">Alture & Co. works with private investors, founders, and independent who already manage significant capital.</p>
                 <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 1.5rem; color: #ffffff;">Our work is designed for those seeking long-term structure, market clarity, and discreet execution across real estate and digital assets.</p>
@@ -277,14 +377,15 @@
                onmouseout="this.style.backgroundColor='#D14D72'">
                 View All Properties
             </a>
+
         </div>
     </section>
 
     <section id="contact" class="contact parallax-bg" style="background-image: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80');">
         <div class="container">
-            <h2 class="scroll-reveal">Contact</h2>
-            <div class="section-divider light scroll-reveal"></div>
-            <div class="contact-form scroll-reveal">
+            <h2>Contact</h2>
+            <div class="section-divider light"></div>
+            <div class="contact-form">
                 <form>
                     <div class="form-group">
                         <input type="text" id="name" name="name" placeholder="Full Name" required>
@@ -308,39 +409,91 @@
         </div>
     </section>
 
-    <footer class="parallax-bg" style="background-image: linear-gradient(rgba(62, 0, 47, 0.95), rgba(62, 0, 47, 0.95)), url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80');">
+    <footer class="site-footer">
         <div class="container">
-            <div class="footer-content scroll-reveal">
-                <a href="index.html" class="logo-link"><div class="footer-logo" style="color: #000000; font-size: 1.8rem; font-weight: 600; letter-spacing: 2px; text-shadow: none; font-family: 'Cormorant Garamond', serif;">ALTURE <span style="color: #000000 !important; text-shadow: none !important; display: inline !important;">&</span> CO.</div></a>
-                <div class="footer-links">
-                    <ul style="font-family: 'Montserrat', sans-serif; font-weight: 300;">
-                        <li><a href="#who-we-are">Who We Are</a></li>
-                        <li><a href="#what-we-offer">What We Offer</a></li>
-                        <li><a href="#strategic-vision">Strategic Vision</a></li>
-                        <li><a href="#contact">Contact</a></li>
+            <div class="footer-content">
+                <div class="footer-column">
+                    <div class="footer-logo">
+                        <a href="index.html">Alture & Co.</a>
+                    </div>
+                    <p>Luxury real estate in Dubai's most exclusive locations.</p>
+                    <div class="social-links">
+                        <a href="https://wa.me/971509845622" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                        <a href="https://www.instagram.com/altureco" aria-label="Instagram" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3 class="footer-heading">Contact</h3>
+                    <ul class="footer-contact">
+                        <li>
+                            <i class="fab fa-whatsapp"></i>
+                            <a href="https://wa.me/971509845622">+971 50 984 5622</a>
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <a href="mailto:info@altureco.com">info@altureco.com</a>
+                        </li>
                     </ul>
                 </div>
-                <div class="footer-contact" style="font-family: 'Montserrat', sans-serif; font-weight: 200;">
-                    <p style="color: rgba(255, 255, 255, 0.8); margin-bottom: 0.5rem; font-size: 0.85rem; letter-spacing: 0.03em;">Dubai, UAE</p>
-                    <p style="color: rgba(255, 255, 255, 0.8); margin-bottom: 0.5rem; font-size: 0.85rem; letter-spacing: 0.03em;">Email: info@altureandco.com</p>
-                    <a href="https://wa.me/971509845622" class="whatsapp-number" target="_blank" rel="noopener noreferrer">
-                        <i class="fab fa-whatsapp"></i> +971 50 984 5622
-                    </a>
-                </div>
             </div>
+            
             <div class="footer-bottom">
-                <p style="font-family: 'Montserrat', sans-serif; font-weight: 300;">&copy; 2025 Alture & Co. All rights reserved.</p>
+                <p>&copy; 2023 Alture & Co. All rights reserved. | <a href="privacy-policy.html">Privacy Policy</a></p>
             </div>
         </div>
     </footer>
 
-    <script src="js/script.js"></script>
-    <script src="js/enhanced-interactions.js"></script>
-    <script src="js/property-map.js"></script>
-    <script src="js/back-to-top.js"></script>
+    <script>
+        // Simple Mobile Menu Toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuToggle = document.querySelector('.menu-toggle');
+            const nav = document.querySelector('#main-navigation');
+            const overlay = document.querySelector('.mobile-menu-overlay');
+            
+            function closeMenu() {
+                if (nav) nav.classList.remove('active');
+                if (menuToggle) menuToggle.classList.remove('active');
+                if (overlay) overlay.classList.remove('active');
+                document.body.classList.remove('menu-open');
+            }
+            
+            function toggleMenu() {
+                if (nav && nav.classList.contains('active')) {
+                    closeMenu();
+                } else {
+                    if (nav) nav.classList.add('active');
+                    if (menuToggle) menuToggle.classList.add('active');
+                    if (overlay) overlay.classList.add('active');
+                    document.body.classList.add('menu-open');
+                }
+            }
+            
+            // Menu toggle click
+            if (menuToggle) {
+                menuToggle.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    toggleMenu();
+                });
+            }
+            
+            // Overlay click to close
+            if (overlay) {
+                overlay.addEventListener('click', closeMenu);
+            }
+            
+            // Close on nav link click
+            if (nav) {
+                const navLinks = nav.querySelectorAll('a');
+                navLinks.forEach(link => {
+                    link.addEventListener('click', closeMenu);
+                });
+            }
+        });
+    </script>
+    <!-- SCRIPTS ESSENTIELS UNIQUEMENT - CONFLITS SUPPRIMÉS -->
     <script src="js/loading-animation.js"></script>
-    <script src="js/main.js"></script>
-    <script src="js/service-cards.js"></script>
     
 </body>
 </html>

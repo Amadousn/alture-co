@@ -1,8 +1,16 @@
 /*
- * Alture & Co. - Fix pour afficher le titre principal sur mobile
+ * Alture & Co. - Fix pour afficher le titre principal sur mobile et desktop
  * Ajuste l'espacement et le positionnement pour garantir la visibilité du titre
  */
 
+/* Desktop - Padding pour éviter que le header écrase le titre */
+@media only screen and (min-width: 769px) {
+    .hero {
+        padding-top: 120px !important;
+    }
+}
+
+/* Mobile - Styles existants */
 @media only screen and (max-width: 768px) {
     /* Augmenter l'espace en haut pour afficher le titre */
     .hero {

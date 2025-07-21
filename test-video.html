@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Créer une vidéo de test</title>
+</head>
+<body>
+    <h1>Générateur de vidéo de test</h1>
+    <canvas id="canvas" width="320" height="240" style="border: 1px solid black;"></canvas>
+    <br><br>
+    <button onclick="createTestVideo()">Créer vidéo de test</button>
+    <br><br>
+    <video id="testVideo" controls style="display: none;"></video>
+    <br><br>
+    <a id="downloadLink" style="display: none;">Télécharger la vidéo de test</a>
+
+    <script>
+        function createTestVideo() {
+            const canvas = document.getElementById('canvas');
+            const ctx = canvas.getContext('2d');
+            const video = document.getElementById('testVideo');
+            const downloadLink = document.getElementById('downloadLink');
+            
+            // Créer un stream depuis le canvas
+            const stream = canvas.captureStream(30); // 30 FPS
+            const mediaRecorder = new MediaRecorder(stream, {
+                mimeType: 'video/webm'
+            });
+            
+            const chunks = [];
+            
+            mediaRecorder.ondataavailable = function(e) {
+                if (e.data.size > 0) {
+                    chunks.push(e.data);
+                }
+            };
+            
+            mediaRecorder.onstop = function() {
+                const blob = new Blob(chunks, { type: 'video/webm' });
+                const url = URL.createObjectURL(blob);
+                
+                video.src = url;
+                video.style.display = 'block';
+                
+                downloadLink.href = url;
+                downloadLink.download = 'test-video.webm';
+                downloadLink.textContent = 'Télécharger test-video.webm';
+                downloadLink.style.display = 'block';
+            };
+            
+            // Animer le canvas
+            let frame = 0;
+            function animate() {
+                ctx.fillStyle = `hsl(${frame % 360}, 50%, 50%)`;
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                
+                ctx.fillStyle = 'white';
+                ctx.font = '20px Arial';
+                ctx.fillText(`Frame: ${frame}`, 10, 30);
+                ctx.fillText('Vidéo de test', 10, 60);
+                
+                frame++;
+                
+                if (frame < 90) { // 3 secondes à 30 FPS
+                    requestAnimationFrame(animate);
+                } else {
+                    mediaRecorder.stop();
+                }
+            }
+            
+            mediaRecorder.start();
+            animate();
+        }
+    </script>
+</body>
+</html>
