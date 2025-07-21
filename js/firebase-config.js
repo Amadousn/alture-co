@@ -4,14 +4,14 @@
 (function() {
     'use strict';
     
-    // Firebase configuration (replace with your actual Firebase config)
+    // Firebase configuration (production)
     const firebaseConfig = {
-        apiKey: "your-api-key-here",
-        authDomain: "your-project.firebaseapp.com",
-        projectId: "your-project-id",
-        storageBucket: "your-project.appspot.com",
-        messagingSenderId: "123456789",
-        appId: "your-app-id"
+        apiKey: "AIzaSyAhK9Pn4l1T5r7I_LP2xHxTqfGYV2HwXRYc",
+        authDomain: "alture-co.firebaseapp.com",
+        projectId: "alture-co",
+        storageBucket: "alture-co.appspot.com",
+        messagingSenderId: "52265164460",
+        appId: "1:52265164460:web:547162a187281d591dc909"
     };
     
     // Initialize Firebase only if not already initialized

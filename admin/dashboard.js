@@ -1,9 +1,10 @@
 // Dashboard JavaScript for Property Management
 
 // Check authentication on page load
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', async function() {
     checkAuth();
-    loadProperties();
+    initFirebase();
+    await loadProperties();
     updateStats();
     setupImageUpload();
 });
@@ -62,12 +63,43 @@ function showSection(sectionId) {
 }
 
 // Property management functions
-let properties = JSON.parse(localStorage.getItem('properties')) || [];
+// --- FIRESTORE INTEGRATION ---
+// Charger Firebase (assume que firebase-app.js et firebase-firestore.js sont inclus via CDN ou bundler)
+let properties = [];
+let db = null;
+
+function initFirebase() {
+    if (typeof firebase !== 'undefined' && firebase.firestore) {
+        db = firebase.firestore();
+        console.log('🔥 Firestore connecté dans le dashboard admin');
+    } else {
+        console.error('❌ Firebase non disponible dans le dashboard admin');
+    }
+}
+
+// Charger les propriétés depuis Firestore (asynchrone)
+async function loadPropertiesFromFirestore() {
+    if (!db) {
+        console.error('Firestore non initialisé');
+        return;
+    }
+    try {
+        const snapshot = await db.collection('properties').orderBy('createdAt', 'desc').get();
+        properties = [];
+        snapshot.forEach(doc => {
+            properties.push({ id: doc.id, ...doc.data() });
+        });
+        console.log('✅ Propriétés chargées depuis Firestore:', properties.length);
+    } catch (error) {
+        console.error('❌ Erreur lors du chargement Firestore:', error);
+    }
+}
 let editingPropertyId = null;
 let propertyToDelete = null;
 
 // Load and display properties
-function loadProperties() {
+async function loadProperties() {
+    await loadPropertiesFromFirestore();
     const grid = document.getElementById('propertiesGrid');
     grid.innerHTML = '';
     
@@ -121,7 +153,7 @@ function formatPrice(price) {
 }
 
 // Add/Edit property form handling
-document.getElementById('propertyForm').addEventListener('submit', function(e) {
+document.getElementById('propertyForm').addEventListener('submit', async function(e) {
     e.preventDefault();
     
     const formData = new FormData(this);
@@ -143,22 +175,31 @@ document.getElementById('propertyForm').addEventListener('submit', function(e) {
         updatedAt: new Date().toISOString()
     };
     
-    if (editingPropertyId) {
-        // Update existing property
-        const index = properties.findIndex(p => p.id === editingPropertyId);
-        properties[index] = property;
-        showNotification('Property updated successfully!', 'success');
-    } else {
-        // Add new property
-        properties.push(property);
-        showNotification('Property added successfully!', 'success');
+    if (!db) {
+        showNotification('Firestore non initialisé', 'error');
+        return;
     }
-    
-    // Save to localStorage and sync with main site
-    localStorage.setItem('properties', JSON.stringify(properties));
-    syncWithMainSite().catch(error => console.error('Sync error:', error));
-    
-    // Reset form and go back to properties list
+    if (editingPropertyId) {
+        // Update existing property in Firestore
+        try {
+            await db.collection('properties').doc(editingPropertyId).set(property);
+            showNotification('Property updated successfully!', 'success');
+        } catch (error) {
+            showNotification('Error updating property: ' + error.message, 'error');
+            return;
+        }
+    } else {
+        // Add new property in Firestore
+        try {
+            await db.collection('properties').add(property);
+            showNotification('Property added successfully!', 'success');
+        } catch (error) {
+            showNotification('Error adding property: ' + error.message, 'error');
+            return;
+        }
+    }
+    // Recharger les propriétés et l’UI
+    await loadProperties();
     resetForm();
     showSection('properties');
     updateStats();
@@ -231,17 +272,22 @@ function deleteProperty(id) {
 }
 
 // Confirm delete
-function confirmDelete() {
-    if (propertyToDelete) {
-        properties = properties.filter(p => p.id !== propertyToDelete);
-        localStorage.setItem('properties', JSON.stringify(properties));
-        syncWithMainSite().catch(error => console.error('Sync error:', error));
-        
-        loadProperties();
-        updateStats();
-        showNotification('Property deleted successfully!', 'success');
+async function confirmDelete() {
+    if (!db) {
+        showNotification('Firestore non initialisé', 'error');
+        return;
     }
-    
+    if (propertyToDelete) {
+        try {
+            await db.collection('properties').doc(propertyToDelete).delete();
+            showNotification('Property deleted successfully!', 'success');
+        } catch (error) {
+            showNotification('Error deleting property: ' + error.message, 'error');
+            return;
+        }
+        await loadProperties();
+        updateStats();
+    }
     closeDeleteModal();
 }
 
@@ -480,34 +526,112 @@ style.textContent = `
     
     @keyframes slideOut {
         from { transform: translateX(0); opacity: 1; }
+        }
+
+        // Mark if properties are explicitly empty (admin decision)
+        if (mainSiteProperties.length === 0) {
+            localStorage.setItem('adminPropertiesEmpty', 'true');
+            console.log(' Admin marked properties as empty - main site will show no properties');
+        } else {
+            localStorage.removeItem('adminPropertiesEmpty');
+            console.log(' Admin has properties - main site will show them');
+        }
+
+        console.log(' Properties synced successfully');
+        showNotification('Properties synced successfully!', 'success');
+
+    } catch (error) {
+        console.error('Error syncing with main site:', error);
+
+        // Handle quota exceeded error specifically
+        if (error.name === 'QuotaExceededError' || error.code === 22) {
+            showNotification('Storage optimized! Some images were limited to ensure performance.', 'success');
+            console.log(' Info: Images were automatically optimized for storage');
+        } else {
+            showNotification('Error syncing with main site: ' + error.message, 'error');
+        }
+    }
+}
+
+// Optimize properties for storage by reducing image count intelligently
+async function optimizePropertiesForStorage(properties) {
+    console.log(' Optimizing properties for storage...')
+
+    // Calculate total images across all properties
+    const totalImages = properties.reduce((total, prop) => total + (prop.images?.length || 0), 0);
+    console.log(` Total images: ${totalImages}`)
+
+    // If we have too many images total, reduce per property
+    const maxImagesPerProperty = totalImages > 50 ? 8 : (totalImages > 30 ? 12 : 20);
+
+    return properties.map(property => {
+        if (property.images && property.images.length > 0) {
+            // Limit images per property based on total count
+            const limitedImages = property.images.slice(0, maxImagesPerProperty);
+
+            console.log(` Property "${property.title}": ${property.images.length} → ${limitedImages.length} images`)
+
+            return {
+                ...property,
+                images: limitedImages
+            };
+        }
+        return property;
+    });
+}
+
+// Show notification
+function showNotification(message, type = 'success') {
+    // Remove existing notifications
+    const existingNotifications = document.querySelectorAll('.notification');
+    existingNotifications.forEach(n => n.remove());
+
+    const notification = document.createElement('div');
+    notification.className = `notification ${type}`;
+    notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        padding: 15px 20px;
+        border-radius: 5px;
+        color: white;
+        font-weight: 500;
+        z-index: 10000;
+        animation: slideIn 0.3s ease;
+        max-width: 300px;
+    `;
+
+    if (type === 'success') {
+        notification.style.backgroundColor = '#28a745';
+    } else if (type === 'error') {
+        notification.style.backgroundColor = '#dc3545';
+    }
+
+    notification.innerHTML = `
+        <i class="fas fa-${type === 'success' ? 'check' : 'exclamation-triangle'}"></i>
+        ${message}
+    `;
+
+    document.body.appendChild(notification);
+
+    // Remove after 3 seconds
+    setTimeout(() => {
+        notification.style.animation = 'slideOut 0.3s ease';
+        setTimeout(() => notification.remove(), 300);
+    }, 3000);
+}
+
+// Add CSS for notifications
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes slideIn {
+        from { transform: translateX(100%); opacity: 0; }
+        to { transform: translateX(0); opacity: 1; }
+    }
+
+    @keyframes slideOut {
+        from { transform: translateX(0); opacity: 1; }
         to { transform: translateX(100%); opacity: 0; }
     }
 `;
 document.head.appendChild(style);
-
-// Initialize with some sample data if no properties exist
-if (properties.length === 0) {
-    const sampleProperties = [
-        {
-            id: 'sample_1',
-            title: 'Five Palm Jumeirah',
-            location: 'Dubai, Palm Jumeirah',
-            price: 10000000,
-            area: 2500,
-            bedrooms: 3,
-            bathrooms: 4,
-            view: 'Pool View',
-            floor: '15th Floor',
-            description: 'Stunning contemporary residence with breathtaking panoramic sea views, offering luxury and elegance in every detail.',
-            amenities: ['Jacuzzi', 'Balcony', 'Parking', 'Pool Access'],
-            images: ['images/Five palm Jumeirah 3BED/image0.jpeg'],
-            featured: true,
-            createdAt: new Date().toISOString(),
-            updatedAt: new Date().toISOString()
-        }
-    ];
-    
-    properties = sampleProperties;
-    localStorage.setItem('properties', JSON.stringify(properties));
-    syncWithMainSite().catch(error => console.error('Sync error:', error));
-}
