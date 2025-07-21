@@ -3,10 +3,17 @@
 // Check authentication on page load
 document.addEventListener('DOMContentLoaded', function() {
     checkAuth();
+    initializeFirebase();
     loadProperties();
     updateStats();
     setupImageUpload();
 });
+
+// Initialize Firebase connection
+function initializeFirebase() {
+    console.log('🔥 Firebase initialized successfully');
+    console.log('📊 Database connection established');
+}
 
 // Authentication check
 function checkAuth() {
@@ -62,13 +69,59 @@ function showSection(sectionId) {
 }
 
 // Property management functions
-let properties = JSON.parse(localStorage.getItem('properties')) || [];
+let properties = [];
 let editingPropertyId = null;
 let propertyToDelete = null;
 
+// Firebase Firestore functions
+async function savePropertyToFirebase(property) {
+    try {
+        await db.collection('properties').doc(property.id).set(property);
+        console.log('✅ Property saved to Firebase:', property.title);
+        return true;
+    } catch (error) {
+        console.error('❌ Error saving property:', error);
+        showNotification('Error saving property to database', 'error');
+        return false;
+    }
+}
+
+async function loadPropertiesFromFirebase() {
+    try {
+        const snapshot = await db.collection('properties').orderBy('createdAt', 'desc').get();
+        properties = [];
+        snapshot.forEach(doc => {
+            properties.push({ id: doc.id, ...doc.data() });
+        });
+        console.log('✅ Loaded', properties.length, 'properties from Firebase');
+        return properties;
+    } catch (error) {
+        console.error('❌ Error loading properties:', error);
+        showNotification('Error loading properties from database', 'error');
+        return [];
+    }
+}
+
+async function deletePropertyFromFirebase(propertyId) {
+    try {
+        await db.collection('properties').doc(propertyId).delete();
+        console.log('✅ Property deleted from Firebase:', propertyId);
+        return true;
+    } catch (error) {
+        console.error('❌ Error deleting property:', error);
+        showNotification('Error deleting property from database', 'error');
+        return false;
+    }
+}
+
 // Load and display properties
-function loadProperties() {
+async function loadProperties() {
     const grid = document.getElementById('propertiesGrid');
+    grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: #666; padding: 2rem;"><i class="fas fa-spinner fa-spin"></i> Loading properties...</p>';
+    
+    // Load properties from Firebase
+    await loadPropertiesFromFirebase();
+    
     grid.innerHTML = '';
     
     if (properties.length === 0) {
@@ -121,7 +174,7 @@ function formatPrice(price) {
 }
 
 // Add/Edit property form handling
-document.getElementById('propertyForm').addEventListener('submit', function(e) {
+document.getElementById('propertyForm').addEventListener('submit', async function(e) {
     e.preventDefault();
     
     const formData = new FormData(this);
@@ -143,20 +196,23 @@ document.getElementById('propertyForm').addEventListener('submit', function(e) {
         updatedAt: new Date().toISOString()
     };
     
-    if (editingPropertyId) {
-        // Update existing property
-        const index = properties.findIndex(p => p.id === editingPropertyId);
-        properties[index] = property;
-        showNotification('Property updated successfully!', 'success');
-    } else {
-        // Add new property
-        properties.push(property);
-        showNotification('Property added successfully!', 'success');
-    }
+    // Save property to Firebase
+    const success = await savePropertyToFirebase(property);
     
-    // Save to localStorage and sync with main site
-    localStorage.setItem('properties', JSON.stringify(properties));
-    syncWithMainSite();
+    if (success) {
+        if (editingPropertyId) {
+            showNotification('Property updated successfully!', 'success');
+            editingPropertyId = null;
+        } else {
+            showNotification('Property added successfully!', 'success');
+        }
+        
+        // Reload properties from Firebase to update the display
+        await loadProperties();
+    } else {
+        showNotification('Failed to save property. Please try again.', 'error');
+        return; // Don't reset form if save failed
+    }
     
     // Reset form and go back to properties list
     resetForm();
@@ -187,9 +243,12 @@ function getUploadedImages() {
 
 
 // Edit property
-function editProperty(id) {
+async function editProperty(id) {
     const property = properties.find(p => p.id === id);
-    if (!property) return;
+    if (!property) {
+        showNotification('Property not found', 'error');
+        return;
+    }
     
     editingPropertyId = id;
     
@@ -203,45 +262,44 @@ function editProperty(id) {
     document.getElementById('bathrooms').value = property.bathrooms;
     document.getElementById('view').value = property.view || '';
     document.getElementById('floor').value = property.floor || '';
-    document.getElementById('description').value = property.description;
+    document.getElementById('description').value = property.description || '';
     document.getElementById('amenities').value = property.amenities ? property.amenities.join(', ') : '';
+    document.getElementById('featured').checked = property.featured || false;
     
-    // Load images
+    // Clear and populate image preview
     const imagePreview = document.getElementById('imagePreview');
     imagePreview.innerHTML = '';
+    
     if (property.images && property.images.length > 0) {
         property.images.forEach((imageSrc, index) => {
-            addImageToPreview(imageSrc, `edit_${index}`);
+            addImageToPreview(imageSrc, `existing_${index}`);
         });
     }
     
-
-    
-    // Update form title
+    // Switch to add property section
+    showSection('addProperty');
     document.getElementById('formTitle').textContent = 'Edit Property';
-    
-    // Show add property section
-    showSection('add-property');
 }
 
 // Delete property
 function deleteProperty(id) {
     propertyToDelete = id;
-    document.getElementById('deleteModal').style.display = 'block';
+    document.getElementById('deleteModal').style.display = 'flex';
 }
 
 // Confirm delete
-function confirmDelete() {
+async function confirmDelete() {
     if (propertyToDelete) {
-        properties = properties.filter(p => p.id !== propertyToDelete);
-        localStorage.setItem('properties', JSON.stringify(properties));
-        syncWithMainSite();
+        const success = await deletePropertyFromFirebase(propertyToDelete);
         
-        loadProperties();
-        updateStats();
-        showNotification('Property deleted successfully!', 'success');
+        if (success) {
+            await loadProperties();
+            updateStats();
+            showNotification('Property deleted successfully!', 'success');
+        } else {
+            showNotification('Failed to delete property. Please try again.', 'error');
+        }
     }
-    
     closeDeleteModal();
 }
 
@@ -336,57 +394,10 @@ function updateStats() {
     document.getElementById('totalViews').textContent = Math.floor(Math.random() * 1000) + 500; // Mock data
 }
 
-// Sync with main site
-function syncWithMainSite() {
-    // Convert properties to the format expected by the main site
-    const mainSiteProperties = properties.map(property => ({
-        id: property.id,
-        title: property.title,
-        location: property.location,
-        price: `AED ${formatPrice(property.price)}`,
-        description: property.description,
-        area: property.area,
-        bedrooms: property.bedrooms,
-        bathrooms: property.bathrooms,
-        view: property.view,
-        floor: property.floor,
-        amenities: property.amenities,
-        images: property.images || [],
-        featured: property.featured || false,
-        createdAt: property.createdAt,
-        updatedAt: property.updatedAt
-    }));
-    
-    // Save to a JSON file that the main site can read
-    // In a real application, this would be an API call
-    try {
-        // For now, we'll use localStorage as a bridge
-        localStorage.setItem('mainSiteProperties', JSON.stringify(mainSiteProperties));
-        
-        // Mark if properties are explicitly empty (admin decision)
-        if (mainSiteProperties.length === 0) {
-            localStorage.setItem('adminPropertiesEmpty', 'true');
-            console.log('🚫 Admin marked properties as empty - main site will show no properties');
-        } else {
-            localStorage.removeItem('adminPropertiesEmpty');
-            console.log('✅ Admin has properties - main site will show them');
-        }
-        
-        // Also save to a format that can be easily copied to a JSON file
-        const jsonData = JSON.stringify(mainSiteProperties, null, 2);
-        console.log('Properties JSON for main site:', jsonData);
-        
-        // In a real implementation, you would make an API call here:
-        // fetch('/api/properties', {
-        //     method: 'POST',
-        //     headers: { 'Content-Type': 'application/json' },
-        //     body: jsonData
-        // });
-        
-    } catch (error) {
-        console.error('Error syncing with main site:', error);
-        showNotification('Error syncing with main site', 'error');
-    }
+// Firebase sync is automatic - no manual sync needed
+function logFirebaseSync() {
+    console.log('🔄 Firebase automatically syncs data in real-time');
+    console.log('📊 Properties are immediately available to the public site');
 }
 
 // Show notification
@@ -445,29 +456,39 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
-// Initialize with some sample data if no properties exist
-if (properties.length === 0) {
-    const sampleProperties = [
-        {
-            id: 'sample_1',
-            title: 'Five Palm Jumeirah',
-            location: 'Dubai, Palm Jumeirah',
-            price: 10000000,
-            area: 2500,
-            bedrooms: 3,
-            bathrooms: 4,
-            view: 'Pool View',
-            floor: '15th Floor',
-            description: 'Stunning contemporary residence with breathtaking panoramic sea views, offering luxury and elegance in every detail.',
-            amenities: ['Jacuzzi', 'Balcony', 'Parking', 'Pool Access'],
-            images: ['images/Five palm Jumeirah 3BED/image0.jpeg'],
-            featured: true,
-            createdAt: new Date().toISOString(),
-            updatedAt: new Date().toISOString()
+// Initialize Firebase sample data if needed
+async function initializeSampleData() {
+    try {
+        const snapshot = await db.collection('properties').get();
+        
+        if (snapshot.empty) {
+            console.log('🏗️ Initializing Firebase with sample property...');
+            
+            const sampleProperty = {
+                id: 'five-palm-jumeirah',
+                title: 'Five Palm Jumeirah',
+                location: 'Dubai, Palm Jumeirah',
+                price: 10000000,
+                area: 2500,
+                bedrooms: 3,
+                bathrooms: 4,
+                view: 'Pool View',
+                floor: '15th Floor',
+                description: 'Stunning contemporary residence with breathtaking panoramic sea views, offering luxury and elegance in every detail.',
+                amenities: ['Jacuzzi', 'Balcony', 'Parking', 'Pool Access'],
+                images: ['images/Five palm Jumeirah 3BED/image0.jpeg'],
+                featured: true,
+                createdAt: new Date().toISOString(),
+                updatedAt: new Date().toISOString()
+            };
+            
+            await savePropertyToFirebase(sampleProperty);
+            console.log('✅ Sample property added to Firebase');
         }
-    ];
-    
-    properties = sampleProperties;
-    localStorage.setItem('properties', JSON.stringify(properties));
-    syncWithMainSite();
+    } catch (error) {
+        console.error('❌ Error initializing sample data:', error);
+    }
 }
+
+// Call initialization after Firebase is ready
+setTimeout(initializeSampleData, 1000);

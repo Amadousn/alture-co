@@ -1,4 +1,4 @@
-// Properties Loader - Dynamically load properties from API/JSON
+// Properties Loader - Dynamically load properties from Firebase Firestore
 // This script maintains the exact visual appearance while making the content dynamic
 
 class PropertiesLoader {
@@ -6,6 +6,7 @@ class PropertiesLoader {
         this.properties = [];
         this.propertiesContainer = null;
         this.isLoading = false;
+        this.db = null;
     }
 
     // Initialize the loader
@@ -16,74 +17,61 @@ class PropertiesLoader {
             return;
         }
 
-        // Load properties from API/JSON
+        // Initialize Firebase connection
+        this.initFirebase();
+        
+        // Wait a bit for Firebase to initialize
+        await new Promise(resolve => setTimeout(resolve, 1000));
+
+        // Load properties from Firebase
         await this.loadProperties();
         
         // Replace static content with dynamic content
         this.renderProperties();
         
-        // Set up auto-refresh to sync with admin changes
-        this.setupAutoRefresh();
+        // Set up real-time listener for Firebase updates
+        this.setupFirebaseListener();
+    }
+    
+    // Initialize Firebase connection
+    initFirebase() {
+        if (typeof firebase !== 'undefined' && firebase.firestore) {
+            this.db = firebase.firestore();
+            console.log('🔥 Firebase connected to properties loader');
+        } else {
+            console.error('❌ Firebase not available in properties loader');
+        }
     }
 
-    // Load properties from API or localStorage (admin dashboard sync)
+    // Load properties from Firebase Firestore
     async loadProperties() {
         this.isLoading = true;
         
         try {
-            // Debug: Clear localStorage if needed (uncomment for testing)
-            // localStorage.removeItem('mainSiteProperties');
-            
-            // First, try to get properties from admin dashboard (localStorage)
-            const adminProperties = localStorage.getItem('mainSiteProperties');
-            console.log('🔍 Debug: Checking localStorage for mainSiteProperties...');
-            
-            if (adminProperties !== null) {
-                // Admin data exists (even if empty array)
-                this.properties = JSON.parse(adminProperties);
-                console.log('✅ Loaded properties from admin dashboard:', this.properties.length);
-                console.log('📋 Properties data:', this.properties);
-                
-                if (this.properties.length === 0) {
-                    console.log('ℹ️ Admin has no properties - respecting admin decision (no fallback to JSON)');
-                }
-                return;
+            if (!this.db) {
+                throw new Error('Firebase not initialized');
             }
             
-            // Check if there's an explicit "empty" marker from admin
-            const adminEmptyMarker = localStorage.getItem('adminPropertiesEmpty');
-            if (adminEmptyMarker === 'true') {
-                console.log('🚫 Admin explicitly set properties as empty - no fallback to JSON');
-                this.properties = [];
-                return;
-            }
+            console.log('🔍 Loading properties from Firebase...');
             
-            console.log('⚠️ No admin data found, loading from JSON file as fallback...');
+            const snapshot = await this.db.collection('properties').orderBy('createdAt', 'desc').get();
+            this.properties = [];
             
-            // Fallback to JSON file with aggressive cache busting
-            const timestamp = Date.now();
-            const response = await fetch(`api/properties.json?v=${timestamp}&cache=false`, {
-                cache: 'no-cache',
-                headers: {
-                    'Cache-Control': 'no-cache',
-                    'Pragma': 'no-cache'
-                }
+            snapshot.forEach(doc => {
+                this.properties.push({ id: doc.id, ...doc.data() });
             });
             
-            console.log('🌐 Fetch response status:', response.status);
-            
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            
-            this.properties = await response.json();
-            console.log('✅ Loaded properties from JSON file:', this.properties.length);
+            console.log('✅ Loaded', this.properties.length, 'properties from Firebase');
             console.log('📋 Properties data:', this.properties);
             
+            // Make properties available globally for gallery integration
+            this.exposePropertiesGlobally();
+            
         } catch (error) {
-            console.error('Error loading properties:', error);
-            // Use fallback static data if everything fails
+            console.error('❌ Error loading properties from Firebase:', error);
+            // Use fallback static data if Firebase fails
             this.properties = this.getFallbackProperties();
+            console.log('⚠️ Using fallback properties');
         } finally {
             this.isLoading = false;
         }
@@ -266,23 +254,34 @@ class PropertiesLoader {
         console.log('Gallery buttons initialized for', galleryButtons.length, 'dynamic properties');
     }
 
-    // Setup auto-refresh to sync with admin dashboard changes
-    setupAutoRefresh() {
-        // Check for updates every 30 seconds
-        setInterval(async () => {
-            const adminProperties = localStorage.getItem('mainSiteProperties');
+    // Setup Firebase real-time listener for instant updates
+    setupFirebaseListener() {
+        if (!this.db) {
+            console.error('❌ Firebase not available for real-time listener');
+            return;
+        }
+        
+        console.log('🔄 Setting up Firebase real-time listener...');
+        
+        // Listen for real-time changes in the properties collection
+        this.db.collection('properties').orderBy('createdAt', 'desc').onSnapshot((snapshot) => {
+            console.log('🔥 Firebase real-time update received');
             
-            if (adminProperties) {
-                const newProperties = JSON.parse(adminProperties);
-                
-                // Check if properties have changed
-                if (JSON.stringify(newProperties) !== JSON.stringify(this.properties)) {
-                    console.log('Properties updated from admin dashboard');
-                    this.properties = newProperties;
-                    this.renderProperties();
-                }
+            const newProperties = [];
+            snapshot.forEach(doc => {
+                newProperties.push({ id: doc.id, ...doc.data() });
+            });
+            
+            // Only update if properties actually changed
+            if (JSON.stringify(newProperties) !== JSON.stringify(this.properties)) {
+                console.log('✅ Properties updated in real-time:', newProperties.length);
+                this.properties = newProperties;
+                this.renderProperties();
+                this.exposePropertiesGlobally();
             }
-        }, 30000); // 30 seconds
+        }, (error) => {
+            console.error('❌ Firebase listener error:', error);
+        });
     }
 
     // Fallback properties if everything fails

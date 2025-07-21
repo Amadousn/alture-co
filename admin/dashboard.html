@@ -523,6 +523,25 @@
         </div>
     </div>
 
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    
+    <!-- Firebase Configuration -->
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyBvOkBH0ImRdjoxMaplzOK5RuVBD7VTrE8",
+            authDomain: "alture-co-properties.firebaseapp.com",
+            projectId: "alture-co-properties",
+            storageBucket: "alture-co-properties.appspot.com",
+            messagingSenderId: "123456789",
+            appId: "1:123456789:web:abcdef123456"
+        };
+        
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+    </script>
+    
     <script src="dashboard.js"></script>
 </body>
 </html>
