@@ -151,6 +151,30 @@ function openGallery(propertyId) {
     // Set the first image
     modalImage.src = property.images[property.currentIndex];
     
+    // AJOUT SIMPLE : Remplir uniquement View et Floor (pas de description)
+    const featuresElement = document.getElementById('propertyFeatures');
+    if (featuresElement && property.view && property.floor) {
+        featuresElement.innerHTML = '';
+        
+        // Ajouter View
+        const viewFeature = document.createElement('div');
+        viewFeature.className = 'feature';
+        viewFeature.innerHTML = `<i class="fas fa-eye"></i><div>${property.view}</div>`;
+        featuresElement.appendChild(viewFeature);
+        
+        // Ajouter Floor
+        const floorFeature = document.createElement('div');
+        floorFeature.className = 'feature';
+        floorFeature.innerHTML = `<i class="fas fa-building"></i><div>${property.floor}</div>`;
+        featuresElement.appendChild(floorFeature);
+    }
+    
+    // Supprimer explicitement toute description pour éviter les problèmes
+    const descriptionElement = document.getElementById('propertyDescription');
+    if (descriptionElement) {
+        descriptionElement.textContent = ''; // Pas de description affichée
+    }
+    
     // Clear existing thumbnails
     thumbnailsContainer.innerHTML = '';
     

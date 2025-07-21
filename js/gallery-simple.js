@@ -17,6 +17,12 @@
         'five-palm-jumeirah': {
             title: 'Five Palm Jumeirah',
             price: 'AED 10,000,000',
+            bedrooms: 3,
+            bathrooms: 3,
+            area: 2770,
+            view: 'Sea & Palm View',
+            floor: '10th Floor',
+            amenities: ['Jacuzzi', 'Balcony', 'Fully Furnished', 'Corner Unit', '2 Parking Spaces', '2 Large Balconies'],
             images: [
                 'images/Five palm Jumeirah 3BED/image0.jpeg',
                 'images/Five palm Jumeirah 3BED/image1.jpeg',
@@ -384,36 +390,40 @@
                                             <span style="font-weight: 500;">${propertyData.area} Sq Ft</span>
                                         </div>
                                     ` : ''}
+                                    ${propertyData.view ? `
+                                        <div style="
+                                            display: flex;
+                                            align-items: center;
+                                            gap: 8px;
+                                            background: #f8f9fa;
+                                            padding: 10px 15px;
+                                            border-radius: 25px;
+                                        ">
+                                            <i class="fas fa-eye" style="color: #D14D72;"></i>
+                                            <span style="font-weight: 500;">${propertyData.view}</span>
+                                        </div>
+                                    ` : ''}
+                                    ${propertyData.floor ? `
+                                        <div style="
+                                            display: flex;
+                                            align-items: center;
+                                            gap: 8px;
+                                            background: #f8f9fa;
+                                            padding: 10px 15px;
+                                            border-radius: 25px;
+                                        ">
+                                            <i class="fas fa-building" style="color: #D14D72;"></i>
+                                            <span style="font-weight: 500;">${propertyData.floor}</span>
+                                        </div>
+                                    ` : ''}
                                 </div>
                             </div>
                             
-                            <!-- Description -->
-                            ${propertyData.description ? `
-                                <div style="margin-bottom: 25px;">
-                                    <h3 style="
-                                        margin: 0 0 15px 0;
-                                        color: #333;
-                                        font-size: 1.3rem;
-                                        font-weight: 600;
-                                    ">Description</h3>
-                                    <p style="
-                                        margin: 0;
-                                        color: #666;
-                                        line-height: 1.6;
-                                        font-size: 1rem;
-                                    ">${propertyData.description}</p>
-                                </div>
-                            ` : ''}
+                            <!-- Description SUPPRIMÉE pour éviter les problèmes d'espace -->
                             
-                            <!-- Additional Features -->
+                            <!-- Amenities (sans titre) -->
                             ${propertyData.amenities && propertyData.amenities.length > 0 ? `
                                 <div style="margin-bottom: 20px;">
-                                    <h3 style="
-                                        margin: 0 0 15px 0;
-                                        color: #333;
-                                        font-size: 1.3rem;
-                                        font-weight: 600;
-                                    ">Amenities</h3>
                                     <div style="
                                         display: flex;
                                         flex-wrap: wrap;
