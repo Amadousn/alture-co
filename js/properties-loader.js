@@ -124,11 +124,16 @@ class PropertiesLoader {
             this.propertiesContainer.appendChild(propertyCard);
         });
 
-        // Reinitialize gallery functionality for new cards
-        this.initializeGalleryButtons();
+        // Initialize gallery buttons after rendering
+        setTimeout(() => {
+            this.initializeGalleryButtons();
+        }, 100);
         
-        // Expose properties globally for gallery integration
+        // Make properties available globally for gallery integration
         this.exposePropertiesGlobally();
+        
+        console.log('✅ Properties exposed globally:', this.properties.length);
+        console.log('✅ Sample property data:', this.properties[0]);
     }
 
     // Create property card with exact same structure as original

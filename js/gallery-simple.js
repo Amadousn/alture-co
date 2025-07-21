@@ -17,6 +17,8 @@
         'five-palm-jumeirah': {
             title: 'Five Palm Jumeirah',
             price: 'AED 10,000,000',
+            location: 'Dubai, Palm Jumeirah',
+            description: 'Stunning contemporary residence with breathtaking panoramic sea views, offering luxury and elegance in every detail.',
             bedrooms: 3,
             bathrooms: 3,
             area: 2770,
@@ -28,14 +30,19 @@
                 'images/Five palm Jumeirah 3BED/image1.jpeg',
                 'images/Five palm Jumeirah 3BED/image2.jpeg'
             ],
-            videos: [
-                // Add video URLs here when available
-                // 'videos/five-palm-jumeirah-tour.mp4'
-            ]
+            videos: []
         },
         'jumeirah-islands': {
             title: 'Jumeirah Islands Villa',
             price: 'AED 8,500,000',
+            location: 'Dubai, Jumeirah Islands',
+            description: 'Luxurious villa in the prestigious Jumeirah Islands community.',
+            bedrooms: 4,
+            bathrooms: 5,
+            area: 3500,
+            view: 'Lake View',
+            floor: 'Ground Floor',
+            amenities: ['Private Pool', 'Garden', 'Maid Room', 'Garage'],
             images: [
                 'images/Jumeirah Islands/Main.jpg'
             ],
@@ -44,6 +51,14 @@
         'downtown-apartment': {
             title: 'Downtown Dubai Apartment',
             price: 'AED 6,200,000',
+            location: 'Dubai, Downtown',
+            description: 'Modern apartment in the heart of Downtown Dubai with city views.',
+            bedrooms: 2,
+            bathrooms: 3,
+            area: 1800,
+            view: 'City View',
+            floor: '25th Floor',
+            amenities: ['Gym Access', 'Pool', 'Concierge', 'Valet Parking'],
             images: [
                 'images/Downtown/apt1.jpg',
                 'images/Downtown/apt2.jpg'
@@ -56,11 +71,10 @@
     function openSimpleGallery(propertyId) {
         console.log('Opening simple gallery for:', propertyId);
         
-        // Get property data
-        let propertyData = galleryData[propertyId];
+        let propertyData = null;
         
-        // Try to get from dynamic properties if available
-        if (!propertyData && window.getDynamicProperty) {
+        // Try to get from dynamic properties FIRST
+        if (window.getDynamicProperty) {
             const dynamicProperty = window.getDynamicProperty(propertyId);
             console.log('Dynamic property found:', dynamicProperty);
             if (dynamicProperty) {
@@ -80,7 +94,17 @@
                 };
                 console.log('Property data prepared for gallery:', propertyData);
                 console.log('Videos found:', propertyData.videos);
+                console.log('🔍 DEBUG - Area:', propertyData.area);
+                console.log('🔍 DEBUG - View:', propertyData.view);
+                console.log('🔍 DEBUG - Floor:', propertyData.floor);
+                console.log('🔍 DEBUG - Amenities:', propertyData.amenities);
             }
+        }
+        
+        // Fallback to static data if dynamic not found
+        if (!propertyData) {
+            propertyData = galleryData[propertyId];
+            console.log('Using static fallback data for:', propertyId);
         }
         
         if (!propertyData) {
@@ -127,9 +151,11 @@
                     width: 95%;
                     max-width: 1400px;
                     max-height: 95vh;
-                    overflow: hidden;
+                    overflow-y: auto;
                     position: relative;
                     box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+                    display: flex;
+                    flex-direction: column;
                 ">
                     <!-- Close Button -->
                     <button onclick="closeSimpleGallery()" style="
@@ -169,11 +195,11 @@
                     </div>
                     
                     <!-- Main Gallery Container -->
-                    <div style="padding: 0; position: relative;">
+                    <div style="padding: 0; position: relative; flex: 0 0 auto;">
                         <!-- Main Image Display -->
                         <div id="mainImageContainer" style="
                             position: relative;
-                            height: 600px;
+                            height: 400px;
                             overflow: hidden;
                             background: transparent;
                             display: flex;
@@ -249,7 +275,7 @@
                         </div>
                         
                         <!-- Thumbnails -->
-                        ${propertyData.images.length > 1 ? `
+                        ${propertyData.images.length >= 1 ? `
                             <div style="
                                 padding: 20px;
                                 background: #f8f9fa;
@@ -259,7 +285,11 @@
                                     display: flex;
                                     gap: 12px;
                                     overflow-x: auto;
+                                    overflow-y: hidden;
                                     padding: 5px 0;
+                                    max-height: 85px;
+                                    scrollbar-width: thin;
+                                    scrollbar-color: #D14D72 #f8f9fa;
                                 ">
                                     ${propertyData.images.map((img, index) => `
                                         <div onclick="showMedia(${index}, 'image')" style="
@@ -316,6 +346,9 @@
                             padding: 30px;
                             background: white;
                             border-top: 1px solid #eee;
+                            flex: 1 1 auto;
+                            overflow-y: auto;
+                            min-height: 300px;
                         ">
                             <!-- Price and Location -->
                             <div style="
@@ -419,7 +452,23 @@
                                 </div>
                             </div>
                             
-                            <!-- Description SUPPRIMÉE pour éviter les problèmes d'espace -->
+                            <!-- Description -->
+                            ${propertyData.description ? `
+                                <div style="margin-bottom: 25px;">
+                                    <h3 style="
+                                        color: #333;
+                                        font-size: 1.3rem;
+                                        font-weight: 600;
+                                        margin-bottom: 15px;
+                                    ">Description</h3>
+                                    <p style="
+                                        color: #666;
+                                        line-height: 1.6;
+                                        font-size: 1rem;
+                                        margin: 0;
+                                    ">${propertyData.description}</p>
+                                </div>
+                            ` : ''}
                             
                             <!-- Amenities (sans titre) -->
                             ${propertyData.amenities && propertyData.amenities.length > 0 ? `

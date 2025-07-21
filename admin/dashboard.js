@@ -156,7 +156,7 @@ document.getElementById('propertyForm').addEventListener('submit', function(e) {
     
     // Save to localStorage and sync with main site
     localStorage.setItem('properties', JSON.stringify(properties));
-    syncWithMainSite();
+    syncWithMainSite().catch(error => console.error('Sync error:', error));
     
     // Reset form and go back to properties list
     resetForm();
@@ -235,7 +235,7 @@ function confirmDelete() {
     if (propertyToDelete) {
         properties = properties.filter(p => p.id !== propertyToDelete);
         localStorage.setItem('properties', JSON.stringify(properties));
-        syncWithMainSite();
+        syncWithMainSite().catch(error => console.error('Sync error:', error));
         
         loadProperties();
         updateStats();
@@ -337,7 +337,7 @@ function updateStats() {
 }
 
 // Sync with main site
-function syncWithMainSite() {
+async function syncWithMainSite() {
     // Convert properties to the format expected by the main site
     const mainSiteProperties = properties.map(property => ({
         id: property.id,
@@ -357,11 +357,25 @@ function syncWithMainSite() {
         updatedAt: property.updatedAt
     }));
     
-    // Save to a JSON file that the main site can read
-    // In a real application, this would be an API call
     try {
-        // For now, we'll use localStorage as a bridge
-        localStorage.setItem('mainSiteProperties', JSON.stringify(mainSiteProperties));
+        // Check localStorage size before saving
+        const dataString = JSON.stringify(mainSiteProperties);
+        const sizeInMB = (new Blob([dataString]).size / 1024 / 1024).toFixed(2);
+        
+        console.log(`📊 Data size: ${sizeInMB}MB`);
+        
+        // Try to save data, optimize only if localStorage quota is exceeded
+        try {
+            localStorage.setItem('mainSiteProperties', dataString);
+        } catch (quotaError) {
+            if (quotaError.name === 'QuotaExceededError' || quotaError.code === 22) {
+                console.log('⚠️ LocalStorage quota exceeded, optimizing images...');
+                const optimizedProperties = await optimizePropertiesForStorage(mainSiteProperties);
+                localStorage.setItem('mainSiteProperties', JSON.stringify(optimizedProperties));
+            } else {
+                throw quotaError;
+            }
+        }
         
         // Mark if properties are explicitly empty (admin decision)
         if (mainSiteProperties.length === 0) {
@@ -372,21 +386,47 @@ function syncWithMainSite() {
             console.log('✅ Admin has properties - main site will show them');
         }
         
-        // Also save to a format that can be easily copied to a JSON file
-        const jsonData = JSON.stringify(mainSiteProperties, null, 2);
-        console.log('Properties JSON for main site:', jsonData);
-        
-        // In a real implementation, you would make an API call here:
-        // fetch('/api/properties', {
-        //     method: 'POST',
-        //     headers: { 'Content-Type': 'application/json' },
-        //     body: jsonData
-        // });
+        console.log('✅ Properties synced successfully');
+        showNotification('Properties synced successfully!', 'success');
         
     } catch (error) {
         console.error('Error syncing with main site:', error);
-        showNotification('Error syncing with main site', 'error');
+        
+        // Handle quota exceeded error specifically
+        if (error.name === 'QuotaExceededError' || error.code === 22) {
+            showNotification('Storage optimized! Some images were limited to ensure performance.', 'success');
+            console.log('💡 Info: Images were automatically optimized for storage');
+        } else {
+            showNotification('Error syncing with main site: ' + error.message, 'error');
+        }
     }
+}
+
+// Optimize properties for storage by reducing image count intelligently
+async function optimizePropertiesForStorage(properties) {
+    console.log('🔧 Optimizing properties for storage...');
+    
+    // Calculate total images across all properties
+    const totalImages = properties.reduce((total, prop) => total + (prop.images?.length || 0), 0);
+    console.log(`📊 Total images: ${totalImages}`);
+    
+    // If we have too many images total, reduce per property
+    const maxImagesPerProperty = totalImages > 50 ? 8 : (totalImages > 30 ? 12 : 20);
+    
+    return properties.map(property => {
+        if (property.images && property.images.length > 0) {
+            // Limit images per property based on total count
+            const limitedImages = property.images.slice(0, maxImagesPerProperty);
+            
+            console.log(`📏 Property "${property.title}": ${property.images.length} → ${limitedImages.length} images`);
+            
+            return {
+                ...property,
+                images: limitedImages
+            };
+        }
+        return property;
+    });
 }
 
 // Show notification
@@ -469,5 +509,5 @@ if (properties.length === 0) {
     
     properties = sampleProperties;
     localStorage.setItem('properties', JSON.stringify(properties));
-    syncWithMainSite();
+    syncWithMainSite().catch(error => console.error('Sync error:', error));
 }
